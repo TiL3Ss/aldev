@@ -17,51 +17,46 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
 
     // Importación dinámica de Neat para evitar problemas de SSR
     const initNeat = async () => {
+  try {
+    const { NeatGradient } = await import('@firecms/neat');
+    
+    const config = {
+      colors: [
+        { color: '#F8EDED', opacity: 0.8 },
+        { color: '#FF8225', opacity: 0.6 },
+        { color: '#B43F3F', opacity: 0.4 },
+        { color: '#173B45', opacity: 0.3 },
+      ],
+      speed: 0.8,
+      horizontalPressure: 4,
+      verticalPressure: 5,
+      waveFrequencyX: 2,
+      waveFrequencyY: 3,
+      waveAmplitude: 5,
+      shadows: 2,
+      highlights: 4,
+      colorSaturation: 7,
+      colorBrightness: 1.2,
+      wireframe: false,
+      density: 0.75,
+      backgroundColor: '#F8EDED',
+    };
+
+        const neat = new NeatGradient(canvasRef.current!, config);
+    neat.speed = 0.8;
+
+    return () => {
       try {
-        const { Neat } = await import('@firecms/neat');
-        
-        // Configuración del fondo animado con temática oriental
-        const config = {
-          // Colores de tu paleta
-          colors: [
-            { color: '#F8EDED', opacity: 0.8 }, // Cream
-            { color: '#FF8225', opacity: 0.6 }, // Orange
-            { color: '#B43F3F', opacity: 0.4 }, // Burgundy
-            { color: '#173B45', opacity: 0.3 }, // Navy
-          ],
-          // Configuración específica para look oriental/zen
-          speed: 0.8,
-          horizontalPressure: 4,
-          verticalPressure: 5,
-          waveFrequencyX: 2,
-          waveFrequencyY: 3,
-          waveAmplitude: 5,
-          shadows: 2,
-          highlights: 4,
-          colorSaturation: 7,
-          colorBrightness: 1.2,
-          wireframe: false,
-          density: 0.75,
-          backgroundColor: '#F8EDED',
-        };
-
-        const neat = new Neat(canvasRef.current, config);
-        neat.speed = 0.8;
-
-        // Cleanup function
-        return () => {
-          try {
-            neat?.destroy?.();
-          } catch (error) {
-            console.warn('Error destroying Neat instance:', error);
-          }
-        };
+        neat?.destroy?.();
       } catch (error) {
-        console.warn('Error loading @firecms/neat:', error);
-        // Fallback si no se puede cargar neat
-        fallbackBackground();
+        console.warn('Error destroying NeatGradient instance:', error);
       }
     };
+  } catch (error) {
+    console.warn('Error loading @firecms/neat:', error);
+    fallbackBackground();
+  }
+};
 
     // Función de fallback con CSS puro
     const fallbackBackground = () => {
