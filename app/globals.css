@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --heroui-primary: #FF8225;
+  --heroui-secondary: #B43F3F;
 }
 
 @theme inline {

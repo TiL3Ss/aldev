@@ -1,7 +1,5 @@
 // tailwind.config.ts
-// This is a Tailwind CSS configuration file that sets up custom themes, colors, and animations
 import type { Config } from 'tailwindcss';
-import { heroui } from '@heroui/react';
 
 const config: Config = {
   content: [
@@ -82,62 +80,7 @@ const config: Config = {
     },
   },
   darkMode: 'class',
-  plugins: [
-    heroui({
-      themes: {
-        light: {
-          colors: {
-            primary: {
-              50: '#fef7ed',
-              100: '#feefd5', 
-              200: '#fed7aa',
-              300: '#fdba74',
-              400: '#fb923c',
-              500: '#FF8225', // orange
-              600: '#ea580c',
-              700: '#c2410c',
-              800: '#9a3412',
-              900: '#7c2d12',
-              DEFAULT: '#FF8225',
-              foreground: '#ffffff',
-            },
-            secondary: {
-              50: '#fdf2f8',
-              100: '#fce7f3',
-              200: '#fbcfe8',
-              300: '#f9a8d4',
-              400: '#f472b6',
-              500: '#B43F3F', // burgundy
-              600: '#be185d',
-              700: '#be185d',
-              800: '#9d174d',
-              900: '#831843',
-              DEFAULT: '#B43F3F',
-              foreground: '#ffffff',
-            },
-            success: {
-              DEFAULT: '#22c55e',
-              foreground: '#ffffff',
-            },
-            warning: {
-              DEFAULT: '#FF8225', // orange
-              foreground: '#ffffff',
-            },
-            danger: {
-              DEFAULT: '#B43F3F', // burgundy
-              foreground: '#ffffff',
-            },
-            background: '#F8EDED', // cream
-            foreground: '#173B45', // navy
-            content1: 'rgba(248, 237, 237, 0.8)', // cream with opacity
-            content2: 'rgba(248, 237, 237, 0.6)',
-            content3: 'rgba(248, 237, 237, 0.4)',
-            content4: 'rgba(248, 237, 237, 0.2)',
-          },
-        },
-      },
-    }),
-  ],
+  plugins: [],
 };
 
 export default config;
