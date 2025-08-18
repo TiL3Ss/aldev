@@ -52,7 +52,6 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           wireframe: false,
           colorBlending: 5,
           backgroundAlpha: 1,
-          interactive: true,
         });
 
         setIsLoaded(true);
@@ -86,7 +85,6 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                   wireframe: false,
                   colorBlending: 5,
                   backgroundAlpha: 1,
-                  interactive: true,
                 });
               } catch (error) {
                 console.error('Error al redimensionar NeatGradient:', error);
