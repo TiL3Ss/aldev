@@ -181,6 +181,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       label="Tu Nombre"
                       placeholder="Escribe tu nombre completo"
                       value={form.name}
+                      onValueChange={(value) => handleInputChange('name', value)}
+                      isRequired
+                      classNames={{
+                        input: "text-navy",
+                        label: "text-navy/70",
+                        inputWrapper: "bg-cream/40 border-orange/20 hover:border-orange/40 focus-within:border-orange"
+                      }}
+                    />
+                    <Input
+                      type="email"
+                      label="Email"
+                      placeholder="tu@email.com"
+                      value={form.email}
                       onValueChange={(value) => handleInputChange('email', value)}
                       isRequired
                       classNames={{
@@ -442,17 +455,4 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
       </div>
     </section>
   );
-};InputChange('name', value)}
-                      isRequired
-                      classNames={{
-                        input: "text-navy",
-                        label: "text-navy/70",
-                        inputWrapper: "bg-cream/40 border-orange/20 hover:border-orange/40 focus-within:border-orange"
-                      }}
-                    />
-                    <Input
-                      type="email"
-                      label="Email"
-                      placeholder="tu@email.com"
-                      value={form.email}
-                      onValueChange={(value) => handle
+};
