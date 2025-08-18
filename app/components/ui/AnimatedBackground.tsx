@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { NeatGradient } from '@firecms/neat';
+import { useEffect, useRef, useState } from 'react';
 
 interface AnimatedBackgroundProps {
   className?: string;
@@ -11,14 +10,27 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   className = '' 
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const neatRef = useRef<NeatGradient | null>(null);
+  const neatRef = useRef<any>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const cleanupRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    let isMounted = true;
 
-    const initNeat = async () => {
+    const loadNeatGradient = async () => {
       try {
-        // Configuración del gradiente animado
+        // Importar dinámicamente para evitar problemas de SSR
+        const { NeatGradient } = await import('@firecms/neat');
+        
+        if (!isMounted || !canvasRef.current) return;
+
+        // Limpiar cualquier instancia anterior
+        if (neatRef.current) {
+          neatRef.current.destroy();
+          neatRef.current = null;
+        }
+
+        // Configuración del gradiente animado "Dark Mode"
         neatRef.current = new NeatGradient({
           ref: canvasRef.current,
           colors: [
@@ -43,58 +55,109 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           interactive: true,
         });
 
-        // Manejo de redimensionamiento
+        setIsLoaded(true);
+
+        // Manejo de redimensionamiento con debounce
+        let resizeTimeout: NodeJS.Timeout;
         const handleResize = () => {
-          if (neatRef.current && canvasRef.current) {
-            neatRef.current.destroy();
-            neatRef.current = new NeatGradient({
-              ref: canvasRef.current,
-              colors: [
-                { color: '#F8EDED', enabled: true },
-                { color: '#FF8225', enabled: true },
-                { color: '#B43F3F', enabled: true },
-                { color: '#173B45', enabled: true },
-              ],
-              speed: 0.8,
-              horizontalPressure: 4,
-              verticalPressure: 5,
-              waveFrequencyX: 2,
-              waveFrequencyY: 3,
-              waveAmplitude: 5,
-              shadows: 2,
-              highlights: 4,
-              colorSaturation: 0.7,
-              colorBrightness: 1.2,
-              wireframe: false,
-              colorBlending: 5,
-              backgroundAlpha: 1,
-              interactive: true,
-            });
-          }
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
+            if (neatRef.current && canvasRef.current && isMounted) {
+              try {
+                neatRef.current.destroy();
+                neatRef.current = new NeatGradient({
+                  ref: canvasRef.current,
+                  colors: [
+                    { color: '#F8EDED', enabled: true },
+                    { color: '#FF8225', enabled: true },
+                    { color: '#B43F3F', enabled: true },
+                    { color: '#173B45', enabled: true },
+                  ],
+                  speed: 0.8,
+                  horizontalPressure: 4,
+                  verticalPressure: 5,
+                  waveFrequencyX: 2,
+                  waveFrequencyY: 3,
+                  waveAmplitude: 5,
+                  shadows: 2,
+                  highlights: 4,
+                  colorSaturation: 0.7,
+                  colorBrightness: 1.2,
+                  wireframe: false,
+                  colorBlending: 5,
+                  backgroundAlpha: 1,
+                  interactive: true,
+                });
+              } catch (error) {
+                console.error('Error al redimensionar NeatGradient:', error);
+                fallbackBackground();
+              }
+            }
+          }, 250);
         };
 
         window.addEventListener('resize', handleResize);
 
-        return () => {
+        // Función de limpieza
+        cleanupRef.current = () => {
+          clearTimeout(resizeTimeout);
           window.removeEventListener('resize', handleResize);
-          neatRef.current?.destroy();
+          if (neatRef.current) {
+            try {
+              neatRef.current.destroy();
+            } catch (error) {
+              console.error('Error al limpiar NeatGradient:', error);
+            }
+            neatRef.current = null;
+          }
         };
+
       } catch (error) {
-        console.error('Error initializing NeatGradient:', error);
-        fallbackBackground();
+        console.error('Error al cargar NeatGradient:', error);
+        if (isMounted) {
+          fallbackBackground();
+          setIsLoaded(true); // Marcamos como cargado aunque sea con fallback
+        }
       }
     };
 
     const fallbackBackground = () => {
       if (canvasRef.current) {
-        canvasRef.current.style.background = 'linear-gradient(135deg, #F8EDED 0%, rgba(255, 130, 37, 0.1) 100%)';
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        
+        if (ctx) {
+          // Configurar el tamaño del canvas
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          
+          // Crear gradiente fallback
+          const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+          gradient.addColorStop(0, '#F8EDED');
+          gradient.addColorStop(0.3, 'rgba(255, 130, 37, 0.3)');
+          gradient.addColorStop(0.7, 'rgba(180, 63, 63, 0.2)');
+          gradient.addColorStop(1, '#173B45');
+          
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        } else {
+          // Fallback CSS si no hay canvas
+          canvas.style.background = 'linear-gradient(135deg, #F8EDED 0%, rgba(255, 130, 37, 0.3) 50%, rgba(180, 63, 63, 0.2) 70%, #173B45 100%)';
+        }
       }
     };
 
-    initNeat();
+    // Pequeño delay para asegurar que el DOM esté listo
+    const initTimeout = setTimeout(() => {
+      loadNeatGradient();
+    }, 100);
 
     return () => {
-      neatRef.current?.destroy();
+      isMounted = false;
+      clearTimeout(initTimeout);
+      if (cleanupRef.current) {
+        cleanupRef.current();
+      }
     };
   }, []);
 
@@ -102,7 +165,12 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
     <div className={`fixed inset-0 -z-10 ${className}`}>
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover"
+        className={`w-full h-full object-cover transition-opacity duration-500 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          background: isLoaded ? 'transparent' : 'linear-gradient(135deg, #F8EDED 0%, rgba(255, 130, 37, 0.3) 50%, rgba(180, 63, 63, 0.2) 70%, #173B45 100%)'
+        }}
       />
 
       {/* Elementos decorativos */}

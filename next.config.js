@@ -1,7 +1,8 @@
 // next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  transpilePackages: ['@firecms/neat']
 };
 
 module.exports = nextConfig;
