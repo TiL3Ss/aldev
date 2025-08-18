@@ -1,8 +1,7 @@
-// app/components/ui/AnimatedBackground.tsx 
+// components/ui/AnimatedBackground.tsx
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { Neat } from '@firecms/neat';
 
 interface AnimatedBackgroundProps {
   className?: string;
@@ -12,57 +11,71 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   className = '' 
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const neatRef = useRef<Neat | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
-    // Configuración del fondo animado con temática oriental
-    const config = {
-      // Colores de tu paleta
-      colors: [
-        { color: '#F8EDED', opacity: 0.8 }, // Cream
-        { color: '#FF8225', opacity: 0.6 }, // Orange
-        { color: '#B43F3F', opacity: 0.4 }, // Burgundy
-        { color: '#173B45', opacity: 0.3 }, // Navy
-      ],
-      // Configuración específica para look oriental/zen
-      speed: 0.8,
-      horizontalPressure: 4,
-      verticalPressure: 5,
-      waveFrequencyX: 2,
-      waveFrequencyY: 3,
-      waveAmplitude: 5,
-      shadows: 2,
-      highlights: 4,
-      colorSaturation: 7,
-      colorBrightness: 1.2,
-      wireframe: false,
-      density: 0.75,
-      backgroundColor: '#F8EDED',
-    };
+    // Importación dinámica de Neat para evitar problemas de SSR
+    const initNeat = async () => {
+      try {
+        const { Neat } = await import('@firecms/neat');
+        
+        // Configuración del fondo animado con temática oriental
+        const config = {
+          // Colores de tu paleta
+          colors: [
+            { color: '#F8EDED', opacity: 0.8 }, // Cream
+            { color: '#FF8225', opacity: 0.6 }, // Orange
+            { color: '#B43F3F', opacity: 0.4 }, // Burgundy
+            { color: '#173B45', opacity: 0.3 }, // Navy
+          ],
+          // Configuración específica para look oriental/zen
+          speed: 0.8,
+          horizontalPressure: 4,
+          verticalPressure: 5,
+          waveFrequencyX: 2,
+          waveFrequencyY: 3,
+          waveAmplitude: 5,
+          shadows: 2,
+          highlights: 4,
+          colorSaturation: 7,
+          colorBrightness: 1.2,
+          wireframe: false,
+          density: 0.75,
+          backgroundColor: '#F8EDED',
+        };
 
-    try {
-      neatRef.current = new Neat(canvasRef.current, config);
-      neatRef.current.speed = 0.8;
-    } catch (error) {
-      console.warn('Error initializing Neat background:', error);
-    }
+        const neat = new Neat(canvasRef.current, config);
+        neat.speed = 0.8;
 
-    // Cleanup function
-    return () => {
-      if (neatRef.current) {
-        try {
-          neatRef.current.destroy?.();
-        } catch (error) {
-          console.warn('Error destroying Neat instance:', error);
-        }
+        // Cleanup function
+        return () => {
+          try {
+            neat?.destroy?.();
+          } catch (error) {
+            console.warn('Error destroying Neat instance:', error);
+          }
+        };
+      } catch (error) {
+        console.warn('Error loading @firecms/neat:', error);
+        // Fallback si no se puede cargar neat
+        fallbackBackground();
       }
     };
+
+    // Función de fallback con CSS puro
+    const fallbackBackground = () => {
+      if (canvasRef.current) {
+        canvasRef.current.style.display = 'none';
+      }
+    };
+
+    initNeat();
   }, []);
 
   return (
     <div className={`fixed inset-0 -z-10 ${className}`}>
+      {/* Canvas para Neat */}
       <canvas
         ref={canvasRef}
         className="w-full h-full object-cover"
@@ -71,11 +84,33 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
         }}
       />
       
+      {/* Fallback CSS background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cream via-orange/10 to-burgundy/10 animate-gradient" 
+           style={{ backgroundSize: '400% 400%' }} />
+      
       {/* Overlay sutil para mejor legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream/20" />
       
       {/* Elementos decorativos orientales */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Partículas flotantes */}
+        {Array.from({ length: 6 }, (_, i) => (
+          <div
+            key={i}
+            className={`
+              absolute w-2 h-2 rounded-full bg-gradient-to-r from-orange/20 to-burgundy/20
+              animate-float opacity-30
+            `}
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${6 + i}s`,
+            }}
+          />
+        ))}
+        
+        {/* Elementos decorativos orientales */}
         <div className="absolute top-20 left-10 w-32 h-32 opacity-5 animate-pulse">
           <svg viewBox="0 0 100 100" className="w-full h-full text-navy">
             <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="2" />
