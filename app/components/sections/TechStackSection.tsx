@@ -245,7 +245,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                   </div>
 
                   {/* Technologies List - iOS 18 Style with Icons */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-4 gap-4">
                     {category.technologies.map((tech) => {
                       const colorClasses = getColorClasses(tech.color);
                       
@@ -258,25 +258,28 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                           transition={{ duration: 0.4, delay: index * 0.05 }}
                           className="group/tech relative"
                         >
-                          {/* Expandable Container */}
+                          {/* Expandable Container - Starts as just icon */}
                           <motion.div
                             className={`
-                              flex items-center gap-3 p-3 rounded-2xl cursor-pointer
+                              flex items-center rounded-2xl cursor-pointer
                               transition-all duration-300 overflow-hidden
                               ${colorClasses.bg} ${colorClasses.border} border backdrop-blur-xl
                               hover:shadow-lg hover:shadow-current/20
                             `}
+                            initial={{ width: "3rem", padding: "0.75rem" }} // Just icon size
                             whileHover={{ 
-                              scale: 1.02,
-                              paddingRight: "1rem"
+                              width: "auto",
+                              paddingLeft: "0.75rem",
+                              paddingRight: "1rem",
+                              paddingTop: "0.75rem",
+                              paddingBottom: "0.75rem"
                             }}
-                            layout
+                            transition={{ duration: 0.3, ease: "easeOut" }}
                           >
-                            {/* Icon */}
+                            {/* Icon - Always visible */}
                             <motion.div
                               className={`
-                                w-10 h-10 rounded-xl ${colorClasses.bg} ${colorClasses.border}
-                                border flex items-center justify-center flex-shrink-0
+                                w-6 h-6 flex items-center justify-center flex-shrink-0
                                 transition-all duration-300 relative overflow-hidden
                               `}
                               whileHover={{ scale: 1.1 }}
@@ -291,12 +294,13 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                               " />
                             </motion.div>
 
-                            {/* Expanding Text */}
+                            {/* Text - Only visible on hover */}
                             <motion.div
-                              initial={{ width: 0, opacity: 0 }}
+                              initial={{ width: 0, opacity: 0, marginLeft: 0 }}
                               whileHover={{ 
                                 width: "auto", 
                                 opacity: 1,
+                                marginLeft: "0.75rem",
                                 transition: { duration: 0.3, ease: "easeOut" }
                               }}
                               className="overflow-hidden whitespace-nowrap"
