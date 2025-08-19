@@ -159,26 +159,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                   className="flex flex-col sm:flex-row gap-4 pt-4"
                 >
                   <Button
-                    size="lg"
-                    radius="full"
-                    className="
-                      flex items-center justify-center gap-2
-                      bg-gradient-to-r from-red-500 to-orange text-white
-                      hover:shadow-xl hover:shadow-red-500/30
-                      transition-all duration-300 hover:scale-105
-                      font-semibold px-8 h-14 text-base
-                      border-0 backdrop-blur-xl
-                    "
-                    onPress={() => {
-                      const projectsSection = document.getElementById('projects');
-                      if (projectsSection) {
-                        projectsSection.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    startContent={<Sparkles size={20} className="shrink-0" />}
-                  >
-                    Ver Proyectos
-                  </Button>
+                  size="lg"
+                  radius="full"
+                  className="
+                    flex items-center justify-center gap-2
+                    bg-gradient-to-r from-red-500 to-orange text-white
+                    hover:shadow-xl hover:shadow-red-500/30
+                    transition-all duration-300 hover:scale-105
+                    font-semibold px-8 h-14 text-base
+                    border-0 backdrop-blur-xl
+                  "
+                  onPress={() => {
+                    const projectsSection = document.getElementById('projects');
+                    if (projectsSection) {
+                      projectsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  startContent={<Sparkles size={20} className="shrink-0" />}
+                >
+                  Ver Proyectos
+                </Button>
                   
                   <Button
                     size="lg"
@@ -186,7 +186,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     className="
                       bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
                       border border-gray-200/50 dark:border-gray-600/50
-                      hover:bg-red-700 dark:hover:bg-orange-light
+                      hover:bg-gray-500/60 hover:text-orange dark:hover:bg-white/10
                       transition-all duration-300 hover:scale-105 backdrop-blur-xl
                       font-semibold px-8 h-14 text-base
                     "
