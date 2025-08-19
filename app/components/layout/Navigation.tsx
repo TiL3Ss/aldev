@@ -103,7 +103,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
             {/* Logo */}
             <div className="relative">
               <Image
-                src="/images/logo_w.png"
+                src="/images/logo_b.png"
                 alt="Alvaro Logo"
                 width={40}
                 height={40}
