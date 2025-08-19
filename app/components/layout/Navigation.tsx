@@ -109,7 +109,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
                 height={40}
                 className="
                   rounded-xl object-contain transition-all duration-300
-                  hover:drop-shadow-lg p-1
+                  hover:drop-shadow-lg p-2
                 "
                 priority
               />
@@ -205,7 +205,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
                 alt="Alvaro Logo"
                 width={40}
                 height={40}
-                className="rounded-xl object-contain p-1"
+                className="rounded-xl object-contain p-2"
               />
               <span className="
                 font-bold text-2xl bg-gradient-to-r from-red-600 via-orange to-red-500
