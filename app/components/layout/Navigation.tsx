@@ -203,8 +203,8 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               <Image
                 src="/images/logo_b.png"
                 alt="Alvaro Logo"
-                width={36}
-                height={36}
+                width={32}
+                height={32}
                 className="rounded-xl object-contain"
               />
               <span className="
