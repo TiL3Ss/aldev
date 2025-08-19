@@ -263,11 +263,11 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="
-                h-full bg-white/80 backdrop-blur-xl border border-orange/20
+                h-full bg-cream/80 backdrop-blur-xl border border-orange/20
                 hover:border-orange/40 hover:shadow-xl hover:shadow-orange/10
                 transition-all duration-500 hover:-translate-y-2
                 group rounded-3xl overflow-hidden
-                hover:bg-white/90
+                hover:bg-cream/90
               ">
                 <CardBody className="p-8">
                   {/* Category Header */}
@@ -399,7 +399,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           className="mt-16"
         >
           <Card className="
-            bg-white/70 backdrop-blur-xl border border-orange/20 rounded-3xl
+            bg-cream/70 backdrop-blur-xl border border-orange/20 rounded-3xl
             shadow-xl shadow-orange/5
           ">
             <CardBody className="p-10">
@@ -479,7 +479,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           className="mt-12"
         >
           <Card className="
-            bg-white/70 backdrop-blur-xl border border-orange/20 rounded-3xl
+            bg-cream/70 backdrop-blur-xl border border-orange/20 rounded-3xl
             shadow-xl shadow-orange/5
           ">
             <CardBody className="p-10">
