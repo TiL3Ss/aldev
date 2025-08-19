@@ -162,6 +162,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     size="lg"
                     radius="full"
                     className="
+                      flex items-center justify-center gap-2
                       bg-gradient-to-r from-red-500 to-orange text-white
                       hover:shadow-xl hover:shadow-red-500/30
                       transition-all duration-300 hover:scale-105
@@ -174,7 +175,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         projectsSection.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
-                    startContent={<Sparkles size={20} />}
+                    startContent={<Sparkles size={20} className="shrink-0" />}
                   >
                     Ver Proyectos
                   </Button>
