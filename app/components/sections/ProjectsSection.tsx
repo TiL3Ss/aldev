@@ -16,6 +16,7 @@ import {
   Clock,
   FileText
 } from 'lucide-react';
+import React from 'react';
 
 interface ProjectsSectionProps {
   className?: string;
