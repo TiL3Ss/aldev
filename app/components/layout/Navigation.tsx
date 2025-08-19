@@ -102,14 +102,17 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
           >
             {/* Logo */}
             <div className="relative">
-              <div
-              className="
-                w-10 h-10 p-2 rounded-xl
-                bg-gradient-to-br from-red-500 via-orange-500 to-red-500
-                [mask:url('/images/logo_b.svg')] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]
-                transition-all duration-300 hover:drop-shadow-lg
-              "
-            ></div>
+              <Image
+                src="/images/logo_b.png"
+                alt="Alvaro Logo"
+                width={40}
+                height={40}
+                className="
+                  rounded-xl object-contain transition-all duration-300
+                  hover:drop-shadow-lg p-2
+                "
+                priority
+              />
             </div>
             
             {/* Name */}
@@ -197,9 +200,13 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               }}
               className="flex items-center gap-3 justify-center"
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-red-500 via-orange-500 to-red-500 
-                [mask:url('/images/logo_b.svg')] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]">
-              </div>
+              <Image
+                src="/images/logo_b.png"
+                alt="Alvaro Logo"
+                width={40}
+                height={40}
+                className="rounded-xl object-contain p-2"
+              />
               <span className="
                 font-bold text-2xl bg-gradient-to-r from-red-600 via-orange to-red-500
                 bg-clip-text text-transparent

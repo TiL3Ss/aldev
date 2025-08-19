@@ -377,19 +377,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
             }}
           >
             <Button
-              isIconOnly
-              className="
-                bg-white/60 dark:bg-black/40 text-gray-700 dark:text-gray-300
-                border border-gray-200/50 dark:border-gray-600/50
-                hover:bg-gray-50/70 dark:hover:bg-gray-800/50 hover:scale-110
-                transition-all duration-300 backdrop-blur-xl
-                w-12 h-12 rounded-2xl
-              "
-              onPress={scrollToNext}
-              aria-label="Scroll to next section"
-            >
-              <ArrowDown size={20} />
-            </Button>
+            isIconOnly
+            className="
+              flex items-center justify-center
+              bg-white/60 dark:bg-black/40 text-gray-700 dark:text-gray-300
+              border border-gray-200/50 dark:border-gray-600/50
+              hover:bg-gray-50/70 dark:hover:bg-gray-800/50 hover:scale-110
+              transition-all duration-300 backdrop-blur-xl
+              w-12 h-12 rounded-2xl
+            "
+            onPress={scrollToNext}
+            aria-label="Scroll to next section"
+          >
+            <ArrowDown size={20} />
+          </Button>
+
           </motion.div>
         </motion.div>
       </div>
