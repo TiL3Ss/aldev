@@ -224,12 +224,11 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
               mb-4 bg-gradient-to-r from-orange/15 to-burgundy/15 
               text-navy border-orange/25 rounded-full px-6 py-3
               backdrop-blur-xl shadow-lg shadow-orange/5
-              flex items-center gap-2
             "
             variant="bordered"
             size="lg"
+            startContent={<Zap size={16} className="shrink-0" />}
           >
-            <Zap size={16} className="shrink-0" />
             Stack Tecnológico
           </Chip>
 
