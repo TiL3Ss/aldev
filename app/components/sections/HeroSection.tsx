@@ -11,16 +11,16 @@ interface HeroSectionProps {
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/TiL3Ss', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/tu-perfil', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:tu@email.com', label: 'Email' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/alvaro-chavez-melo-35392b338/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:alvchdev@gmail.com', label: 'Email' },
 ];
 
 const specialties = [
   'APIs RESTful',
-  'Microservicios',
+  'Optimización de Procesos',
   'Node.js & Next.js',
   'Bases de Datos',
-  'DevOps',
+  'Implemetaciones',
 ];
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
@@ -36,8 +36,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
       id="home" 
       className={`
         min-h-screen flex items-center justify-center px-4 py-20 
-        bg-gradient-to-br from-blue-50 via-white to-purple-50
-        dark:from-gray-900 dark:via-black dark:to-purple-950
+        bg-gradient-to-br from-red-50 via-white to-orange
+        dark:from-gray-900 dark:via-black dark:to-orange
         ${className}
       `}
     >
@@ -67,8 +67,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 >
                   <Chip 
                     className="
-                      mb-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 
-                      text-gray-800 dark:text-gray-200 border border-blue-200/30 dark:border-purple-400/30
+                      mb-6 bg-gradient-to-r from-red-500/20 to-red-600/20 
+                      text-gray-800 dark:text-gray-200 border border-red-200/30 dark:border-orange-light/30
                       backdrop-blur-xl px-4 py-2
                     "
                     variant="bordered"
@@ -87,11 +87,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 >
                   <h1 className="
                     text-5xl md:text-7xl lg:text-8xl font-black
-                    bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
+                    bg-gradient-to-r from-red-600 via-orange to-red-500 
                     bg-clip-text text-transparent
                     leading-[0.9] tracking-tight mb-4
                   ">
-                    Backend
+                    Software
                     <br />
                     <span className="font-light italic">Developer</span>
                   </h1>
@@ -107,7 +107,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     leading-relaxed max-w-lg
                   "
                 >
-                  Creando arquitecturas robustas y escalables que impulsan 
+                  Diseñando proyectos eficientes y escalables para impulsar
                   el crecimiento digital
                 </motion.p>
 
@@ -120,7 +120,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 >
                   Especialista en desarrollo backend con enfoque en 
                   performance, seguridad y mejores prácticas. 
-                  Transformo ideas complejas en soluciones técnicas elegantes.
+                  Transformo ideas en soluciones practicas.
                 </motion.p>
 
                 {/* Specialties */}
@@ -141,7 +141,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         className="
                           bg-white/70 dark:bg-black/50 text-gray-700 dark:text-gray-300 
                           border border-gray-200/50 dark:border-gray-600/50
-                          backdrop-blur-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/50
+                          backdrop-blur-xl hover:bg-red-50/70 dark:hover:bg-red-950/50
                           transition-all duration-300 hover:scale-105
                         "
                         variant="bordered"
@@ -164,8 +164,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     size="lg"
                     radius="full"
                     className="
-                      bg-gradient-to-r from-blue-500 to-purple-600 text-white
-                      hover:shadow-xl hover:shadow-blue-500/30
+                      bg-gradient-to-r from-red-500 to-orange text-white
+                      hover:shadow-xl hover:shadow-red-500/30
                       transition-all duration-300 hover:scale-105
                       font-semibold px-8 h-14 text-base
                       border-0 backdrop-blur-xl
@@ -225,7 +225,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         className="
                           bg-white/70 dark:bg-black/50 text-gray-700 dark:text-gray-300
                           border border-gray-200/50 dark:border-gray-600/50
-                          hover:bg-blue-50/70 dark:hover:bg-blue-950/50 hover:text-blue-600 dark:hover:text-blue-400
+                          hover:bg-red-50/70 dark:hover:bg-red-950/50 hover:text-red-600 dark:hover:text-red-400
                           transition-all duration-300 hover:scale-110 backdrop-blur-xl
                           w-12 h-12 rounded-2xl
                         "
@@ -245,8 +245,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="
                   relative flex items-center justify-center p-8 lg:p-16
-                  bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5
-                  dark:from-blue-500/10 dark:via-purple-500/10 dark:to-pink-500/10
+                  bg-gradient-to-br from-red-700/5 via-orange/5 to-red-500/5
+                  dark:from-red-500/10 dark:via-orange-light/10 dark:to-orange-light/10
                 "
               >
                 <div className="relative">
@@ -263,9 +263,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     }}
                     className="
                       w-80 h-80 rounded-full relative overflow-hidden
-                      bg-gradient-to-br from-blue-500/20 via-purple-500/30 to-pink-500/20
+                      bg-gradient-to-br from-red-500/20 via-orange/30 to-red-500/20
                       backdrop-blur-3xl border border-white/20 dark:border-white/10
-                      shadow-2xl shadow-blue-500/20 dark:shadow-purple-500/30
+                      shadow-2xl shadow-red-500/20 dark:shadow-orange/30
                       flex items-center justify-center
                     "
                   >
@@ -287,7 +287,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         ⚡
                       </motion.div>
                       <div className="text-gray-800 dark:text-white font-bold text-xl tracking-wide">Backend</div>
-                      <div className="text-purple-600 dark:text-purple-400 font-medium text-lg">Excellence</div>
+                      <div className="text-orange dark:text-orange-light font-medium text-lg">Excellence</div>
                     </div>
                   </motion.div>
 
@@ -343,7 +343,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         opacity: [0.3, 0.5, 0.3]
                       }}
                       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-10 right-10 w-20 h-20 rounded-full bg-blue-500/20 blur-xl"
+                      className="absolute top-10 right-10 w-20 h-20 rounded-full bg-red-500/20 blur-xl"
                     />
                     <motion.div
                       animate={{ 
@@ -351,7 +351,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         opacity: [0.4, 0.6, 0.4]
                       }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute bottom-10 left-10 w-16 h-16 rounded-full bg-purple-500/20 blur-xl"
+                      className="absolute bottom-10 left-10 w-16 h-16 rounded-full bg-orange/20 blur-xl"
                     />
                   </div>
                 </div>
