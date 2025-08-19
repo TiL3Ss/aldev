@@ -8,10 +8,11 @@ import {
   Database, 
   Cloud, 
   Shield, 
-  BarChart3, 
+  Code, 
   Zap,
   Code2,
-  GitBranch
+  GitBranch,
+  Wrench
 } from 'lucide-react';
 
 interface TechStackSectionProps {
@@ -24,7 +25,6 @@ interface TechCategory {
   description: string;
   technologies: {
     name: string;
-    level: number;
     color: 'orange' | 'burgundy' | 'navy';
   }[];
 }
@@ -35,10 +35,10 @@ const techCategories: TechCategory[] = [
     title: 'Backend & APIs',
     description: 'Desarrollo de servicios robustos y escalables',
     technologies: [
-      { name: 'Node.js', level: 95, color: 'orange' },
-      { name: 'Next.js API Routes', level: 90, color: 'burgundy' },
-      { name: 'Express.js', level: 88, color: 'navy' },
-      { name: 'TypeScript', level: 92, color: 'orange' },
+      { name: 'Node.js', color: 'orange' },
+      { name: 'Next.js API Routes', color: 'burgundy' },
+      { name: 'PHP', color: 'navy' },
+      { name: 'TypeScript', color: 'orange' },
     ]
   },
   {
@@ -46,10 +46,10 @@ const techCategories: TechCategory[] = [
     title: 'Bases de Datos',
     description: 'Gestión y optimización de datos',
     technologies: [
-      { name: 'PostgreSQL', level: 85, color: 'burgundy' },
-      { name: 'MongoDB', level: 88, color: 'orange' },
-      { name: 'Redis', level: 80, color: 'navy' },
-      { name: 'Prisma ORM', level: 85, color: 'orange' },
+      { name: 'MySQL', color: 'burgundy' },
+      { name: 'MongoDB', color: 'orange' },
+      { name: 'SQLite', color: 'navy' },
+      { name: 'Firebase', color: 'orange' },
     ]
   },
   {
@@ -57,10 +57,10 @@ const techCategories: TechCategory[] = [
     title: 'DevOps & Cloud',
     description: 'Despliegue y infraestructura moderna',
     technologies: [
-      { name: 'Docker', level: 85, color: 'navy' },
-      { name: 'AWS', level: 80, color: 'burgundy' },
-      { name: 'Vercel', level: 90, color: 'orange' },
-      { name: 'GitHub Actions', level: 82, color: 'navy' },
+      { name: 'Docker', color: 'navy' },
+      { name: 'GCP', color: 'burgundy' },
+      { name: 'Vercel', color: 'orange' },
+      { name: 'GitHub Actions', color: 'navy' },
     ]
   },
   {
@@ -68,32 +68,31 @@ const techCategories: TechCategory[] = [
     title: 'Seguridad',
     description: 'Protección y autenticación robusta',
     technologies: [
-      { name: 'JWT', level: 90, color: 'orange' },
-      { name: 'OAuth 2.0', level: 85, color: 'burgundy' },
-      { name: 'Bcrypt', level: 88, color: 'navy' },
-      { name: 'CORS & CSRF', level: 85, color: 'orange' },
+      { name: 'OAuth 2.0', color: 'burgundy' },
+      { name: 'Bcrypt', color: 'navy' },
     ]
   },
   {
-    icon: BarChart3,
-    title: 'Monitoreo',
-    description: 'Observabilidad y análisis de performance',
+    icon: Code,
+    title: 'Lenguajes',
+    description: 'Dominio de múltiples lenguajes de programación',
     technologies: [
-      { name: 'Winston Logging', level: 82, color: 'burgundy' },
-      { name: 'Prometheus', level: 75, color: 'navy' },
-      { name: 'New Relic', level: 78, color: 'orange' },
-      { name: 'Sentry', level: 85, color: 'burgundy' },
+      { name: 'JavaScript', color: 'burgundy' },
+      { name: 'TypeScript', color: 'navy' },
+      { name: 'PHP', color: 'orange' },
+      { name: 'C#', color: 'burgundy' },
+      { name: 'Dart', color: 'orange' },
     ]
   },
   {
-    icon: Code2,
+    icon: Wrench,
     title: 'Herramientas',
     description: 'Desarrollo y productividad',
     technologies: [
-      { name: 'VS Code', level: 95, color: 'orange' },
-      { name: 'Postman', level: 90, color: 'burgundy' },
-      { name: 'ESLint/Prettier', level: 88, color: 'navy' },
-      { name: 'Jest/Testing', level: 85, color: 'orange' },
+      { name: 'VS Code', color: 'orange' },
+      { name: 'Postman', color: 'burgundy' },
+      { name: 'ESLint/Prettier', color: 'navy' },
+      { name: 'Planner', color: 'orange' },
     ]
   },
 ];
@@ -116,22 +115,25 @@ const itemVariants = {
 const getColorClasses = (color: 'orange' | 'burgundy' | 'navy') => {
   const colors = {
     orange: {
-      bg: 'bg-orange/20',
+      bg: 'bg-orange/15',
       text: 'text-orange',
-      border: 'border-orange/30',
-      gradient: 'from-orange/20 to-orange/5'
+      border: 'border-orange/25',
+      gradient: 'from-orange/15 to-orange/8',
+      chip: 'bg-orange/10 text-orange-700 border-orange/20'
     },
     burgundy: {
-      bg: 'bg-burgundy/20',
+      bg: 'bg-burgundy/15',
       text: 'text-burgundy',
-      border: 'border-burgundy/30',
-      gradient: 'from-burgundy/20 to-burgundy/5'
+      border: 'border-burgundy/25',
+      gradient: 'from-burgundy/15 to-burgundy/8',
+      chip: 'bg-burgundy/10 text-burgundy-700 border-burgundy/20'
     },
     navy: {
-      bg: 'bg-navy/20',
+      bg: 'bg-navy/15',
       text: 'text-navy',
-      border: 'border-navy/30',
-      gradient: 'from-navy/20 to-navy/5'
+      border: 'border-navy/25',
+      gradient: 'from-navy/15 to-navy/8',
+      chip: 'bg-navy/10 text-navy-700 border-navy/20'
     }
   };
   return colors[color];
@@ -152,14 +154,20 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <Chip 
-            className="mb-4 bg-gradient-to-r from-orange/20 to-burgundy/20 text-navy border-orange/30"
+          <Chip
+            className="
+              mb-4 bg-gradient-to-r from-orange/15 to-burgundy/15 
+              text-navy border-orange/25 rounded-full px-6 py-3
+              backdrop-blur-xl shadow-lg shadow-orange/5
+              flex items-center gap-2
+            "
             variant="bordered"
             size="lg"
           >
-            <Zap size={16} className="mr-2" />
+            <Zap size={16} className="shrink-0" />
             Stack Tecnológico
           </Chip>
+
           
           <h2 className="
             text-4xl md:text-5xl font-bold mb-6
@@ -191,27 +199,29 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="
-                h-full bg-cream/30 backdrop-blur-xl border border-orange/20
-                hover:border-orange/40 hover:shadow-lg hover:shadow-orange/10
-                transition-all duration-300 hover:-translate-y-1
-                group
+                h-full bg-cream/20 backdrop-blur-xl border border-orange/15
+                hover:border-orange/30 hover:shadow-xl hover:shadow-orange/8
+                transition-all duration-500 hover:-translate-y-2
+                group rounded-3xl overflow-hidden
+                hover:bg-cream/30
               ">
-                <CardBody className="p-6">
+                <CardBody className="p-8">
                   {/* Category Header */}
-                  <div className="flex items-start gap-4 mb-6">
+                  <div className="flex items-start gap-4 mb-8">
                     <div className="
-                      p-3 rounded-xl bg-gradient-to-br from-orange/20 to-burgundy/20
-                      backdrop-blur-xl border border-orange/30
-                      group-hover:scale-110 transition-transform duration-300
+                      p-4 rounded-2xl bg-gradient-to-br from-orange/15 to-burgundy/15
+                      backdrop-blur-xl border border-orange/20 shadow-lg shadow-orange/5
+                      group-hover:scale-110 transition-all duration-500
+                      group-hover:shadow-xl group-hover:shadow-orange/10
                     ">
                       <category.icon 
-                        size={24} 
-                        className="text-navy group-hover:text-orange transition-colors duration-300" 
+                        size={28} 
+                        className="text-navy group-hover:text-orange transition-colors duration-500" 
                       />
                     </div>
                     
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-navy mb-2 group-hover:text-orange transition-colors duration-300">
+                      <h3 className="text-xl font-bold text-navy mb-3 group-hover:text-orange transition-colors duration-500">
                         {category.title}
                       </h3>
                       <p className="text-sm text-navy/60 leading-relaxed">
@@ -220,54 +230,44 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                     </div>
                   </div>
 
-                  {/* Technologies List */}
-                  <div className="space-y-4">
+                  {/* Technologies List - iOS 18 Style */}
+                  <div className="flex flex-wrap gap-3">
                     {category.technologies.map((tech) => {
                       const colorClasses = getColorClasses(tech.color);
                       
                       return (
-                        <div key={tech.name} className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm font-semibold text-navy">
-                              {tech.name}
-                            </span>
-                            <span className={`text-xs font-bold ${colorClasses.text}`}>
-                              {tech.level}%
-                            </span>
-                          </div>
-                          
-                          <div className="relative">
-                            <div className="w-full bg-cream/40 rounded-full h-2 overflow-hidden">
-                              <motion.div
-                                className={`h-full bg-gradient-to-r ${colorClasses.gradient} ${colorClasses.bg} rounded-full`}
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${tech.level}%` }}
-                                viewport={{ once: true }}
-                                transition={{ 
-                                  duration: 1.2, 
-                                  delay: 0.2 + (index * 0.1),
-                                  ease: "easeInOut" 
-                                }}
-                              />
-                            </div>
-                            
-                            {/* Progress glow effect */}
-                            <motion.div
-                              className={`absolute top-0 left-0 h-full bg-gradient-to-r ${colorClasses.gradient} rounded-full opacity-0`}
-                              initial={{ width: 0, opacity: 0 }}
-                              whileInView={{ 
-                                width: `${tech.level}%`, 
-                                opacity: [0, 0.6, 0] 
-                              }}
-                              viewport={{ once: true }}
-                              transition={{ 
-                                duration: 1.5, 
-                                delay: 0.2 + (index * 0.1),
-                                ease: "easeInOut" 
-                              }}
-                            />
-                          </div>
-                        </div>
+                        <motion.div
+                          key={tech.name}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: index * 0.05 }}
+                          whileHover={{ scale: 1.05 }}
+                          className="
+                            relative overflow-hidden
+                          "
+                        >
+                          <Chip
+                            variant="bordered"
+                            className={`
+                              ${colorClasses.chip}
+                              border backdrop-blur-xl
+                              px-4 py-2 text-sm font-semibold
+                              rounded-full transition-all duration-300
+                              hover:shadow-lg hover:shadow-current/20
+                              hover:scale-105 cursor-default
+                              relative overflow-hidden
+                            `}
+                          >
+                            {tech.name}
+                            {/* Subtle shimmer effect */}
+                            <div className="
+                              absolute inset-0 -translate-x-full
+                              bg-gradient-to-r from-transparent via-white/10 to-transparent
+                              group-hover:translate-x-full transition-transform duration-1000
+                            " />
+                          </Chip>
+                        </motion.div>
                       );
                     })}
                   </div>
@@ -286,12 +286,13 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           className="mt-16"
         >
           <Card className="
-            bg-gradient-to-r from-orange/5 via-burgundy/5 to-navy/5
-            backdrop-blur-xl border border-orange/20
+            bg-gradient-to-r from-orange/8 via-burgundy/8 to-navy/8
+            backdrop-blur-xl border border-orange/15 rounded-3xl
+            shadow-xl shadow-orange/5
           ">
-            <CardBody className="p-8">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-navy mb-2">
+            <CardBody className="p-10">
+              <div className="text-center mb-10">
+                <h3 className="text-2xl font-bold text-navy mb-3">
                   Experiencia en Números
                 </h3>
                 <p className="text-navy/60">
@@ -302,19 +303,19 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
               <div className="grid md:grid-cols-4 gap-8">
                 {[
                   {
-                    number: "5+",
+                    number: "3+",
                     label: "Años de Experiencia",
-                    description: "Desarrollando soluciones backend",
+                    description: "Desarrollando Software y APIs",
                     color: "orange"
                   },
                   {
-                    number: "50+",
+                    number: "15+",
                     label: "Proyectos Completados",
                     description: "APIs y sistemas robustos",
                     color: "burgundy"
                   },
                   {
-                    number: "15+",
+                    number: "5+",
                     label: "Tecnologías Dominadas",
                     description: "Stack completo moderno",
                     color: "navy"
@@ -338,12 +339,12 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                       className="text-center group"
                     >
                       <div className={`
-                        text-4xl md:text-5xl font-bold mb-2 ${colorClasses.text}
-                        group-hover:scale-110 transition-transform duration-300
+                        text-4xl md:text-5xl font-bold mb-3 ${colorClasses.text}
+                        group-hover:scale-110 transition-transform duration-500
                       `}>
                         {stat.number}
                       </div>
-                      <div className="text-lg font-semibold text-navy mb-1">
+                      <div className="text-lg font-semibold text-navy mb-2">
                         {stat.label}
                       </div>
                       <div className="text-sm text-navy/60">
@@ -366,51 +367,58 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           className="mt-12"
         >
           <Card className="
-            bg-cream/20 backdrop-blur-xl border border-orange/20
+            bg-cream/15 backdrop-blur-xl border border-orange/15 rounded-3xl
+            shadow-xl shadow-orange/5
           ">
-            <CardBody className="p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <GitBranch size={24} className="text-orange" />
+            <CardBody className="p-10">
+              <div className="flex items-center gap-3 mb-8">
+                <GitBranch size={28} className="text-orange" />
                 <h4 className="text-xl font-bold text-navy">
                   Metodología y Mejores Prácticas
                 </h4>
               </div>
               
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="text-center group">
                   <div className="
-                    w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-orange/20 to-burgundy/20
-                    backdrop-blur-xl border border-orange/30 flex items-center justify-center
+                    w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-orange/15 to-burgundy/15
+                    backdrop-blur-xl border border-orange/20 flex items-center justify-center
+                    shadow-lg shadow-orange/5 group-hover:scale-110 transition-all duration-500
+                    group-hover:shadow-xl group-hover:shadow-orange/10
                   ">
-                    <Code2 size={24} className="text-navy" />
+                    <Code2 size={28} className="text-navy group-hover:text-orange transition-colors duration-500" />
                   </div>
-                  <h5 className="font-semibold text-navy mb-2">Clean Code</h5>
+                  <h5 className="font-semibold text-navy mb-3 text-lg">Código Limpio</h5>
                   <p className="text-sm text-navy/60 leading-relaxed">
                     Código legible, mantenible y bien documentado siguiendo los principios SOLID
                   </p>
                 </div>
                 
-                <div className="text-center">
+                <div className="text-center group">
                   <div className="
-                    w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-burgundy/20 to-navy/20
-                    backdrop-blur-xl border border-burgundy/30 flex items-center justify-center
+                    w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-burgundy/15 to-navy/15
+                    backdrop-blur-xl border border-burgundy/20 flex items-center justify-center
+                    shadow-lg shadow-burgundy/5 group-hover:scale-110 transition-all duration-500
+                    group-hover:shadow-xl group-hover:shadow-burgundy/10
                   ">
-                    <Shield size={24} className="text-navy" />
+                    <Shield size={28} className="text-navy group-hover:text-burgundy transition-colors duration-500" />
                   </div>
-                  <h5 className="font-semibold text-navy mb-2">Security First</h5>
+                  <h5 className="font-semibold text-navy mb-3 text-lg">Prioridad de Seguridad</h5>
                   <p className="text-sm text-navy/60 leading-relaxed">
                     Implementación de las mejores prácticas de seguridad desde el diseño
                   </p>
                 </div>
                 
-                <div className="text-center">
+                <div className="text-center group">
                   <div className="
-                    w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-navy/20 to-orange/20
-                    backdrop-blur-xl border border-navy/30 flex items-center justify-center
+                    w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-navy/15 to-orange/15
+                    backdrop-blur-xl border border-navy/20 flex items-center justify-center
+                    shadow-lg shadow-navy/5 group-hover:scale-110 transition-all duration-500
+                    group-hover:shadow-xl group-hover:shadow-navy/10
                   ">
-                    <Zap size={24} className="text-navy" />
+                    <Zap size={28} className="text-navy group-hover:text-navy transition-colors duration-500" />
                   </div>
-                  <h5 className="font-semibold text-navy mb-2">Performance</h5>
+                  <h5 className="font-semibold text-navy mb-3 text-lg">Rendimiento</h5>
                   <p className="text-sm text-navy/60 leading-relaxed">
                     Optimización constante para máximo rendimiento y escalabilidad
                   </p>
