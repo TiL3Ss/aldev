@@ -48,7 +48,7 @@ interface TechCategory {
   technologies: {
     name: string;
     icon: React.ElementType;
-    color: 'orange' | 'burgundy' | 'navy';
+    color: 'orange' | 'burgundy' | 'navy'| 'green'| 'purple' | 'blue' | 'teal' | 'red' | 'yellow';
   }[];
 }
 
@@ -58,10 +58,10 @@ const techCategories: TechCategory[] = [
     title: 'Backend & APIs',
     description: 'Desarrollo de servicios robustos y escalables',
     technologies: [
-      { name: 'Node.js', icon: Nodejs, color: 'orange' },
-      { name: 'Next.js', icon: Nextjs, color: 'burgundy' },
-      { name: 'PHP', icon: Php, color: 'navy' },
-      { name: 'TypeScript', icon: TypeScript, color: 'orange' },
+      { name: 'Node.js', icon: Nodejs, color: 'green' },
+      { name: 'Next.js', icon: Nextjs, color: 'navy' },
+      { name: 'PHP', icon: Php, color: 'purple' },
+      { name: 'TypeScript', icon: TypeScript, color: 'blue' },
     ]
   },
   {
@@ -69,8 +69,8 @@ const techCategories: TechCategory[] = [
     title: 'Bases de Datos',
     description: 'Gestión y optimización de datos',
     technologies: [
-      { name: 'MySQL', icon: MySQL, color: 'burgundy' },
-      { name: 'MongoDB', icon: MongoDB, color: 'orange' },
+      { name: 'MySQL', icon: MySQL, color: 'teal' },
+      { name: 'MongoDB', icon: MongoDB, color: 'green' },
       { name: 'SQLite', icon: SQLite, color: 'navy' },
       { name: 'Firebase', icon: Firebase, color: 'orange' },
     ]
@@ -80,10 +80,10 @@ const techCategories: TechCategory[] = [
     title: 'DevOps & Cloud',
     description: 'Despliegue y infraestructura moderna',
     technologies: [
-      { name: 'Docker', icon: Docker, color: 'navy' },
-      { name: 'GCP', icon: GoogleCloud, color: 'burgundy' },
-      { name: 'Vercel', icon: Vercel, color: 'orange' },
-      { name: 'GitHub Actions', icon: GitBranch, color: 'navy' }, // Mantenemos GitBranch de Lucide
+      { name: 'Docker', icon: Docker, color: 'blue' },
+      { name: 'GCP', icon: GoogleCloud, color: 'red' },
+      { name: 'Vercel', icon: Vercel, color: 'navy' },
+      { name: 'GitHub Actions', icon: GitBranch, color: 'purple' },
     ]
   },
   {
@@ -91,8 +91,8 @@ const techCategories: TechCategory[] = [
     title: 'Seguridad',
     description: 'Protección y autenticación robusta',
     technologies: [
-      { name: 'Auth0', icon: Auth0, color: 'burgundy' },
-      { name: 'OAuth 2.0', icon: Shield, color: 'navy' }, // Mantenemos Shield de Lucide
+      { name: 'Auth0', icon: Auth0, color: 'orange' },
+      { name: 'OAuth 2.0', icon: Shield, color: 'green' },
     ]
   },
   {
@@ -100,11 +100,11 @@ const techCategories: TechCategory[] = [
     title: 'Lenguajes',
     description: 'Dominio de múltiples lenguajes de programación',
     technologies: [
-      { name: 'JavaScript', icon: JavaScript, color: 'burgundy' },
-      { name: 'TypeScript', icon: TypeScript, color: 'navy' },
-      { name: 'PHP', icon: Php, color: 'orange' },
-      { name: 'C#', icon: C, color: 'burgundy' },
-      { name: 'Dart', icon: Dart, color: 'orange' },
+      { name: 'JavaScript', icon: JavaScript, color: 'yellow' },
+      { name: 'TypeScript', icon: TypeScript, color: 'blue' },
+      { name: 'PHP', icon: Php, color: 'purple' },
+      { name: 'C#', icon: C, color: 'green' },
+      { name: 'Dart', icon: Dart, color: 'blue' },
     ]
   },
   {
@@ -112,10 +112,10 @@ const techCategories: TechCategory[] = [
     title: 'Herramientas',
     description: 'Desarrollo y productividad',
     technologies: [
-      { name: 'VS Code', icon: VisualStudioCode, color: 'orange' },
-      { name: 'Postman', icon: Postman, color: 'burgundy' },
-      { name: 'ESLint', icon: ESLint, color: 'navy' },
-      { name: 'Planner', icon: Code2, color: 'orange' }, // Mantenemos Code2 de Lucide para Planner
+      { name: 'VS Code', icon: VisualStudioCode, color: 'blue' },
+      { name: 'Postman', icon: Postman, color: 'orange' },
+      { name: 'ESLint', icon: ESLint, color: 'purple' },
+      { name: 'Planner', icon: Code2, color: 'green' },
     ]
   },
 ];
