@@ -11,7 +11,10 @@ import {
   Database, 
   Shield,
   BarChart3,
-  Zap
+  Zap,
+  CheckCircle2,
+  Clock,
+  FileText
 } from 'lucide-react';
 
 interface ProjectsSectionProps {
@@ -137,32 +140,40 @@ const statusConfig = {
   completed: { 
     label: 'Completado', 
     color: 'success' as const,
-    icon: '✅' 
+    icon: CheckCircle2,
+    bgClass: 'bg-green-100 dark:bg-green-950/50 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800'
   },
   'in-progress': { 
     label: 'En Desarrollo', 
     color: 'warning' as const,
-    icon: '🚧' 
+    icon: Clock,
+    bgClass: 'bg-orange-100 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-800'
   },
   planning: { 
     label: 'Planificación', 
     color: 'default' as const,
-    icon: '📋' 
+    icon: FileText,
+    bgClass: 'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-700'
   }
 };
 
 const categoryConfig = {
-  api: { label: 'API', color: 'primary' },
-  microservices: { label: 'Microservicios', color: 'secondary' },
-  fullstack: { label: 'Full Stack', color: 'success' },
-  tools: { label: 'Herramientas', color: 'warning' }
+  api: { label: 'API', bgClass: 'bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800' },
+  microservices: { label: 'Microservicios', bgClass: 'bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-400 border-purple-200 dark:border-purple-800' },
+  fullstack: { label: 'Full Stack', bgClass: 'bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800' },
+  tools: { label: 'Herramientas', bgClass: 'bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800' }
 };
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = '' }) => {
   return (
     <section 
       id="projects" 
-      className={`py-20 px-4 bg-gradient-to-b from-transparent to-cream/30 ${className}`}
+      className={`
+        py-20 px-4 
+        bg-gradient-to-b from-gray-50/50 via-blue-50/30 to-purple-50/50
+        dark:from-gray-900/50 dark:via-blue-950/30 dark:to-purple-950/50
+        ${className}
+      `}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -170,30 +181,54 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="text-center mb-20"
         >
-          <Chip 
-            className="mb-4 bg-gradient-to-r from-orange/20 to-burgundy/20 text-navy border-orange/30"
-            variant="bordered"
-            size="lg"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <Rocket size={16} className="mr-2" />
-            Proyectos Destacados
-          </Chip>
+            <Chip 
+              className="
+                mb-6 bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
+                border border-gray-200/50 dark:border-gray-600/50
+                backdrop-blur-xl px-4 py-2
+              "
+              variant="bordered"
+              size="lg"
+              startContent={<Rocket size={18} className="text-blue-600 dark:text-blue-400" />}
+            >
+              <span className="font-semibold">Proyectos Destacados</span>
+            </Chip>
+          </motion.div>
           
-          <h2 className="
-            text-4xl md:text-5xl font-bold mb-6
-            bg-gradient-to-r from-navy via-burgundy to-orange 
-            bg-clip-text text-transparent
-          ">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="
+              text-5xl md:text-6xl font-black mb-6 tracking-tight
+              bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 
+              dark:from-white dark:via-blue-400 dark:to-purple-400
+              bg-clip-text text-transparent
+            "
+          >
             Casos de Éxito
-          </h2>
+          </motion.h2>
           
-          <p className="text-xl text-navy/70 max-w-3xl mx-auto leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+          >
             Proyectos reales que demuestran mi experiencia en desarrollo backend, 
             desde APIs REST hasta arquitecturas de microservicios complejas
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Projects Grid */}
@@ -201,98 +236,122 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ 
+                duration: 0.7, 
+                delay: index * 0.15,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
             >
               <Card className="
-                bg-cream/20 backdrop-blur-xl border border-orange/20 
-                hover:border-orange/40 hover:shadow-xl hover:shadow-orange/10
-                transition-all duration-500 hover:-translate-y-2
-                overflow-hidden
+                bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
+                border border-black/5 dark:border-white/10
+                hover:border-blue-200/50 dark:hover:border-blue-700/50 
+                hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-purple-500/20
+                transition-all duration-700 ease-out hover:scale-[1.02]
+                rounded-3xl overflow-hidden group
               ">
-                <div className="grid lg:grid-cols-2 gap-0">
+                <div className="grid lg:grid-cols-3 gap-0 min-h-[400px]">
                   {/* Content */}
-                  <div className="p-8 lg:p-12">
+                  <div className="lg:col-span-2 p-8 lg:p-12 flex flex-col justify-center">
                     {/* Header */}
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="flex items-center gap-4">
-                        <div className="
-                          p-4 rounded-2xl bg-gradient-to-br from-orange/20 to-burgundy/20
-                          backdrop-blur-xl border border-orange/30
-                        ">
-                          <project.icon size={32} className="text-navy" />
-                        </div>
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="flex items-center gap-6">
+                        <motion.div 
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                          className="
+                            p-4 rounded-3xl bg-gradient-to-br from-blue-500/20 to-purple-500/20
+                            backdrop-blur-xl border border-blue-200/30 dark:border-purple-400/30
+                            shadow-lg shadow-blue-500/10 dark:shadow-purple-500/20
+                          "
+                        >
+                          <project.icon size={32} className="text-blue-600 dark:text-blue-400" />
+                        </motion.div>
                         <div>
-                          <h3 className="text-2xl font-bold text-navy mb-2">
+                          <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">
                             {project.title}
                           </h3>
-                          <div className="flex gap-2">
-                            <Chip
-                              size="sm"
-                              variant="flat"
-                              color={statusConfig[project.status].color}
-                              startContent={
-                                <span className="text-xs">
-                                  {statusConfig[project.status].icon}
-                                </span>
-                              }
-                            >
-                              {statusConfig[project.status].label}
-                            </Chip>
-                            <Chip
-                              size="sm"
-                              variant="bordered"
-                              className="border-orange/30 text-navy"
-                            >
+                          <div className="flex flex-wrap gap-3">
+                            <div className={`
+                              px-3 py-1.5 rounded-full text-sm font-medium
+                              border backdrop-blur-xl
+                              ${statusConfig[project.status].bgClass}
+                            `}>
+                              <div className="flex items-center gap-2">
+                                {React.createElement(statusConfig[project.status].icon, { size: 14 })}
+                                {statusConfig[project.status].label}
+                              </div>
+                            </div>
+                            <div className={`
+                              px-3 py-1.5 rounded-full text-sm font-medium
+                              border backdrop-blur-xl
+                              ${categoryConfig[project.category].bgClass}
+                            `}>
                               {categoryConfig[project.category].label}
-                            </Chip>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-burgundy/80 mb-4 text-lg">
+                    <p className="text-gray-700 dark:text-gray-300 mb-4 text-xl font-medium">
                       {project.description}
                     </p>
-                    <p className="text-navy/70 mb-6 leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed text-lg">
                       {project.longDescription}
                     </p>
 
                     {/* Technologies */}
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold text-navy mb-3 uppercase tracking-wide">
-                        Tecnologías
+                    <div className="mb-8">
+                      <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-wider">
+                        Stack Tecnológico
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {project.technologies.map((tech) => (
-                          <Chip
+                        {project.technologies.map((tech, techIndex) => (
+                          <motion.div
                             key={tech}
-                            size="sm"
-                            className="bg-orange/10 text-navy border-orange/20"
-                            variant="bordered"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: techIndex * 0.1, duration: 0.3 }}
+                            whileHover={{ scale: 1.05 }}
                           >
-                            {tech}
-                          </Chip>
+                            <Chip
+                              size="md"
+                              className="
+                                bg-white/70 dark:bg-black/50 text-gray-700 dark:text-gray-300
+                                border border-gray-200/50 dark:border-gray-600/50
+                                backdrop-blur-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/50
+                                transition-all duration-300 font-medium
+                              "
+                              variant="bordered"
+                            >
+                              {tech}
+                            </Chip>
+                          </motion.div>
                         ))}
                       </div>
                     </div>
 
                     {/* Links */}
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-4">
                       {project.demoUrl && (
                         <Button
                           as={Link}
                           href={project.demoUrl}
                           target="_blank"
                           className="
-                            bg-gradient-to-r from-orange to-burgundy text-white
-                            hover:shadow-lg hover:shadow-orange/25
-                            transition-all duration-300 hover:-translate-y-0.5
+                            bg-gradient-to-r from-blue-500 to-purple-600 text-white
+                            hover:shadow-xl hover:shadow-blue-500/30
+                            transition-all duration-300 hover:scale-105
+                            font-semibold border-0 backdrop-blur-xl
                           "
-                          startContent={<ExternalLink size={16} />}
+                          radius="full"
+                          startContent={<ExternalLink size={18} />}
                         >
                           Ver Demo
                         </Button>
@@ -302,12 +361,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                           as={Link}
                           href={project.githubUrl}
                           target="_blank"
-                          variant="bordered"
                           className="
-                            border-2 border-navy text-navy hover:bg-navy hover:text-cream
-                            transition-all duration-300 hover:-translate-y-0.5
+                            bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
+                            border border-gray-200/50 dark:border-gray-600/50
+                            hover:bg-gray-50/70 dark:hover:bg-gray-800/50
+                            transition-all duration-300 hover:scale-105 backdrop-blur-xl
+                            font-semibold
                           "
-                          startContent={<Github size={16} />}
+                          radius="full"
+                          startContent={<Github size={18} />}
                         >
                           Código
                         </Button>
@@ -316,28 +378,34 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                   </div>
 
                   {/* Features */}
-                  <div className="bg-gradient-to-br from-orange/5 to-burgundy/5 p-8 lg:p-12">
-                    <h4 className="text-lg font-bold text-navy mb-6">
+                  <div className="
+                    bg-gradient-to-br from-gray-50/80 to-blue-50/80 
+                    dark:from-gray-800/50 dark:to-blue-950/50 
+                    p-8 lg:p-12 flex flex-col justify-center
+                    backdrop-blur-xl border-l border-gray-200/30 dark:border-gray-700/30
+                  ">
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-6 tracking-wide">
                       Características Principales
                     </h4>
                     <div className="space-y-4">
                       {project.features.map((feature, featureIndex) => (
                         <motion.div
                           key={feature}
-                          initial={{ opacity: 0, x: 20 }}
+                          initial={{ opacity: 0, x: 30 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
-                          transition={{ delay: featureIndex * 0.1 }}
-                          className="flex items-center gap-3"
+                          transition={{ delay: featureIndex * 0.1 + 0.3, duration: 0.4 }}
+                          className="flex items-start gap-3 group"
                         >
                           <div className="
-                            w-6 h-6 rounded-full bg-gradient-to-r from-orange to-burgundy
+                            w-6 h-6 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600
                             flex items-center justify-center text-white text-xs font-bold
-                            flex-shrink-0
+                            flex-shrink-0 mt-0.5 shadow-lg shadow-blue-500/25
+                            group-hover:scale-110 transition-transform duration-300
                           ">
-                            ✓
+                            <CheckCircle2 size={14} />
                           </div>
-                          <span className="text-navy/80 text-sm">
+                          <span className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed font-medium">
                             {feature}
                           </span>
                         </motion.div>
@@ -352,48 +420,58 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-16"
+          transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="text-center mt-20"
         >
-          <p className="text-navy/70 mb-6 text-lg">
-            ¿Te interesa ver más de mi trabajo o colaborar en un proyecto?
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              as={Link}
-              href="https://github.com/TiL3Ss"
-              target="_blank"
-              size="lg"
-              className="
-                bg-gradient-to-r from-orange to-burgundy text-white
-                hover:shadow-lg hover:shadow-orange/25
-                transition-all duration-300 hover:-translate-y-0.5
-                font-semibold px-8
-              "
-              startContent={<Github size={20} />}
-            >
-              Ver GitHub Completo
-            </Button>
-            <Button
-              size="lg"
-              variant="bordered"
-              className="
-                border-2 border-navy text-navy hover:bg-navy hover:text-cream
-                transition-all duration-300 hover:-translate-y-0.5
-                font-semibold px-8
-              "
-              onPress={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              Hablemos del Proyecto
-            </Button>
+          <div className="
+            bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
+            border border-black/5 dark:border-white/10
+            rounded-3xl p-8 md:p-12 shadow-xl shadow-black/5 dark:shadow-white/10
+            max-w-3xl mx-auto
+          ">
+            <p className="text-gray-700 dark:text-gray-300 mb-8 text-xl leading-relaxed">
+              ¿Te interesa ver más de mi trabajo o colaborar en un proyecto?
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                as={Link}
+                href="https://github.com/TiL3Ss"
+                target="_blank"
+                size="lg"
+                className="
+                  bg-gradient-to-r from-blue-500 to-purple-600 text-white
+                  hover:shadow-xl hover:shadow-blue-500/30
+                  transition-all duration-300 hover:scale-105
+                  font-semibold border-0 backdrop-blur-xl h-14 px-8
+                "
+                radius="full"
+                startContent={<Github size={20} />}
+              >
+                Ver GitHub Completo
+              </Button>
+              <Button
+                size="lg"
+                className="
+                  bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
+                  border border-gray-200/50 dark:border-gray-600/50
+                  hover:bg-gray-50/70 dark:hover:bg-gray-800/50
+                  transition-all duration-300 hover:scale-105 backdrop-blur-xl
+                  font-semibold h-14 px-8
+                "
+                radius="full"
+                onPress={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                Hablemos del Proyecto
+              </Button>
+            </div>
           </div>
         </motion.div>
       </div>

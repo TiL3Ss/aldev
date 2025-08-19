@@ -3,7 +3,7 @@
 
 import { Button, Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
   className?: string;
@@ -34,52 +34,66 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
   return (
     <section 
       id="home" 
-      className={`min-h-screen flex items-center justify-center px-4 py-20 ${className}`}
+      className={`
+        min-h-screen flex items-center justify-center px-4 py-20 
+        bg-gradient-to-br from-blue-50 via-white to-purple-50
+        dark:from-gray-900 dark:via-black dark:to-purple-950
+        ${className}
+      `}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto w-full">
         <Card className="
-          bg-cream/20 backdrop-blur-xl border border-orange/20 
-          shadow-2xl shadow-navy/5
+          bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
+          border border-black/5 dark:border-white/10
+          shadow-2xl shadow-black/5 dark:shadow-white/10
+          hover:shadow-3xl hover:shadow-black/10 dark:hover:shadow-white/20
+          transition-all duration-700 ease-out
+          rounded-3xl overflow-hidden
         ">
-          <CardBody className="p-8 md:p-16">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <CardBody className="p-0">
+            <div className="grid lg:grid-cols-2 gap-0 min-h-[600px]">
               {/* Content */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                className="space-y-8"
+                transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="p-8 md:p-16 flex flex-col justify-center space-y-8"
               >
                 {/* Greeting */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
                 >
                   <Chip 
-                    className="mb-4 bg-gradient-to-r from-orange/20 to-burgundy/20 text-navy border-orange/30"
+                    className="
+                      mb-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 
+                      text-gray-800 dark:text-gray-200 border border-blue-200/30 dark:border-purple-400/30
+                      backdrop-blur-xl px-4 py-2
+                    "
                     variant="bordered"
                     size="lg"
+                    startContent={<span className="text-xl">👋</span>}
                   >
-                    👋 Hola, soy Alvaro
+                    <span className="font-semibold">Hola, soy Alvaro</span>
                   </Chip>
                 </motion.div>
 
                 {/* Main Title */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
                 >
                   <h1 className="
-                    text-4xl md:text-6xl lg:text-7xl font-bold 
-                    bg-gradient-to-r from-navy via-burgundy to-orange 
+                    text-5xl md:text-7xl lg:text-8xl font-black
+                    bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
                     bg-clip-text text-transparent
-                    leading-tight
+                    leading-[0.9] tracking-tight mb-4
                   ">
                     Backend
                     <br />
-                    Developer
+                    <span className="font-light italic">Developer</span>
                   </h1>
                 </motion.div>
 
@@ -87,9 +101,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
                   className="
-                    text-xl md:text-2xl text-burgundy/80 font-medium 
+                    text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium 
                     leading-relaxed max-w-lg
                   "
                 >
@@ -101,8 +115,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 }}
-                  className="text-navy/70 text-lg leading-relaxed max-w-lg"
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                  className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed max-w-lg"
                 >
                   Especialista en desarrollo backend con enfoque en 
                   performance, seguridad y mejores prácticas. 
@@ -113,36 +127,48 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.0 }}
-                  className="flex flex-wrap gap-2"
+                  transition={{ delay: 1.0, duration: 0.6 }}
+                  className="flex flex-wrap gap-3"
                 >
                   {specialties.map((specialty, index) => (
-                    <Chip
+                    <motion.div
                       key={specialty}
-                      className="bg-orange/10 text-navy border-orange/20"
-                      variant="bordered"
-                      size="sm"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1.2 + index * 0.1, duration: 0.4 }}
                     >
-                      {specialty}
-                    </Chip>
+                      <Chip
+                        className="
+                          bg-white/70 dark:bg-black/50 text-gray-700 dark:text-gray-300 
+                          border border-gray-200/50 dark:border-gray-600/50
+                          backdrop-blur-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/50
+                          transition-all duration-300 hover:scale-105
+                        "
+                        variant="bordered"
+                        size="md"
+                      >
+                        {specialty}
+                      </Chip>
+                    </motion.div>
                   ))}
                 </motion.div>
 
                 {/* CTA Buttons */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 }}
-                  className="flex flex-col sm:flex-row gap-4"
+                  transition={{ delay: 1.4, duration: 0.6 }}
+                  className="flex flex-col sm:flex-row gap-4 pt-4"
                 >
                   <Button
                     size="lg"
                     radius="full"
                     className="
-                      bg-gradient-to-r from-orange to-burgundy text-white
-                      hover:shadow-lg hover:shadow-orange/25
-                      transition-all duration-300 hover:-translate-y-0.5
-                      font-semibold px-8
+                      bg-gradient-to-r from-blue-500 to-purple-600 text-white
+                      hover:shadow-xl hover:shadow-blue-500/30
+                      transition-all duration-300 hover:scale-105
+                      font-semibold px-8 h-14 text-base
+                      border-0 backdrop-blur-xl
                     "
                     onPress={() => {
                       const projectsSection = document.getElementById('projects');
@@ -150,6 +176,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         projectsSection.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
+                    startContent={<Sparkles size={20} />}
                   >
                     Ver Proyectos
                   </Button>
@@ -157,11 +184,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                   <Button
                     size="lg"
                     radius="full"
-                    variant="bordered"
                     className="
-                      border-2 border-navy text-navy hover:bg-navy hover:text-cream
-                      transition-all duration-300 hover:-translate-y-0.5
-                      font-semibold px-8
+                      bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
+                      border border-gray-200/50 dark:border-gray-600/50
+                      hover:bg-gray-50/70 dark:hover:bg-gray-800/50
+                      transition-all duration-300 hover:scale-105 backdrop-blur-xl
+                      font-semibold px-8 h-14 text-base
                     "
                     onPress={() => {
                       const contactSection = document.getElementById('contact');
@@ -178,26 +206,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.4 }}
-                  className="flex gap-4"
+                  transition={{ delay: 1.6, duration: 0.6 }}
+                  className="flex gap-3 pt-4"
                 >
-                  {socialLinks.map(({ icon: Icon, href, label }) => (
-                    <Button
+                  {socialLinks.map(({ icon: Icon, href, label }, index) => (
+                    <motion.div
                       key={label}
-                      as="a"
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      isIconOnly
-                      variant="light"
-                      className="
-                        text-navy hover:text-orange hover:bg-orange/10
-                        transition-all duration-300 hover:-translate-y-0.5
-                      "
-                      aria-label={label}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1.8 + index * 0.1, duration: 0.4 }}
                     >
-                      <Icon size={24} />
-                    </Button>
+                      <Button
+                        as="a"
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        isIconOnly
+                        className="
+                          bg-white/70 dark:bg-black/50 text-gray-700 dark:text-gray-300
+                          border border-gray-200/50 dark:border-gray-600/50
+                          hover:bg-blue-50/70 dark:hover:bg-blue-950/50 hover:text-blue-600 dark:hover:text-blue-400
+                          transition-all duration-300 hover:scale-110 backdrop-blur-xl
+                          w-12 h-12 rounded-2xl
+                        "
+                        aria-label={label}
+                      >
+                        <Icon size={20} />
+                      </Button>
+                    </motion.div>
                   ))}
                 </motion.div>
               </motion.div>
@@ -206,68 +242,118 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="hidden lg:flex justify-center items-center"
+                transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="
+                  relative flex items-center justify-center p-8 lg:p-16
+                  bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5
+                  dark:from-blue-500/10 dark:via-purple-500/10 dark:to-pink-500/10
+                "
               >
                 <div className="relative">
-                  {/* Main Circle */}
-                  <div className="
-                    w-80 h-80 rounded-full 
-                    bg-gradient-to-br from-orange/20 via-burgundy/20 to-navy/20
-                    backdrop-blur-xl border border-orange/30
-                    flex items-center justify-center
-                    shadow-2xl shadow-navy/10
-                  ">
-                    {/* Inner Content */}
-                    <div className="
-                      w-64 h-64 rounded-full 
-                      bg-gradient-to-br from-cream/40 to-orange/20
-                      backdrop-blur-xl border border-orange/20
+                  {/* Main Orb */}
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.05, 1],
+                      rotate: [0, 2, -2, 0]
+                    }}
+                    transition={{ 
+                      duration: 8, 
+                      repeat: Infinity, 
+                      ease: "easeInOut" 
+                    }}
+                    className="
+                      w-80 h-80 rounded-full relative overflow-hidden
+                      bg-gradient-to-br from-blue-500/20 via-purple-500/30 to-pink-500/20
+                      backdrop-blur-3xl border border-white/20 dark:border-white/10
+                      shadow-2xl shadow-blue-500/20 dark:shadow-purple-500/30
                       flex items-center justify-center
-                    ">
-                      <div className="text-center">
-                        <div className="text-6xl mb-4">⚡</div>
-                        <div className="text-navy font-bold text-xl">Backend</div>
-                        <div className="text-burgundy font-medium">Excellence</div>
-                      </div>
+                    "
+                  >
+                    {/* Inner Glow */}
+                    <div className="
+                      absolute inset-4 rounded-full
+                      bg-gradient-to-br from-white/40 to-transparent
+                      dark:from-white/20 dark:to-transparent
+                      backdrop-blur-xl
+                    " />
+                    
+                    {/* Content */}
+                    <div className="relative z-10 text-center">
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        className="text-6xl mb-4 grayscale-0"
+                      >
+                        ⚡
+                      </motion.div>
+                      <div className="text-gray-800 dark:text-white font-bold text-xl tracking-wide">Backend</div>
+                      <div className="text-purple-600 dark:text-purple-400 font-medium text-lg">Excellence</div>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Floating Elements */}
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0"
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    className="absolute inset-0 pointer-events-none"
                   >
-                    <div className="
-                      absolute -top-4 left-1/2 -translate-x-1/2
-                      w-12 h-12 rounded-full bg-orange/30 backdrop-blur-xl
-                      flex items-center justify-center text-2xl
-                    ">
-                      🚀
-                    </div>
-                    <div className="
-                      absolute top-1/2 -right-4 -translate-y-1/2
-                      w-12 h-12 rounded-full bg-burgundy/30 backdrop-blur-xl
-                      flex items-center justify-center text-2xl
-                    ">
-                      ⚙️
-                    </div>
-                    <div className="
-                      absolute -bottom-4 left-1/2 -translate-x-1/2
-                      w-12 h-12 rounded-full bg-navy/30 backdrop-blur-xl
-                      flex items-center justify-center text-2xl
-                    ">
-                      🔧
-                    </div>
-                    <div className="
-                      absolute top-1/2 -left-4 -translate-y-1/2
-                      w-12 h-12 rounded-full bg-cream/40 backdrop-blur-xl border border-orange/20
-                      flex items-center justify-center text-2xl
-                    ">
-                      💡
-                    </div>
+                    {[
+                      { emoji: '🚀', delay: 0, position: 'top' },
+                      { emoji: '⚙️', delay: 0.25, position: 'right' },
+                      { emoji: '🔧', delay: 0.5, position: 'bottom' },
+                      { emoji: '💡', delay: 0.75, position: 'left' }
+                    ].map(({ emoji, delay, position }, index) => (
+                      <motion.div
+                        key={position}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: delay + 2, duration: 0.6 }}
+                        className={`
+                          absolute w-14 h-14 rounded-2xl backdrop-blur-xl
+                          bg-white/60 dark:bg-black/40 border border-white/30 dark:border-white/10
+                          flex items-center justify-center text-2xl
+                          shadow-lg shadow-black/5 dark:shadow-white/10
+                          ${position === 'top' && '-top-6 left-1/2 -translate-x-1/2'}
+                          ${position === 'right' && 'top-1/2 -right-6 -translate-y-1/2'}
+                          ${position === 'bottom' && '-bottom-6 left-1/2 -translate-x-1/2'}
+                          ${position === 'left' && 'top-1/2 -left-6 -translate-y-1/2'}
+                        `}
+                      >
+                        <motion.span
+                          animate={{ 
+                            rotate: -360,
+                            scale: [1, 1.1, 1]
+                          }}
+                          transition={{ 
+                            rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+                            scale: { duration: 2, repeat: Infinity, delay: delay }
+                          }}
+                        >
+                          {emoji}
+                        </motion.span>
+                      </motion.div>
+                    ))}
                   </motion.div>
+
+                  {/* Background Decorative Elements */}
+                  <div className="absolute inset-0 -z-10">
+                    <motion.div
+                      animate={{ 
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.5, 0.3]
+                      }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute top-10 right-10 w-20 h-20 rounded-full bg-blue-500/20 blur-xl"
+                    />
+                    <motion.div
+                      animate={{ 
+                        scale: [1.2, 1, 1.2],
+                        opacity: [0.4, 0.6, 0.4]
+                      }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute bottom-10 left-10 w-16 h-16 rounded-full bg-purple-500/20 blur-xl"
+                    />
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -278,22 +364,35 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
+          transition={{ delay: 2.5, duration: 0.6 }}
           className="flex justify-center mt-12"
         >
-          <Button
-            isIconOnly
-            variant="light"
-            className="
-              text-navy hover:text-orange
-              animate-bounce hover:animate-none
-              transition-all duration-300
-            "
-            onPress={scrollToNext}
-            aria-label="Scroll to next section"
+          <motion.div
+            animate={{ 
+              y: [0, 8, 0],
+              opacity: [0.5, 1, 0.5]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
           >
-            <ArrowDown size={24} />
-          </Button>
+            <Button
+              isIconOnly
+              className="
+                bg-white/60 dark:bg-black/40 text-gray-700 dark:text-gray-300
+                border border-gray-200/50 dark:border-gray-600/50
+                hover:bg-gray-50/70 dark:hover:bg-gray-800/50 hover:scale-110
+                transition-all duration-300 backdrop-blur-xl
+                w-12 h-12 rounded-2xl
+              "
+              onPress={scrollToNext}
+              aria-label="Scroll to next section"
+            >
+              <ArrowDown size={20} />
+            </Button>
+          </motion.div>
         </motion.div>
       </div>
     </section>
