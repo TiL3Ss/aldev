@@ -48,7 +48,7 @@ interface TechCategory {
   technologies: {
     name: string;
     icon: React.ElementType;
-    color: 'orange' | 'burgundy' | 'navy'| 'green'| 'purple' | 'blue' | 'teal' | 'red' | 'yellow';
+    color: 'orange' | 'burgundy' | 'navy' | 'green' | 'purple' | 'blue' | 'teal' | 'red' | 'yellow';
   }[];
 }
 
@@ -135,7 +135,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 }
 };
 
-const getColorClasses = (color: 'orange' | 'burgundy' | 'navy') => {
+const getColorClasses = (color: 'orange' | 'burgundy' | 'navy' | 'green' | 'purple' | 'blue' | 'teal' | 'red' | 'yellow') => {
   const colors = {
     orange: {
       bg: 'bg-orange/15',
@@ -157,6 +157,48 @@ const getColorClasses = (color: 'orange' | 'burgundy' | 'navy') => {
       border: 'border-navy/25',
       gradient: 'from-navy/15 to-navy/8',
       chip: 'bg-navy/10 text-navy-700 border-navy/20'
+    },
+    green: {
+      bg: 'bg-green-500/15',
+      text: 'text-green-600',
+      border: 'border-green-500/25',
+      gradient: 'from-green-500/15 to-green-500/8',
+      chip: 'bg-green-500/10 text-green-700 border-green-500/20'
+    },
+    purple: {
+      bg: 'bg-purple-500/15',
+      text: 'text-purple-600',
+      border: 'border-purple-500/25',
+      gradient: 'from-purple-500/15 to-purple-500/8',
+      chip: 'bg-purple-500/10 text-purple-700 border-purple-500/20'
+    },
+    blue: {
+      bg: 'bg-blue-500/15',
+      text: 'text-blue-600',
+      border: 'border-blue-500/25',
+      gradient: 'from-blue-500/15 to-blue-500/8',
+      chip: 'bg-blue-500/10 text-blue-700 border-blue-500/20'
+    },
+    teal: {
+      bg: 'bg-teal-500/15',
+      text: 'text-teal-600',
+      border: 'border-teal-500/25',
+      gradient: 'from-teal-500/15 to-teal-500/8',
+      chip: 'bg-teal-500/10 text-teal-700 border-teal-500/20'
+    },
+    red: {
+      bg: 'bg-red-500/15',
+      text: 'text-red-600',
+      border: 'border-red-500/25',
+      gradient: 'from-red-500/15 to-red-500/8',
+      chip: 'bg-red-500/10 text-red-700 border-red-500/20'
+    },
+    yellow: {
+      bg: 'bg-yellow-500/15',
+      text: 'text-yellow-600',
+      border: 'border-yellow-500/25',
+      gradient: 'from-yellow-500/15 to-yellow-500/8',
+      chip: 'bg-yellow-500/10 text-yellow-700 border-yellow-500/20'
     }
   };
   return colors[color];
@@ -397,7 +439,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                     color: "orange"
                   }
                 ].map((stat, index) => {
-                  const colorClasses = getColorClasses(stat.color as 'orange' | 'burgundy' | 'navy');
+                  const colorClasses = getColorClasses(stat.color as 'orange' | 'burgundy' | 'navy' | 'green' | 'purple' | 'blue' | 'teal' | 'red' | 'yellow');
                   
                   return (
                     <motion.div
