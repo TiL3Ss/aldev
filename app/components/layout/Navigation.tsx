@@ -117,7 +117,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
             
             {/* Name */}
             <span className="
-              font-bold text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
+              font-bold text-2xl bg-gradient-to-r from-red-600 via-orange 0 to-red-800 
               bg-clip-text text-transparent
             ">
               Alvaro
@@ -169,8 +169,8 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               scrollToSection('#contact');
             }}
             className="
-              bg-gradient-to-r from-blue-500 to-purple-600 text-white
-              hover:shadow-lg hover:shadow-blue-500/30
+              bg-gradient-to-r from-red-600 to-orange text-white
+              hover:shadow-lg hover:shadow-red-500/30
               transition-all duration-300 hover:scale-105
               font-semibold border-0 backdrop-blur-xl
               px-6 py-2
@@ -208,7 +208,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
                 className="rounded-xl object-contain"
               />
               <span className="
-                font-bold text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
+                font-bold text-2xl bg-gradient-to-r from-red-600 via-orange to-red-800
                 bg-clip-text text-transparent
               ">
                 Alvaro
@@ -249,8 +249,8 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
                 scrollToSection('#contact');
               }}
               className="
-                w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white
-                hover:shadow-lg hover:shadow-blue-500/30
+                w-full bg-gradient-to-r from-red-600 to-orange text-white
+                hover:shadow-lg hover:shadow-red-500/30
                 transition-all duration-300 hover:scale-[1.02]
                 font-semibold h-14
               "
