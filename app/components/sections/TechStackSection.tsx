@@ -38,6 +38,7 @@ interface TechCategory {
   description: string;
   technologies: {
     name: string;
+    icon: React.ElementType;
     color: 'orange' | 'burgundy' | 'navy';
   }[];
 }
@@ -48,10 +49,10 @@ const techCategories: TechCategory[] = [
     title: 'Backend & APIs',
     description: 'Desarrollo de servicios robustos y escalables',
     technologies: [
-      { name: 'Node.js', color: 'orange' },
-      { name: 'Next.js API Routes', color: 'burgundy' },
-      { name: 'PHP', color: 'navy' },
-      { name: 'TypeScript', color: 'orange' },
+      { name: 'Node.js', icon: Cpu, color: 'orange' },
+      { name: 'Next.js API Routes', icon: Globe, color: 'burgundy' },
+      { name: 'PHP', icon: FileCode, color: 'navy' },
+      { name: 'TypeScript', icon: Code2, color: 'orange' },
     ]
   },
   {
@@ -59,10 +60,10 @@ const techCategories: TechCategory[] = [
     title: 'Bases de Datos',
     description: 'Gestión y optimización de datos',
     technologies: [
-      { name: 'MySQL', color: 'burgundy' },
-      { name: 'MongoDB', color: 'orange' },
-      { name: 'SQLite', color: 'navy' },
-      { name: 'Firebase', color: 'orange' },
+      { name: 'MySQL', icon: Database, color: 'burgundy' },
+      { name: 'MongoDB', icon: Layers, color: 'orange' },
+      { name: 'SQLite', icon: Box, color: 'navy' },
+      { name: 'Firebase', icon: Zap, color: 'orange' },
     ]
   },
   {
@@ -70,10 +71,10 @@ const techCategories: TechCategory[] = [
     title: 'DevOps & Cloud',
     description: 'Despliegue y infraestructura moderna',
     technologies: [
-      { name: 'Docker', color: 'navy' },
-      { name: 'GCP', color: 'burgundy' },
-      { name: 'Vercel', color: 'orange' },
-      { name: 'GitHub Actions', color: 'navy' },
+      { name: 'Docker', icon: Box, color: 'navy' },
+      { name: 'GCP', icon: Cloud, color: 'burgundy' },
+      { name: 'Vercel', icon: Globe, color: 'orange' },
+      { name: 'GitHub Actions', icon: GitBranch, color: 'navy' },
     ]
   },
   {
@@ -81,8 +82,8 @@ const techCategories: TechCategory[] = [
     title: 'Seguridad',
     description: 'Protección y autenticación robusta',
     technologies: [
-      { name: 'OAuth 2.0', color: 'burgundy' },
-      { name: 'Bcrypt', color: 'navy' },
+      { name: 'OAuth 2.0', icon: Shield, color: 'burgundy' },
+      { name: 'Bcrypt', icon: Hash, color: 'navy' },
     ]
   },
   {
@@ -90,11 +91,11 @@ const techCategories: TechCategory[] = [
     title: 'Lenguajes',
     description: 'Dominio de múltiples lenguajes de programación',
     technologies: [
-      { name: 'JavaScript', color: 'burgundy' },
-      { name: 'TypeScript', color: 'navy' },
-      { name: 'PHP', color: 'orange' },
-      { name: 'C#', color: 'burgundy' },
-      { name: 'Dart', color: 'orange' },
+      { name: 'JavaScript', icon: Code2, color: 'burgundy' },
+      { name: 'TypeScript', icon: FileCode, color: 'navy' },
+      { name: 'PHP', icon: Cpu, color: 'orange' },
+      { name: 'C#', icon: Hash, color: 'burgundy' },
+      { name: 'Dart', icon: Smartphone, color: 'orange' },
     ]
   },
   {
@@ -102,10 +103,10 @@ const techCategories: TechCategory[] = [
     title: 'Herramientas',
     description: 'Desarrollo y productividad',
     technologies: [
-      { name: 'VS Code', color: 'orange' },
-      { name: 'Postman', color: 'burgundy' },
-      { name: 'ESLint/Prettier', color: 'navy' },
-      { name: 'Planner', color: 'orange' },
+      { name: 'VS Code', icon: Terminal, color: 'orange' },
+      { name: 'Postman', icon: Compass, color: 'burgundy' },
+      { name: 'ESLint/Prettier', icon: Settings, color: 'navy' },
+      { name: 'Planner', icon: Palette, color: 'orange' },
     ]
   },
 ];
@@ -212,11 +213,11 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="
-                h-full bg-cream/20 backdrop-blur-xl border border-orange/15
-                hover:border-orange/30 hover:shadow-xl hover:shadow-orange/8
+                h-full bg-white/80 backdrop-blur-xl border border-orange/20
+                hover:border-orange/40 hover:shadow-xl hover:shadow-orange/10
                 transition-all duration-500 hover:-translate-y-2
                 group rounded-3xl overflow-hidden
-                hover:bg-cream/30
+                hover:bg-white/90
               ">
                 <CardBody className="p-8">
                   {/* Category Header */}
@@ -243,8 +244,8 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                     </div>
                   </div>
 
-                  {/* Technologies List - iOS 18 Style */}
-                  <div className="flex flex-wrap gap-3">
+                  {/* Technologies List - iOS 18 Style with Icons */}
+                  <div className="flex flex-wrap gap-4">
                     {category.technologies.map((tech) => {
                       const colorClasses = getColorClasses(tech.color);
                       
@@ -255,31 +256,50 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.4, delay: index * 0.05 }}
-                          whileHover={{ scale: 1.05 }}
-                          className="
-                            relative overflow-hidden
-                          "
+                          className="group/tech relative"
                         >
-                          <Chip
-                            variant="bordered"
+                          {/* Icon Container */}
+                          <motion.div
+                            whileHover={{ scale: 1.1 }}
                             className={`
-                              ${colorClasses.chip}
-                              border backdrop-blur-xl
-                              px-4 py-2 text-sm font-semibold
-                              rounded-full transition-all duration-300
+                              w-12 h-12 rounded-2xl ${colorClasses.bg} ${colorClasses.border}
+                              border backdrop-blur-xl flex items-center justify-center
+                              cursor-pointer transition-all duration-300
                               hover:shadow-lg hover:shadow-current/20
-                              hover:scale-105 cursor-default
                               relative overflow-hidden
+                              group-hover/tech:scale-110
                             `}
                           >
-                            {tech.name}
+                            <tech.icon size={20} className={`${colorClasses.text} transition-all duration-300`} />
+                            
                             {/* Subtle shimmer effect */}
                             <div className="
                               absolute inset-0 -translate-x-full
-                              bg-gradient-to-r from-transparent via-white/10 to-transparent
-                              group-hover:translate-x-full transition-transform duration-1000
+                              bg-gradient-to-r from-transparent via-white/20 to-transparent
+                              group-hover/tech:translate-x-full transition-transform duration-1000
                             " />
-                          </Chip>
+                          </motion.div>
+
+                          {/* Expanding Label on Hover */}
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0, y: 10 }}
+                            whileHover={{ opacity: 1, scale: 1, y: 0 }}
+                            className="
+                              absolute top-full left-1/2 transform -translate-x-1/2 mt-2
+                              bg-white/95 backdrop-blur-xl border border-gray-200/50
+                              px-3 py-1.5 rounded-xl text-xs font-semibold text-gray-700
+                              shadow-lg whitespace-nowrap z-10
+                              pointer-events-none
+                            "
+                          >
+                            {tech.name}
+                            {/* Arrow */}
+                            <div className="
+                              absolute bottom-full left-1/2 transform -translate-x-1/2
+                              w-0 h-0 border-l-4 border-r-4 border-b-4
+                              border-l-transparent border-r-transparent border-b-white/95
+                            " />
+                          </motion.div>
                         </motion.div>
                       );
                     })}
@@ -299,8 +319,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           className="mt-16"
         >
           <Card className="
-            bg-gradient-to-r from-orange/8 via-burgundy/8 to-navy/8
-            backdrop-blur-xl border border-orange/15 rounded-3xl
+            bg-white/70 backdrop-blur-xl border border-orange/20 rounded-3xl
             shadow-xl shadow-orange/5
           ">
             <CardBody className="p-10">
@@ -380,7 +399,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           className="mt-12"
         >
           <Card className="
-            bg-cream/15 backdrop-blur-xl border border-orange/15 rounded-3xl
+            bg-white/70 backdrop-blur-xl border border-orange/20 rounded-3xl
             shadow-xl shadow-orange/5
           ">
             <CardBody className="p-10">
