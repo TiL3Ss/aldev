@@ -105,11 +105,11 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               <Image
                 src="/images/logo_b.png"
                 alt="Alvaro Logo"
-                width={32}
-                height={32}
+                width={40}
+                height={40}
                 className="
                   rounded-xl object-contain transition-all duration-300
-                  hover:drop-shadow-lg
+                  hover:drop-shadow-lg p-1
                 "
                 priority
               />
@@ -117,7 +117,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
             
             {/* Name */}
             <span className="
-              font-bold text-2xl bg-gradient-to-r from-red-600 via-orange 0 to-red-800 
+              font-bold text-2xl bg-gradient-to-r from-red-600 via-orange 0 to-red-500 
               bg-clip-text text-transparent
             ">
               Alvaro
@@ -203,12 +203,12 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               <Image
                 src="/images/logo_b.png"
                 alt="Alvaro Logo"
-                width={32}
-                height={32}
-                className="rounded-xl object-contain"
+                width={40}
+                height={40}
+                className="rounded-xl object-contain p-1"
               />
               <span className="
-                font-bold text-2xl bg-gradient-to-r from-red-600 via-orange to-red-800
+                font-bold text-2xl bg-gradient-to-r from-red-600 via-orange to-red-500
                 bg-clip-text text-transparent
               ">
                 Alvaro
