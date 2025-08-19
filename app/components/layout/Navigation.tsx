@@ -102,17 +102,14 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
           >
             {/* Logo */}
             <div className="relative">
-              <Image
-                src="/images/logo_b.png"
-                alt="Alvaro Logo"
-                width={40}
-                height={40}
-                className="
-                  rounded-xl object-contain transition-all duration-300
-                  hover:drop-shadow-lg p-2
-                "
-                priority
-              />
+              <div
+              className="
+                w-10 h-10 p-2 rounded-xl
+                bg-gradient-to-br from-red-500 via-orange-500 to-red-500
+                [mask:url('/images/logo_b.svg')] [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]
+                transition-all duration-300 hover:drop-shadow-lg
+              "
+            ></div>
             </div>
             
             {/* Name */}
