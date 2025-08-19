@@ -146,8 +146,8 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
                   px-5 py-3 rounded-xl font-medium transition-all duration-300 relative
                   text-sm tracking-wide
                   ${activeSection === item.key 
-                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' 
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-white/10 hover:text-blue-600 dark:hover:text-blue-400'
+                    ? 'bg-red-500 text-white shadow-lg shadow-red-500/30' 
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-white/10 hover:text-red-600 dark:hover:text-red-400'
                   }
                 `}
               >
@@ -228,7 +228,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
                   w-full p-4 rounded-2xl text-lg font-medium transition-all duration-300
                   flex items-center justify-between group
                   ${activeSection === item.key 
-                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' 
+                    ? 'bg-red-500 text-white shadow-lg shadow-red-500/30' 
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-white/10'
                   }
                 `}
