@@ -185,7 +185,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     className="
                       bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
                       border border-gray-200/50 dark:border-gray-600/50
-                      hover:bg-gray-50/70 dark:hover:bg-gray-800/50
+                      hover:bg-red-700 dark:hover:bg-orange-light
                       transition-all duration-300 hover:scale-105 backdrop-blur-xl
                       font-semibold px-8 h-14 text-base
                     "
