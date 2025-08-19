@@ -32,7 +32,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
   };
 
   return (
-    
+    <section 
+      id="home" 
+      className={`
+        min-h-screen flex items-center justify-center px-4 py-20 
+        ${className}
+      `}
+    >
       <div className="max-w-7xl mx-auto w-full">
         <Card className="
           bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
@@ -387,5 +393,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
           </motion.div>
         </motion.div>
       </div>
+    </section>
   );
 };
