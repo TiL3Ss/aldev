@@ -245,7 +245,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                   </div>
 
                   {/* Technologies List - iOS 18 Style with Icons */}
-                  <div className="grid grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     {category.technologies.map((tech) => {
                       const colorClasses = getColorClasses(tech.color);
                       
@@ -256,56 +256,63 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.4, delay: index * 0.05 }}
-                          className="group/tech relative flex items-center"
+                          className="group/tech relative"
                         >
-                          {/* Icon Container */}
+                          {/* Expandable Container */}
                           <motion.div
-                            whileHover={{ scale: 1.1 }}
                             className={`
-                              w-12 h-12 rounded-2xl ${colorClasses.bg} ${colorClasses.border}
-                              border backdrop-blur-xl flex items-center justify-center
-                              cursor-pointer transition-all duration-300
+                              flex items-center gap-3 p-3 rounded-2xl cursor-pointer
+                              transition-all duration-300 overflow-hidden
+                              ${colorClasses.bg} ${colorClasses.border} border backdrop-blur-xl
                               hover:shadow-lg hover:shadow-current/20
-                              relative overflow-hidden z-20
                             `}
+                            whileHover={{ 
+                              scale: 1.02,
+                              paddingRight: "1rem"
+                            }}
+                            layout
                           >
-                            <tech.icon size={20} className={`${colorClasses.text} transition-all duration-300`} />
-                            
-                            {/* Subtle shimmer effect */}
-                            <div className="
-                              absolute inset-0 -translate-x-full
-                              bg-gradient-to-r from-transparent via-white/20 to-transparent
-                              group-hover/tech:translate-x-full transition-transform duration-1000
-                            " />
-                          </motion.div>
-
-                          {/* Expanding Label to the Right */}
-                          <motion.div
-                            initial={{ width: 0, opacity: 0 }}
-                            whileHover={{ width: "auto", opacity: 1 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="
-                              absolute left-14 top-1/2 transform -translate-y-1/2
-                              bg-white/95 backdrop-blur-xl border border-gray-200/50
-                              rounded-xl shadow-lg z-10 overflow-hidden
-                              group-hover/tech:block
-                            "
-                          >
+                            {/* Icon */}
                             <motion.div
-                              initial={{ opacity: 0, x: -10 }}
-                              whileHover={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.2, delay: 0.1 }}
-                              className="px-3 py-1.5 text-xs font-semibold text-gray-700 whitespace-nowrap"
+                              className={`
+                                w-10 h-10 rounded-xl ${colorClasses.bg} ${colorClasses.border}
+                                border flex items-center justify-center flex-shrink-0
+                                transition-all duration-300 relative overflow-hidden
+                              `}
+                              whileHover={{ scale: 1.1 }}
                             >
-                              {tech.name}
+                              <tech.icon size={18} className={`${colorClasses.text}`} />
+                              
+                              {/* Shimmer effect */}
+                              <div className="
+                                absolute inset-0 -translate-x-full
+                                bg-gradient-to-r from-transparent via-white/20 to-transparent
+                                group-hover/tech:translate-x-full transition-transform duration-1000
+                              " />
                             </motion.div>
-                            
-                            {/* Arrow pointing to icon */}
-                            <div className="
-                              absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1
-                              w-0 h-0 border-t-4 border-b-4 border-r-4
-                              border-t-transparent border-b-transparent border-r-white/95
-                            " />
+
+                            {/* Expanding Text */}
+                            <motion.div
+                              initial={{ width: 0, opacity: 0 }}
+                              whileHover={{ 
+                                width: "auto", 
+                                opacity: 1,
+                                transition: { duration: 0.3, ease: "easeOut" }
+                              }}
+                              className="overflow-hidden whitespace-nowrap"
+                            >
+                              <motion.span
+                                initial={{ x: -20, opacity: 0 }}
+                                whileHover={{ 
+                                  x: 0, 
+                                  opacity: 1,
+                                  transition: { duration: 0.2, delay: 0.1 }
+                                }}
+                                className={`text-sm font-semibold ${colorClasses.text}`}
+                              >
+                                {tech.name}
+                              </motion.span>
+                            </motion.div>
                           </motion.div>
                         </motion.div>
                       );
