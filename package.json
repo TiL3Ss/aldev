@@ -10,6 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@firecms/neat": "^0.4.0",
     "@heroui/react": "^2.8.2",
     "@libsql/client": "^0.15.12",

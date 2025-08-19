@@ -44,28 +44,32 @@ const socialLinks = [
     label: 'GitHub',
     href: 'https://github.com/TiL3Ss',
     username: '@TiL3Ss',
-    color: 'hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
+    color: 'hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white',
+    description: 'Revisa mis proyectos open source'
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/tu-perfil',
-    username: '/in/Alvaro',
-    color: 'hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-600 dark:hover:text-blue-400'
+    href: 'https://linkedin.com/in/alvaro-developer',
+    username: '/in/alvaro-developer',
+    color: 'hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-600 dark:hover:text-blue-400',
+    description: 'Conectemos profesionalmente'
   },
   {
     icon: Twitter,
     label: 'Twitter',
-    href: 'https://twitter.com/tu-handle',
-    username: '@Alvaro_dev',
-    color: 'hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-500 dark:hover:text-blue-400'
+    href: 'https://twitter.com/alvaro_dev',
+    username: '@alvaro_dev',
+    color: 'hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-500 dark:hover:text-blue-400',
+    description: 'Sígueme para tips de desarrollo'
   },
   {
     icon: Mail,
     label: 'Email',
-    href: 'mailto:tu@email.com',
-    username: 'tu@email.com',
-    color: 'hover:bg-orange-50 dark:hover:bg-orange-950 hover:text-orange-600 dark:hover:text-orange-400'
+    href: 'mailto:contact@alvaro-dev.com',
+    username: 'contact@alvaro-dev.com',
+    color: 'hover:bg-orange-50 dark:hover:bg-orange-950 hover:text-orange-600 dark:hover:text-orange-400',
+    description: 'Contacto directo por email'
   }
 ];
 
@@ -75,30 +79,33 @@ const quickActions = [
     title: 'Agenda una Reunión',
     description: 'Conversemos sobre tu proyecto en una videollamada',
     action: 'Agendar',
-    href: 'https://calendly.com/tu-perfil',
+    href: 'https://calendly.com/alvaro-developer/30min',
     gradient: 'from-green-500/20 to-emerald-500/20',
     iconBg: 'bg-green-100 dark:bg-green-950/50',
-    iconColor: 'text-green-600 dark:text-green-400'
+    iconColor: 'text-green-600 dark:text-green-400',
+    badge: 'Disponible'
   },
   {
     icon: MessageCircle,
     title: 'Chat Directo',
     description: 'Hablemos por WhatsApp o Telegram',
     action: 'Chatear',
-    href: 'https://wa.me/tu-numero',
+    href: 'https://wa.me/1234567890?text=Hola%20Álvaro,%20me%20gustaría%20conversar%20sobre...',
     gradient: 'from-blue-500/20 to-cyan-500/20',
     iconBg: 'bg-blue-100 dark:bg-blue-950/50',
-    iconColor: 'text-blue-600 dark:text-blue-400'
+    iconColor: 'text-blue-600 dark:text-blue-400',
+    badge: 'Respuesta rápida'
   },
   {
     icon: Phone,
     title: 'Llamada Telefónica',
     description: 'Para consultas urgentes o discusiones técnicas',
     action: 'Llamar',
-    href: 'tel:+tu-numero',
+    href: 'tel:+1234567890',
     gradient: 'from-purple-500/20 to-violet-500/20',
     iconBg: 'bg-purple-100 dark:bg-purple-950/50',
-    iconColor: 'text-purple-600 dark:text-purple-400'
+    iconColor: 'text-purple-600 dark:text-purple-400',
+    badge: 'Horario comercial'
   }
 ];
 
@@ -111,6 +118,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Partial<ContactForm>>({});
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<ContactForm> = {};
+    
+    if (!form.name.trim()) newErrors.name = 'El nombre es requerido';
+    if (!form.email.trim()) newErrors.email = 'El email es requerido';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = 'Email no válido';
+    }
+    if (!form.subject.trim()) newErrors.subject = 'El asunto es requerido';
+    if (!form.message.trim()) newErrors.message = 'El mensaje es requerido';
+    else if (form.message.trim().length < 10) {
+      newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleInputChange = (field: keyof ContactForm, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -118,17 +144,37 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) return;
+    
     setIsSubmitting(true);
     
-    // Aquí implementarías la lógica de envío
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setForm({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+    try {
+      // Aquí puedes implementar el envío real del formulario
+      // Ejemplo con EmailJS o tu API backend
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (response.ok) {
+        setForm({ name: '', email: '', subject: '', message: '' });
+        setErrors({});
+        setIsSubmitted(true);
+        // Reset success message after 5 seconds
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        throw new Error('Error al enviar el mensaje');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Aquí podrías mostrar un mensaje de error
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -275,6 +321,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                         onValueChange={(value) => handleInputChange('name', value)}
                         isRequired
                         radius="lg"
+                        isInvalid={!!errors.name}
+                        errorMessage={errors.name}
                         classNames={{
                           input: "text-gray-900 dark:text-white",
                           label: "text-gray-700 dark:text-gray-300 font-medium",
@@ -284,7 +332,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                             hover:border-blue-300/50 dark:hover:border-blue-500/50 
                             focus-within:border-blue-500 dark:focus-within:border-blue-400
                             transition-all duration-300
-                          `
+                            ${errors.name ? 'border-red-500 dark:border-red-400' : ''}
+                          `,
+                          errorMessage: "text-red-500 dark:text-red-400"
                         }}
                       />
                     </motion.div>
@@ -302,6 +352,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                         onValueChange={(value) => handleInputChange('email', value)}
                         isRequired
                         radius="lg"
+                        isInvalid={!!errors.email}
+                        errorMessage={errors.email}
                         classNames={{
                           input: "text-gray-900 dark:text-white",
                           label: "text-gray-700 dark:text-gray-300 font-medium",
@@ -311,7 +363,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                             hover:border-blue-300/50 dark:hover:border-blue-500/50 
                             focus-within:border-blue-500 dark:focus-within:border-blue-400
                             transition-all duration-300
-                          `
+                            ${errors.email ? 'border-red-500 dark:border-red-400' : ''}
+                          `,
+                          errorMessage: "text-red-500 dark:text-red-400"
                         }}
                       />
                     </motion.div>
@@ -475,15 +529,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                               ">
                                 {action.title}
                               </h4>
-                              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
                                 {action.description}
                               </p>
-                              <span className="
-                                inline-block mt-2 text-xs font-medium px-3 py-1 rounded-full
-                                bg-blue-100 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400
-                              ">
-                                {action.action}
-                              </span>
+                              <div className="flex items-center justify-between">
+                                <span className="
+                                  inline-block text-xs font-medium px-3 py-1 rounded-full
+                                  bg-blue-100 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400
+                                ">
+                                  {action.action}
+                                </span>
+                                {action.badge && (
+                                  <span className="
+                                    text-xs px-2 py-1 rounded-full font-medium
+                                    bg-green-100 dark:bg-green-950/50 text-green-700 dark:text-green-400
+                                  ">
+                                    {action.badge}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </Link>
@@ -555,9 +619,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                             <div className="font-medium text-gray-900 dark:text-white">
                               {social.label}
                             </div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                            <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                               {social.username}
                             </div>
+                            {social.description && (
+                              <div className="text-xs text-gray-500 dark:text-gray-500">
+                                {social.description}
+                              </div>
+                            )}
                           </div>
                         </Link>
                       </motion.div>

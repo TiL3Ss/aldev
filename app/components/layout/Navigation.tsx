@@ -13,6 +13,7 @@ import {
   Link,
   Button
 } from '@heroui/react';
+import Image from 'next/image';
 
 interface NavigationProps {
   className?: string;
@@ -79,10 +80,10 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
       `}
       maxWidth="xl"
       position="sticky"
-      height="72px"
+      height="84px"
     >
       {/* Brand */}
-      <NavbarContent>
+      <NavbarContent className="pl-6 pt-2">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden text-gray-900 dark:text-white hover:bg-gray-100/50 dark:hover:bg-white/10 rounded-full p-2 transition-all duration-300"
@@ -95,12 +96,32 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               scrollToSection('#home');
             }}
             className="
-              font-bold text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
-              bg-clip-text text-transparent hover:scale-105 transition-all duration-300
-              tracking-tight
+              flex items-center gap-3 hover:scale-105 transition-all duration-300
+              tracking-tight py-2
             "
           >
-            Alvaro
+            {/* Logo */}
+            <div className="relative">
+              <Image
+                src="/images/logo_w.png"
+                alt="Alvaro Logo"
+                width={40}
+                height={40}
+                className="
+                  rounded-xl object-contain transition-all duration-300
+                  hover:drop-shadow-lg
+                "
+                priority
+              />
+            </div>
+            
+            {/* Name */}
+            <span className="
+              font-bold text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
+              bg-clip-text text-transparent
+            ">
+              Alvaro
+            </span>
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -108,7 +129,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
       {/* Desktop Navigation */}
       <NavbarContent className="hidden sm:flex" justify="center">
         <div className="
-          flex items-center gap-2 p-2 rounded-2xl 
+          flex items-center gap-2 p-3 rounded-2xl 
           bg-white/60 dark:bg-black/40 backdrop-blur-2xl
           border border-black/5 dark:border-white/10
           shadow-lg shadow-black/5 dark:shadow-white/5
@@ -122,7 +143,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
                   scrollToSection(item.href);
                 }}
                 className={`
-                  px-4 py-2 rounded-xl font-medium transition-all duration-300 relative
+                  px-5 py-3 rounded-xl font-medium transition-all duration-300 relative
                   text-sm tracking-wide
                   ${activeSection === item.key 
                     ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30' 
@@ -138,7 +159,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
       </NavbarContent>
 
       {/* CTA Button */}
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className="pr-6 pt-2">
         <NavbarItem>
           <Button
             as={Link}
@@ -152,9 +173,10 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               hover:shadow-lg hover:shadow-blue-500/30
               transition-all duration-300 hover:scale-105
               font-semibold border-0 backdrop-blur-xl
+              px-6 py-2
             "
             radius="full"
-            size="md"
+            size="lg"
           >
             Hablemos
           </Button>
@@ -167,9 +189,35 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
         border border-black/5 dark:border-white/10 rounded-3xl mx-4
         shadow-2xl shadow-black/10 dark:shadow-white/10
       ">
-        <div className="p-4">
+        <div className="p-6">
+          {/* Mobile Brand with Logo */}
+          <div className="mb-8 pb-6 border-b border-gray-200/50 dark:border-gray-600/50">
+            <Link
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('#home');
+              }}
+              className="flex items-center gap-3 justify-center"
+            >
+              <Image
+                src="/images/logo_w.png"
+                alt="Alvaro Logo"
+                width={36}
+                height={36}
+                className="rounded-xl object-contain"
+              />
+              <span className="
+                font-bold text-2xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
+                bg-clip-text text-transparent
+              ">
+                Alvaro
+              </span>
+            </Link>
+          </div>
+
           {navItems.map((item, index) => (
-            <NavbarMenuItem key={item.key} className="mb-2">
+            <NavbarMenuItem key={item.key} className="mb-3">
               <Link
                 href={item.href}
                 onClick={(e) => {
@@ -192,7 +240,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
             </NavbarMenuItem>
           ))}
           
-          <NavbarMenuItem className="mt-6">
+          <NavbarMenuItem className="mt-8">
             <Button
               as={Link}
               href="#contact"
