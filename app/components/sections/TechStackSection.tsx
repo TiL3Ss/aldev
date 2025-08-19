@@ -252,78 +252,95 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                     </div>
                   </div>
 
-                  {/* Technologies List - iOS 18 Style with Custom Icons */}
-                  <div className="grid grid-cols-2 gap-6">
-                    {category.technologies.map((tech) => {
-                      const colorClasses = getColorClasses(tech.color);
-                      
-                      return (
-                        <motion.div
-                          key={tech.name}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: index * 0.05 }}
-                          className="group/tech relative z-0 hover:z-10"
-                          layout
-                        >
-                          {/* Expandable Container - Starts as just icon */}
+                  {/* Technologies Container - Distribución flexible */}
+                  <div className="relative">
+                    {/* Grid adaptativo que se reorganiza en hover */}
+                    <div className="
+                      flex flex-wrap gap-2 
+                      group-hover:grid group-hover:grid-cols-2 group-hover:gap-4
+                      transition-all duration-500 ease-in-out
+                    ">
+                      {category.technologies.map((tech, techIndex) => {
+                        const colorClasses = getColorClasses(tech.color);
+                        
+                        return (
                           <motion.div
-                            className={`
-                              flex items-center rounded-2xl cursor-pointer relative
-                              ${colorClasses.bg} ${colorClasses.border} border backdrop-blur-xl
-                              hover:shadow-lg hover:shadow-current/20
-                            `}
-                            initial={{ width: 48, height: 48 }} 
-                            whileHover={{ 
-                              width: "auto",
-                              minWidth: "auto",
-                              paddingRight: "0.75rem"
-                            }}
-                            transition={{ 
-                              type: "spring", 
-                              stiffness: 300, 
-                              damping: 25,
-                              duration: 0.4 
-                            }}
-                            style={{ zIndex: 'inherit' }}
+                            key={tech.name}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: (index * 0.1) + (techIndex * 0.05) }}
+                            className="
+                              group/tech relative flex-shrink-0
+                              group-hover:flex-shrink group-hover:w-full
+                              transition-all duration-500 ease-in-out
+                            "
                           >
-                            {/* Icon Container - Optimized for SVG icons */}
-                            <div className={`
-                              w-12 h-12 flex items-center justify-center flex-shrink-0
-                              transition-all duration-300 relative overflow-hidden
-                            `}>
-                              <tech.icon 
-                                className={`w-5 h-5 ${colorClasses.text} transition-colors duration-300`}
-                                style={{ 
-                                  filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' 
-                                }}
-                              />
-                              
-                              {/* Shimmer effect */}
-                              <div className="
-                                absolute inset-0 -translate-x-full
-                                bg-gradient-to-r from-transparent via-white/20 to-transparent
-                                group-hover/tech:translate-x-full transition-transform duration-1000
-                              " />
-                            </div>
+                            {/* Contenedor expandible - Compacto por defecto */}
+                            <motion.div
+                              className={`
+                                flex items-center rounded-2xl cursor-pointer relative
+                                ${colorClasses.bg} ${colorClasses.border} border backdrop-blur-xl
+                                hover:shadow-lg hover:shadow-current/20
+                                transition-all duration-300
+                              `}
+                              initial={{ width: 40, height: 40 }}
+                              animate={{ 
+                                width: 40, 
+                                height: 40,
+                                paddingRight: 0
+                              }}
+                              whileHover={{ 
+                                width: "100%",
+                                paddingRight: "0.75rem",
+                                zIndex: 10
+                              }}
+                              transition={{ 
+                                type: "spring", 
+                                stiffness: 300, 
+                                damping: 25,
+                                duration: 0.4 
+                              }}
+                            >
+                              {/* Icon Container - Más compacto */}
+                              <div className={`
+                                w-10 h-10 flex items-center justify-center flex-shrink-0
+                                transition-all duration-300 relative overflow-hidden
+                              `}>
+                                <tech.icon 
+                                  className={`w-4 h-4 ${colorClasses.text} transition-all duration-300
+                                    group-hover/tech:w-5 group-hover/tech:h-5
+                                  `}
+                                  style={{ 
+                                    filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' 
+                                  }}
+                                />
+                                
+                                {/* Shimmer effect */}
+                                <div className="
+                                  absolute inset-0 -translate-x-full
+                                  bg-gradient-to-r from-transparent via-white/20 to-transparent
+                                  group-hover/tech:translate-x-full transition-transform duration-1000
+                                " />
+                              </div>
 
-                            {/* Text - Only visible on hover */}
-                            <div className="
-                              w-0 group-hover/tech:w-auto
-                              opacity-0 group-hover/tech:opacity-100
-                              ml-0 group-hover/tech:ml-2
-                              transition-all duration-300 ease-out
-                              whitespace-nowrap overflow-hidden
-                            ">
-                              <span className={`text-sm font-semibold ${colorClasses.text}`}>
-                                {tech.name}
-                              </span>
-                            </div>
+                              {/* Text - Solo visible en hover individual */}
+                              <div className="
+                                w-0 group-hover/tech:w-auto
+                                opacity-0 group-hover/tech:opacity-100
+                                ml-0 group-hover/tech:ml-3
+                                transition-all duration-300 ease-out
+                                whitespace-nowrap overflow-hidden
+                              ">
+                                <span className={`text-sm font-semibold ${colorClasses.text}`}>
+                                  {tech.name}
+                                </span>
+                              </div>
+                            </motion.div>
                           </motion.div>
-                        </motion.div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
                 </CardBody>
               </Card>
