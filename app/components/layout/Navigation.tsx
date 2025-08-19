@@ -105,8 +105,8 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               <Image
                 src="/images/logo_b.png"
                 alt="Alvaro Logo"
-                width={40}
-                height={40}
+                width={32}
+                height={32}
                 className="
                   rounded-xl object-contain transition-all duration-300
                   hover:drop-shadow-lg
