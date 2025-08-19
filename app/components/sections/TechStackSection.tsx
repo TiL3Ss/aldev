@@ -245,7 +245,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                   </div>
 
                   {/* Technologies List - iOS 18 Style with Icons */}
-                  <div className="flex flex-wrap gap-4 justify-start">
+                  <div className="grid grid-cols-2 gap-6">
                     {category.technologies.map((tech) => {
                       const colorClasses = getColorClasses(tech.color);
                       
@@ -256,7 +256,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.4, delay: index * 0.05 }}
-                          className="group/tech relative"
+                          className="group/tech relative z-0 hover:z-10"
                           layout
                         >
                           {/* Expandable Container - Starts as just icon */}
@@ -266,15 +266,19 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                               ${colorClasses.bg} ${colorClasses.border} border backdrop-blur-xl
                               hover:shadow-lg hover:shadow-current/20
                             `}
-                            initial={{ width: 48 }} // 12 * 4 = 48px
-                            whileHover={{ width: "auto" }}
+                            initial={{ width: 48, height: 48 }} 
+                            whileHover={{ 
+                              width: "auto",
+                              minWidth: "auto",
+                              paddingRight: "0.75rem"
+                            }}
                             transition={{ 
                               type: "spring", 
-                              stiffness: 400, 
-                              damping: 30,
-                              duration: 0.3 
+                              stiffness: 300, 
+                              damping: 25,
+                              duration: 0.4 
                             }}
-                            layout
+                            style={{ zIndex: 'inherit' }}
                           >
                             {/* Icon - Always visible */}
                             <div className={`
@@ -297,26 +301,18 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                               whileHover={{ 
                                 width: "auto", 
                                 opacity: 1,
-                                paddingRight: "0.75rem"
+                                marginLeft: "0.5rem"
                               }}
                               transition={{ 
-                                duration: 0.2,
-                                delay: 0.1,
+                                duration: 0.25,
+                                delay: 0.15,
                                 ease: "easeOut"
                               }}
                               className="whitespace-nowrap overflow-hidden"
                             >
-                              <motion.span
-                                initial={{ x: -10, opacity: 0 }}
-                                whileHover={{ x: 0, opacity: 1 }}
-                                transition={{ 
-                                  duration: 0.15,
-                                  delay: 0.15
-                                }}
-                                className={`text-sm font-semibold ${colorClasses.text} ml-2`}
-                              >
+                              <span className={`text-sm font-semibold ${colorClasses.text}`}>
                                 {tech.name}
-                              </motion.span>
+                              </span>
                             </motion.div>
                           </motion.div>
                         </motion.div>
