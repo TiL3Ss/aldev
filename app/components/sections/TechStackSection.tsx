@@ -17,31 +17,25 @@ import {
 
 // Importar los iconos personalizados
 import {
-  // Tools
   Postman,
   VisualStudioCode,
   ESLint,
-  // Languages
   Dart,
   Php,
   C,
   TypeScript,
   JavaScript,
-  // Security/Auth
   Auth0,
-  // DevOps
   Docker,
   GoogleCloud,
   Vercel,
-  // Databases
   MySQL,
   MongoDB,
   SQLite,
   Firebase,
-  // Backend
   Nodejs,
   Nextjs,
-} from '../icons/tech'; // Ajusta la ruta según tu estructura
+} from '../icons/tech'; 
 
 interface TechStackSectionProps {
   className?: string;
