@@ -296,24 +296,17 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                             </div>
 
                             {/* Text - Only visible on hover */}
-                            <motion.div
-                              initial={{ width: 0, opacity: 0 }}
-                              whileHover={{ 
-                                width: "auto", 
-                                opacity: 1,
-                                marginLeft: "0.5rem"
-                              }}
-                              transition={{ 
-                                duration: 0.25,
-                                delay: 0.15,
-                                ease: "easeOut"
-                              }}
-                              className="whitespace-nowrap overflow-hidden"
-                            >
+                            <div className="
+                              w-0 group-hover/tech:w-auto
+                              opacity-0 group-hover/tech:opacity-100
+                              ml-0 group-hover/tech:ml-2
+                              transition-all duration-300 ease-out
+                              whitespace-nowrap overflow-hidden
+                            ">
                               <span className={`text-sm font-semibold ${colorClasses.text}`}>
                                 {tech.name}
                               </span>
-                            </motion.div>
+                            </div>
                           </motion.div>
                         </motion.div>
                       );
