@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold text-navy mb-4">Alexander</h3>
+            <h3 className="text-2xl font-bold text-navy mb-4">Alvaro</h3>
             <p className="text-navy/70 mb-6 leading-relaxed max-w-md">
               Backend Developer especializado en crear soluciones técnicas
               robustas y escalables. Transformando ideas en código de calidad.
@@ -122,7 +122,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         "
         >
           <div className="text-navy/60 text-sm">
-            © {currentYear} Alexander. Todos los derechos reservados.
+            © {currentYear} Alvaro. Todos los derechos reservados.
           </div>
 
           <div className="flex items-center gap-4">

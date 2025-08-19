@@ -95,7 +95,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
             }}
             className="font-bold text-2xl text-navy hover:text-orange transition-colors"
           >
-            Alexander
+            Alvaro
           </Link>
         </NavbarBrand>
       </NavbarContent>

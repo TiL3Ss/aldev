@@ -47,14 +47,14 @@ const socialLinks = [
     icon: Linkedin,
     label: 'LinkedIn',
     href: 'https://linkedin.com/in/tu-perfil',
-    username: '/in/alexander',
+    username: '/in/Alvaro',
     color: 'hover:bg-blue-500/10 hover:text-blue-600'
   },
   {
     icon: Twitter,
     label: 'Twitter',
     href: 'https://twitter.com/tu-handle',
-    username: '@alexander_dev',
+    username: '@Alvaro_dev',
     color: 'hover:bg-blue-400/10 hover:text-blue-500'
   },
   {

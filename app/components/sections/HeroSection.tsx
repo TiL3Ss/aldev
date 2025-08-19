@@ -61,7 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     variant="bordered"
                     size="lg"
                   >
-                    👋 Hola, soy Alexander
+                    👋 Hola, soy Alvaro
                   </Chip>
                 </motion.div>
 
