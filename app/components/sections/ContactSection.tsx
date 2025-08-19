@@ -21,7 +21,10 @@ import {
   MessageCircle,
   Calendar,
   Phone,
-  MapPin
+  MapPin,
+  Clock,
+  CheckCircle2,
+  Sparkles
 } from 'lucide-react';
 
 interface ContactSectionProps {
@@ -41,28 +44,28 @@ const socialLinks = [
     label: 'GitHub',
     href: 'https://github.com/TiL3Ss',
     username: '@TiL3Ss',
-    color: 'hover:bg-navy/10 hover:text-navy'
+    color: 'hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
     href: 'https://linkedin.com/in/tu-perfil',
     username: '/in/Alvaro',
-    color: 'hover:bg-blue-500/10 hover:text-blue-600'
+    color: 'hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-600 dark:hover:text-blue-400'
   },
   {
     icon: Twitter,
     label: 'Twitter',
     href: 'https://twitter.com/tu-handle',
     username: '@Alvaro_dev',
-    color: 'hover:bg-blue-400/10 hover:text-blue-500'
+    color: 'hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-500 dark:hover:text-blue-400'
   },
   {
     icon: Mail,
     label: 'Email',
     href: 'mailto:tu@email.com',
     username: 'tu@email.com',
-    color: 'hover:bg-orange/10 hover:text-orange'
+    color: 'hover:bg-orange-50 dark:hover:bg-orange-950 hover:text-orange-600 dark:hover:text-orange-400'
   }
 ];
 
@@ -72,21 +75,30 @@ const quickActions = [
     title: 'Agenda una Reunión',
     description: 'Conversemos sobre tu proyecto en una videollamada',
     action: 'Agendar',
-    href: 'https://calendly.com/tu-perfil'
+    href: 'https://calendly.com/tu-perfil',
+    gradient: 'from-green-500/20 to-emerald-500/20',
+    iconBg: 'bg-green-100 dark:bg-green-950/50',
+    iconColor: 'text-green-600 dark:text-green-400'
   },
   {
     icon: MessageCircle,
     title: 'Chat Directo',
     description: 'Hablemos por WhatsApp o Telegram',
     action: 'Chatear',
-    href: 'https://wa.me/tu-numero'
+    href: 'https://wa.me/tu-numero',
+    gradient: 'from-blue-500/20 to-cyan-500/20',
+    iconBg: 'bg-blue-100 dark:bg-blue-950/50',
+    iconColor: 'text-blue-600 dark:text-blue-400'
   },
   {
     icon: Phone,
     title: 'Llamada Telefónica',
     description: 'Para consultas urgentes o discusiones técnicas',
     action: 'Llamar',
-    href: 'tel:+tu-numero'
+    href: 'tel:+tu-numero',
+    gradient: 'from-purple-500/20 to-violet-500/20',
+    iconBg: 'bg-purple-100 dark:bg-purple-950/50',
+    iconColor: 'text-purple-600 dark:text-purple-400'
   }
 ];
 
@@ -98,6 +110,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (field: keyof ContactForm, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -108,143 +121,280 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
     setIsSubmitting(true);
     
     // Aquí implementarías la lógica de envío
-    // Por ahora solo simulamos el envío
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    // Reset form
     setForm({ name: '', email: '', subject: '', message: '' });
     setIsSubmitting(false);
+    setIsSubmitted(true);
     
-    // Mostrar confirmación (podrías usar una notificación)
-    alert('Mensaje enviado correctamente. Te responderé pronto!');
+    // Reset success message after 5 seconds
+    setTimeout(() => setIsSubmitted(false), 5000);
   };
 
   return (
     <section 
       id="contact" 
-      className={`py-20 px-4 bg-gradient-to-t from-cream/50 to-transparent ${className}`}
+      className={`
+        py-20 px-4 relative overflow-hidden
+        bg-gradient-to-t from-gray-50/50 via-blue-50/30 to-transparent
+        dark:from-gray-900/50 dark:via-blue-950/30 dark:to-transparent
+        ${className}
+      `}
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-20 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-500/10 rounded-full blur-xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="text-center mb-20"
         >
-          <Chip 
-            className="mb-4 bg-gradient-to-r from-orange/20 to-burgundy/20 text-navy border-orange/30"
-            variant="bordered"
-            size="lg"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <MessageCircle size={16} className="mr-2" />
-            Hablemos
-          </Chip>
+            <Chip 
+              className="
+                mb-6 bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
+                border border-gray-200/50 dark:border-gray-600/50
+                backdrop-blur-xl px-4 py-2
+              "
+              variant="bordered"
+              size="lg"
+              startContent={<MessageCircle size={18} className="text-blue-600 dark:text-blue-400" />}
+            >
+              <span className="font-semibold">Hablemos</span>
+            </Chip>
+          </motion.div>
           
-          <h2 className="
-            text-4xl md:text-5xl font-bold mb-6
-            bg-gradient-to-r from-navy via-burgundy to-orange 
-            bg-clip-text text-transparent
-          ">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="
+              text-5xl md:text-6xl font-black mb-6 tracking-tight
+              bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 
+              dark:from-white dark:via-blue-400 dark:to-purple-400
+              bg-clip-text text-transparent
+            "
+          >
             Conectemos y Creemos
-          </h2>
+          </motion.h2>
           
-          <p className="text-xl text-navy/70 max-w-3xl mx-auto leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+          >
             ¿Tienes un proyecto interesante? ¿Necesitas consultoría técnica? 
             ¿O simplemente quieres charlar sobre tecnología? Estoy aquí para ayudarte.
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="lg:col-span-2"
           >
             <Card className="
-              bg-cream/20 backdrop-blur-xl border border-orange/20 
-              hover:border-orange/40 transition-all duration-300
+              bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
+              border border-black/5 dark:border-white/10
+              hover:border-blue-200/50 dark:hover:border-blue-700/50 
+              hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-purple-500/20
+              transition-all duration-700 ease-out
+              rounded-3xl overflow-hidden
             ">
-              <CardBody className="p-8">
-                <h3 className="text-2xl font-bold text-navy mb-6 flex items-center gap-2">
-                  <Send size={24} />
-                  Envíame un Mensaje
-                </h3>
+              <CardBody className="p-8 lg:p-12">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                >
+                  <h3 className="
+                    text-3xl font-bold text-gray-900 dark:text-white mb-8 
+                    flex items-center gap-3
+                  ">
+                    <div className="
+                      p-3 rounded-2xl bg-gradient-to-br from-blue-500/20 to-purple-500/20
+                      backdrop-blur-xl border border-blue-200/30 dark:border-purple-400/30
+                    ">
+                      <Send size={24} className="text-blue-600 dark:text-blue-400" />
+                    </div>
+                    Envíame un Mensaje
+                  </h3>
+                </motion.div>
+
+                {isSubmitted && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="
+                      mb-6 p-4 rounded-2xl 
+                      bg-green-100 dark:bg-green-950/50 
+                      border border-green-200 dark:border-green-800
+                      flex items-center gap-3
+                    "
+                  >
+                    <CheckCircle2 size={20} className="text-green-600 dark:text-green-400" />
+                    <span className="text-green-700 dark:text-green-300 font-medium">
+                      ¡Mensaje enviado! Te responderé pronto.
+                    </span>
+                  </motion.div>
+                )}
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input
-                      label="Tu Nombre"
-                      placeholder="Escribe tu nombre completo"
-                      value={form.name}
-                      onValueChange={(value) => handleInputChange('name', value)}
-                      isRequired
-                      classNames={{
-                        input: "text-navy",
-                        label: "text-navy/70",
-                        inputWrapper: "bg-cream/40 border-orange/20 hover:border-orange/40 focus-within:border-orange"
-                      }}
-                    />
-                    <Input
-                      type="email"
-                      label="Email"
-                      placeholder="tu@email.com"
-                      value={form.email}
-                      onValueChange={(value) => handleInputChange('email', value)}
-                      isRequired
-                      classNames={{
-                        input: "text-navy",
-                        label: "text-navy/70",
-                        inputWrapper: "bg-cream/40 border-orange/20 hover:border-orange/40 focus-within:border-orange"
-                      }}
-                    />
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                    >
+                      <Input
+                        label="Tu Nombre"
+                        placeholder="Escribe tu nombre completo"
+                        value={form.name}
+                        onValueChange={(value) => handleInputChange('name', value)}
+                        isRequired
+                        radius="lg"
+                        classNames={{
+                          input: "text-gray-900 dark:text-white",
+                          label: "text-gray-700 dark:text-gray-300 font-medium",
+                          inputWrapper: `
+                            bg-white/70 dark:bg-black/50 backdrop-blur-xl
+                            border border-gray-200/50 dark:border-gray-600/50
+                            hover:border-blue-300/50 dark:hover:border-blue-500/50 
+                            focus-within:border-blue-500 dark:focus-within:border-blue-400
+                            transition-all duration-300
+                          `
+                        }}
+                      />
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4, duration: 0.5 }}
+                    >
+                      <Input
+                        type="email"
+                        label="Email"
+                        placeholder="tu@email.com"
+                        value={form.email}
+                        onValueChange={(value) => handleInputChange('email', value)}
+                        isRequired
+                        radius="lg"
+                        classNames={{
+                          input: "text-gray-900 dark:text-white",
+                          label: "text-gray-700 dark:text-gray-300 font-medium",
+                          inputWrapper: `
+                            bg-white/70 dark:bg-black/50 backdrop-blur-xl
+                            border border-gray-200/50 dark:border-gray-600/50
+                            hover:border-blue-300/50 dark:hover:border-blue-500/50 
+                            focus-within:border-blue-500 dark:focus-within:border-blue-400
+                            transition-all duration-300
+                          `
+                        }}
+                      />
+                    </motion.div>
                   </div>
                   
-                  <Input
-                    label="Asunto"
-                    placeholder="¿De qué quieres hablar?"
-                    value={form.subject}
-                    onValueChange={(value) => handleInputChange('subject', value)}
-                    isRequired
-                    classNames={{
-                      input: "text-navy",
-                      label: "text-navy/70",
-                      inputWrapper: "bg-cream/40 border-orange/20 hover:border-orange/40 focus-within:border-orange"
-                    }}
-                  />
-                  
-                  <Textarea
-                    label="Mensaje"
-                    placeholder="Cuéntame sobre tu proyecto, idea o cualquier consulta que tengas..."
-                    value={form.message}
-                    onValueChange={(value) => handleInputChange('message', value)}
-                    minRows={5}
-                    isRequired
-                    classNames={{
-                      input: "text-navy",
-                      label: "text-navy/70",
-                      inputWrapper: "bg-cream/40 border-orange/20 hover:border-orange/40 focus-within:border-orange"
-                    }}
-                  />
-                  
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="
-                      w-full bg-gradient-to-r from-orange to-burgundy text-white
-                      hover:shadow-lg hover:shadow-orange/25
-                      transition-all duration-300 hover:-translate-y-0.5
-                      font-semibold
-                    "
-                    isLoading={isSubmitting}
-                    startContent={!isSubmitting ? <Send size={20} /> : null}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.5 }}
                   >
-                    {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
-                  </Button>
+                    <Input
+                      label="Asunto"
+                      placeholder="¿De qué quieres hablar?"
+                      value={form.subject}
+                      onValueChange={(value) => handleInputChange('subject', value)}
+                      isRequired
+                      radius="lg"
+                      classNames={{
+                        input: "text-gray-900 dark:text-white",
+                        label: "text-gray-700 dark:text-gray-300 font-medium",
+                        inputWrapper: `
+                          bg-white/70 dark:bg-black/50 backdrop-blur-xl
+                          border border-gray-200/50 dark:border-gray-600/50
+                          hover:border-blue-300/50 dark:hover:border-blue-500/50 
+                          focus-within:border-blue-500 dark:focus-within:border-blue-400
+                          transition-all duration-300
+                        `
+                      }}
+                    />
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6, duration: 0.5 }}
+                  >
+                    <Textarea
+                      label="Mensaje"
+                      placeholder="Cuéntame sobre tu proyecto, idea o cualquier consulta que tengas..."
+                      value={form.message}
+                      onValueChange={(value) => handleInputChange('message', value)}
+                      minRows={6}
+                      isRequired
+                      radius="lg"
+                      classNames={{
+                        input: "text-gray-900 dark:text-white",
+                        label: "text-gray-700 dark:text-gray-300 font-medium",
+                        inputWrapper: `
+                          bg-white/70 dark:bg-black/50 backdrop-blur-xl
+                          border border-gray-200/50 dark:border-gray-600/50
+                          hover:border-blue-300/50 dark:hover:border-blue-500/50 
+                          focus-within:border-blue-500 dark:focus-within:border-blue-400
+                          transition-all duration-300
+                        `
+                      }}
+                    />
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.7, duration: 0.5 }}
+                  >
+                    <Button
+                      type="submit"
+                      size="lg"
+                      radius="full"
+                      className="
+                        w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white
+                        hover:shadow-xl hover:shadow-blue-500/30
+                        transition-all duration-300 hover:scale-[1.02]
+                        font-semibold h-14 text-base border-0 backdrop-blur-xl
+                      "
+                      isLoading={isSubmitting}
+                      startContent={!isSubmitting ? <Send size={20} /> : null}
+                      isDisabled={isSubmitted}
+                    >
+                      {isSubmitting ? 'Enviando...' : isSubmitted ? '¡Enviado!' : 'Enviar Mensaje'}
+                    </Button>
+                  </motion.div>
                 </form>
               </CardBody>
             </Card>
@@ -252,206 +402,250 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
 
           {/* Contact Info & Social */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="space-y-6"
           >
             {/* Quick Actions */}
             <Card className="
-              bg-cream/20 backdrop-blur-xl border border-orange/20
+              bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
+              border border-black/5 dark:border-white/10
+              hover:border-blue-200/50 dark:hover:border-blue-700/50 
+              hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-purple-500/20
+              transition-all duration-700 ease-out
+              rounded-3xl overflow-hidden
             ">
               <CardBody className="p-6">
-                <h4 className="text-lg font-bold text-navy mb-4">
-                  Acciones Rápidas
-                </h4>
-                <div className="space-y-3">
-                  {quickActions.map((action) => (
-                    <Button
-                      key={action.title}
-                      as={Link}
-                      href={action.href}
-                      target="_blank"
-                      className="
-                        w-full justify-start bg-transparent hover:bg-orange/10
-                        text-navy border border-orange/20 hover:border-orange/40
-                        transition-all duration-300 h-auto p-4
-                      "
-                      startContent={
-                        <div className="
-                          p-2 rounded-lg bg-gradient-to-br from-orange/20 to-burgundy/20
-                          backdrop-blur-xl border border-orange/30
-                        ">
-                          <action.icon size={18} />
-                        </div>
-                      }
-                    >
-                      <div className="text-left flex-1">
-                        <div className="font-semibold text-sm">
-                          {action.title}
-                        </div>
-                        <div className="text-xs text-navy/60 mt-1">
-                          {action.description}
-                        </div>
-                      </div>
-                    </Button>
-                  ))}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
+                >
+                  <h3 className="
+                    text-2xl font-bold text-gray-900 dark:text-white mb-6
+                    flex items-center gap-3
+                  ">
+                    <div className="
+                      p-2 rounded-xl bg-gradient-to-br from-green-500/20 to-blue-500/20
+                      backdrop-blur-xl border border-green-200/30 dark:border-blue-400/30
+                    ">
+                      <Sparkles size={20} className="text-green-600 dark:text-blue-400" />
+                    </div>
+                    Acciones Rápidas
+                  </h3>
+                </motion.div>
+
+                <div className="space-y-4">
+                  {quickActions.map((action, index) => {
+                    const Icon = action.icon;
+                    return (
+                      <motion.div
+                        key={action.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+                      >
+                        <Link
+                          href={action.href}
+                          className="
+                            block p-4 rounded-2xl border border-gray-200/50 dark:border-gray-600/50
+                            bg-gradient-to-br bg-white/50 dark:bg-black/30
+                            hover:shadow-lg hover:border-blue-300/50 dark:hover:border-blue-500/50
+                            transition-all duration-300 hover:scale-[1.02] group
+                            backdrop-blur-xl
+                          "
+                          isExternal
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className={`
+                              p-3 rounded-xl ${action.iconBg} 
+                              group-hover:scale-110 transition-transform duration-300
+                            `}>
+                              <Icon size={20} className={action.iconColor} />
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="
+                                font-semibold text-gray-900 dark:text-white mb-1
+                                group-hover:text-blue-600 dark:group-hover:text-blue-400
+                                transition-colors duration-300
+                              ">
+                                {action.title}
+                              </h4>
+                              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                {action.description}
+                              </p>
+                              <span className="
+                                inline-block mt-2 text-xs font-medium px-3 py-1 rounded-full
+                                bg-blue-100 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400
+                              ">
+                                {action.action}
+                              </span>
+                            </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </CardBody>
             </Card>
 
             {/* Social Links */}
             <Card className="
-              bg-cream/20 backdrop-blur-xl border border-orange/20
+              bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
+              border border-black/5 dark:border-white/10
+              hover:border-blue-200/50 dark:hover:border-blue-700/50 
+              hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-purple-500/20
+              transition-all duration-700 ease-out
+              rounded-3xl overflow-hidden
             ">
               <CardBody className="p-6">
-                <h4 className="text-lg font-bold text-navy mb-4 flex items-center gap-2">
-                  <MessageCircle size={20} />
-                  Sígueme en
-                </h4>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                >
+                  <h3 className="
+                    text-2xl font-bold text-gray-900 dark:text-white mb-6
+                    flex items-center gap-3
+                  ">
+                    <div className="
+                      p-2 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20
+                      backdrop-blur-xl border border-purple-200/30 dark:border-pink-400/30
+                    ">
+                      <MessageCircle size={20} className="text-purple-600 dark:text-pink-400" />
+                    </div>
+                    Redes Sociales
+                  </h3>
+                </motion.div>
+
                 <div className="space-y-3">
-                  {socialLinks.map((social) => (
-                    <Button
-                      key={social.label}
-                      as={Link}
-                      href={social.href}
-                      target="_blank"
-                      className={`
-                        w-full justify-start bg-transparent 
-                        text-navy border border-orange/20 hover:border-orange/40
-                        transition-all duration-300 h-auto p-4
-                        ${social.color}
-                      `}
-                      startContent={<social.icon size={20} />}
-                    >
-                      <div className="text-left flex-1">
-                        <div className="font-semibold text-sm">
-                          {social.label}
-                        </div>
-                        <div className="text-xs text-navy/60 mt-1">
-                          {social.username}
-                        </div>
-                      </div>
-                    </Button>
-                  ))}
+                  {socialLinks.map((social, index) => {
+                    const Icon = social.icon;
+                    return (
+                      <motion.div
+                        key={social.label}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
+                      >
+                        <Link
+                          href={social.href}
+                          className={`
+                            flex items-center gap-4 p-3 rounded-xl
+                            border border-transparent transition-all duration-300
+                            hover:border-gray-200/50 dark:hover:border-gray-600/50
+                            group backdrop-blur-xl ${social.color}
+                          `}
+                          isExternal
+                        >
+                          <div className="
+                            p-2 rounded-lg bg-gray-100/50 dark:bg-gray-800/50
+                            group-hover:scale-110 transition-transform duration-300
+                          ">
+                            <Icon size={16} />
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-medium text-gray-900 dark:text-white">
+                              {social.label}
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400">
+                              {social.username}
+                            </div>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </CardBody>
             </Card>
 
-            {/* Location & Availability */}
+            {/* Contact Info */}
             <Card className="
-              bg-gradient-to-br from-orange/10 via-burgundy/10 to-navy/10
-              backdrop-blur-xl border border-orange/20
+              bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
+              border border-black/5 dark:border-white/10
+              hover:border-blue-200/50 dark:hover:border-blue-700/50 
+              hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-purple-500/20
+              transition-all duration-700 ease-out
+              rounded-3xl overflow-hidden
             ">
               <CardBody className="p-6">
-                <h4 className="text-lg font-bold text-navy mb-4 flex items-center gap-2">
-                  <MapPin size={20} />
-                  Ubicación & Disponibilidad
-                </h4>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7, duration: 0.6 }}
+                >
+                  <h3 className="
+                    text-2xl font-bold text-gray-900 dark:text-white mb-6
+                    flex items-center gap-3
+                  ">
                     <div className="
-                      w-3 h-3 rounded-full bg-green-500 animate-pulse
-                      shadow-lg shadow-green-500/50
-                    "></div>
-                    <div>
-                      <div className="text-sm font-semibold text-navy">
-                        Disponible para proyectos
-                      </div>
-                      <div className="text-xs text-navy/60">
-                        Respuesta en menos de 24h
-                      </div>
+                      p-2 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20
+                      backdrop-blur-xl border border-orange-200/30 dark:border-red-400/30
+                    ">
+                      <MapPin size={20} className="text-orange-600 dark:text-red-400" />
                     </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <MapPin size={16} className="text-burgundy" />
-                    <div>
-                      <div className="text-sm font-semibold text-navy">
-                        Puerto Aysén, Chile
-                      </div>
-                      <div className="text-xs text-navy/60">
-                        GMT-3 (Trabajo remoto)
-                      </div>
+                    Información
+                  </h3>
+                </motion.div>
+
+                <div className="space-y-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8, duration: 0.5 }}
+                    className="
+                      p-4 rounded-2xl bg-gradient-to-br from-blue-50/50 to-purple-50/50
+                      dark:from-blue-950/30 dark:to-purple-950/30 backdrop-blur-xl
+                      border border-blue-200/30 dark:border-purple-400/30
+                    "
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <Clock size={16} className="text-blue-600 dark:text-blue-400" />
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        Horario de Respuesta
+                      </span>
                     </div>
-                  </div>
-                  
-                  <div className="pt-3 border-t border-orange/20">
-                    <div className="text-xs text-navy/70 leading-relaxed">
-                      Horario preferido de contacto:
-                      <br />
-                      Lun-Vie: 9:00 - 18:00 GMT-3
-                      <br />
-                      Fines de semana: Solo emergencias
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Usualmente respondo en 24 horas o menos
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.9, duration: 0.5 }}
+                    className="
+                      p-4 rounded-2xl bg-gradient-to-br from-green-50/50 to-blue-50/50
+                      dark:from-green-950/30 dark:to-blue-950/30 backdrop-blur-xl
+                      border border-green-200/30 dark:border-blue-400/30
+                    "
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <MapPin size={16} className="text-green-600 dark:text-green-400" />
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        Ubicación
+                      </span>
                     </div>
-                  </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Zona horaria GMT-3 (Argentina)
+                    </p>
+                  </motion.div>
                 </div>
               </CardBody>
             </Card>
           </motion.div>
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16"
-        >
-          <Card className="
-            bg-gradient-to-r from-orange/10 via-burgundy/10 to-navy/10
-            backdrop-blur-xl border border-orange/20
-          ">
-            <CardBody className="p-8 text-center">
-              <div className="max-w-2xl mx-auto">
-                <h3 className="text-2xl font-bold text-navy mb-4">
-                  ¿Listo para llevar tu proyecto al siguiente nivel?
-                </h3>
-                <p className="text-navy/70 mb-6 leading-relaxed">
-                  Ya sea que necesites desarrollar una API desde cero, migrar a microservicios, 
-                  optimizar performance o simplemente una consultoría técnica, 
-                  estoy aquí para ayudarte a tomar las mejores decisiones.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    className="
-                      bg-gradient-to-r from-orange to-burgundy text-white
-                      hover:shadow-lg hover:shadow-orange/25
-                      transition-all duration-300 hover:-translate-y-0.5
-                      font-semibold px-8
-                    "
-                    startContent={<Calendar size={20} />}
-                    as={Link}
-                    href="https://calendly.com/tu-perfil"
-                    target="_blank"
-                  >
-                    Agendar Consulta Gratuita
-                  </Button>
-                  
-                  <Button
-                    size="lg"
-                    variant="bordered"
-                    className="
-                      border-2 border-navy text-navy hover:bg-navy hover:text-cream
-                      transition-all duration-300 hover:-translate-y-0.5
-                      font-semibold px-8
-                    "
-                    startContent={<Mail size={20} />}
-                    as={Link}
-                    href="mailto:tu@email.com"
-                  >
-                    Enviar Email Directo
-                  </Button>
-                </div>
-              </div>
-            </CardBody>
-          </Card>
-        </motion.div>
       </div>
     </section>
   );
