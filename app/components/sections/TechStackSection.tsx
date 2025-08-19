@@ -1,7 +1,7 @@
 // app/components/sections/TechStackSection.tsx
 'use client';
 
-import { Card, CardBody, Chip, Progress } from '@heroui/react';
+import { Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
 import { 
   Server, 
@@ -13,20 +13,35 @@ import {
   Code2,
   GitBranch,
   Wrench,
-  // Technology icons
-  Cpu,
-  Globe,
-  FileCode,
-  Hash,
-  Layers,
-  Box,
-  Palette,
-  Smartphone,
-  Chrome,
-  Terminal,
-  Settings,
-  Compass
 } from 'lucide-react';
+
+// Importar los iconos personalizados
+import {
+  // Tools
+  Postman,
+  VisualStudioCode,
+  ESLint,
+  // Languages
+  Dart,
+  Php,
+  C,
+  TypeScript,
+  JavaScript,
+  // Security/Auth
+  Auth0,
+  // DevOps
+  Docker,
+  GoogleCloud,
+  Vercel,
+  // Databases
+  MySQL,
+  MongoDB,
+  SQLite,
+  Firebase,
+  // Backend
+  Nodejs,
+  Nextjs,
+} from '../icons/tech'; // Ajusta la ruta según tu estructura
 
 interface TechStackSectionProps {
   className?: string;
@@ -49,10 +64,10 @@ const techCategories: TechCategory[] = [
     title: 'Backend & APIs',
     description: 'Desarrollo de servicios robustos y escalables',
     technologies: [
-      { name: 'Node.js', icon: Cpu, color: 'orange' },
-      { name: 'Next.js API Routes', icon: Globe, color: 'burgundy' },
-      { name: 'PHP', icon: FileCode, color: 'navy' },
-      { name: 'TypeScript', icon: Code2, color: 'orange' },
+      { name: 'Node.js', icon: Nodejs, color: 'orange' },
+      { name: 'Next.js', icon: Nextjs, color: 'burgundy' },
+      { name: 'PHP', icon: Php, color: 'navy' },
+      { name: 'TypeScript', icon: TypeScript, color: 'orange' },
     ]
   },
   {
@@ -60,10 +75,10 @@ const techCategories: TechCategory[] = [
     title: 'Bases de Datos',
     description: 'Gestión y optimización de datos',
     technologies: [
-      { name: 'MySQL', icon: Database, color: 'burgundy' },
-      { name: 'MongoDB', icon: Layers, color: 'orange' },
-      { name: 'SQLite', icon: Box, color: 'navy' },
-      { name: 'Firebase', icon: Zap, color: 'orange' },
+      { name: 'MySQL', icon: MySQL, color: 'burgundy' },
+      { name: 'MongoDB', icon: MongoDB, color: 'orange' },
+      { name: 'SQLite', icon: SQLite, color: 'navy' },
+      { name: 'Firebase', icon: Firebase, color: 'orange' },
     ]
   },
   {
@@ -71,10 +86,10 @@ const techCategories: TechCategory[] = [
     title: 'DevOps & Cloud',
     description: 'Despliegue y infraestructura moderna',
     technologies: [
-      { name: 'Docker', icon: Box, color: 'navy' },
-      { name: 'GCP', icon: Cloud, color: 'burgundy' },
-      { name: 'Vercel', icon: Globe, color: 'orange' },
-      { name: 'GitHub Actions', icon: GitBranch, color: 'navy' },
+      { name: 'Docker', icon: Docker, color: 'navy' },
+      { name: 'GCP', icon: GoogleCloud, color: 'burgundy' },
+      { name: 'Vercel', icon: Vercel, color: 'orange' },
+      { name: 'GitHub Actions', icon: GitBranch, color: 'navy' }, // Mantenemos GitBranch de Lucide
     ]
   },
   {
@@ -82,8 +97,8 @@ const techCategories: TechCategory[] = [
     title: 'Seguridad',
     description: 'Protección y autenticación robusta',
     technologies: [
-      { name: 'OAuth 2.0', icon: Shield, color: 'burgundy' },
-      { name: 'Bcrypt', icon: Hash, color: 'navy' },
+      { name: 'Auth0', icon: Auth0, color: 'burgundy' },
+      { name: 'OAuth 2.0', icon: Shield, color: 'navy' }, // Mantenemos Shield de Lucide
     ]
   },
   {
@@ -91,11 +106,11 @@ const techCategories: TechCategory[] = [
     title: 'Lenguajes',
     description: 'Dominio de múltiples lenguajes de programación',
     technologies: [
-      { name: 'JavaScript', icon: Code2, color: 'burgundy' },
-      { name: 'TypeScript', icon: FileCode, color: 'navy' },
-      { name: 'PHP', icon: Cpu, color: 'orange' },
-      { name: 'C#', icon: Hash, color: 'burgundy' },
-      { name: 'Dart', icon: Smartphone, color: 'orange' },
+      { name: 'JavaScript', icon: JavaScript, color: 'burgundy' },
+      { name: 'TypeScript', icon: TypeScript, color: 'navy' },
+      { name: 'PHP', icon: Php, color: 'orange' },
+      { name: 'C#', icon: C, color: 'burgundy' },
+      { name: 'Dart', icon: Dart, color: 'orange' },
     ]
   },
   {
@@ -103,10 +118,10 @@ const techCategories: TechCategory[] = [
     title: 'Herramientas',
     description: 'Desarrollo y productividad',
     technologies: [
-      { name: 'VS Code', icon: Terminal, color: 'orange' },
-      { name: 'Postman', icon: Compass, color: 'burgundy' },
-      { name: 'ESLint/Prettier', icon: Settings, color: 'navy' },
-      { name: 'Planner', icon: Palette, color: 'orange' },
+      { name: 'VS Code', icon: VisualStudioCode, color: 'orange' },
+      { name: 'Postman', icon: Postman, color: 'burgundy' },
+      { name: 'ESLint', icon: ESLint, color: 'navy' },
+      { name: 'Planner', icon: Code2, color: 'orange' }, // Mantenemos Code2 de Lucide para Planner
     ]
   },
 ];
@@ -182,7 +197,6 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
             Stack Tecnológico
           </Chip>
 
-          
           <h2 className="
             text-4xl md:text-5xl font-bold mb-6
             bg-gradient-to-r from-navy via-burgundy to-orange 
@@ -244,7 +258,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                     </div>
                   </div>
 
-                  {/* Technologies List - iOS 18 Style with Icons */}
+                  {/* Technologies List - iOS 18 Style with Custom Icons */}
                   <div className="grid grid-cols-2 gap-6">
                     {category.technologies.map((tech) => {
                       const colorClasses = getColorClasses(tech.color);
@@ -280,12 +294,17 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                             }}
                             style={{ zIndex: 'inherit' }}
                           >
-                            {/* Icon - Always visible */}
+                            {/* Icon Container - Optimized for SVG icons */}
                             <div className={`
                               w-12 h-12 flex items-center justify-center flex-shrink-0
                               transition-all duration-300 relative overflow-hidden
                             `}>
-                              <tech.icon size={18} className={`${colorClasses.text}`} />
+                              <tech.icon 
+                                className={`w-5 h-5 ${colorClasses.text} transition-colors duration-300`}
+                                style={{ 
+                                  filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' 
+                                }}
+                              />
                               
                               {/* Shimmer effect */}
                               <div className="
