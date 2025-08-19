@@ -201,7 +201,7 @@ export const Navigation: React.FC<NavigationProps> = ({ className = '' }) => {
               className="flex items-center gap-3 justify-center"
             >
               <Image
-                src="/images/logo_w.png"
+                src="/images/logo_b.png"
                 alt="Alvaro Logo"
                 width={36}
                 height={36}
