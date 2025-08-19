@@ -12,7 +12,20 @@ import {
   Zap,
   Code2,
   GitBranch,
-  Wrench
+  Wrench,
+  // Technology icons
+  Cpu,
+  Globe,
+  FileCode,
+  Hash,
+  Layers,
+  Box,
+  Palette,
+  Smartphone,
+  Chrome,
+  Terminal,
+  Settings,
+  Compass
 } from 'lucide-react';
 
 interface TechStackSectionProps {
