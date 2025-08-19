@@ -259,31 +259,20 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                           className="group/tech relative"
                         >
                           {/* Expandable Container - Starts as just icon */}
-                          <motion.div
+                          <div
                             className={`
-                              flex items-center rounded-2xl cursor-pointer
-                              transition-all duration-300 overflow-hidden
+                              flex items-center rounded-2xl cursor-pointer relative
+                              transition-all duration-300 group-hover/tech:pr-4
                               ${colorClasses.bg} ${colorClasses.border} border backdrop-blur-xl
                               hover:shadow-lg hover:shadow-current/20
+                              w-12 h-12 hover:w-auto
                             `}
-                            initial={{ width: "3rem", padding: "0.75rem" }} // Just icon size
-                            whileHover={{ 
-                              width: "auto",
-                              paddingLeft: "0.75rem",
-                              paddingRight: "1rem",
-                              paddingTop: "0.75rem",
-                              paddingBottom: "0.75rem"
-                            }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
                           >
                             {/* Icon - Always visible */}
-                            <motion.div
-                              className={`
-                                w-6 h-6 flex items-center justify-center flex-shrink-0
-                                transition-all duration-300 relative overflow-hidden
-                              `}
-                              whileHover={{ scale: 1.1 }}
-                            >
+                            <div className={`
+                              w-12 h-12 flex items-center justify-center flex-shrink-0
+                              transition-all duration-300 relative overflow-hidden
+                            `}>
                               <tech.icon size={18} className={`${colorClasses.text}`} />
                               
                               {/* Shimmer effect */}
@@ -292,32 +281,21 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
                                 bg-gradient-to-r from-transparent via-white/20 to-transparent
                                 group-hover/tech:translate-x-full transition-transform duration-1000
                               " />
-                            </motion.div>
+                            </div>
 
                             {/* Text - Only visible on hover */}
-                            <motion.div
-                              initial={{ width: 0, opacity: 0, marginLeft: 0 }}
-                              whileHover={{ 
-                                width: "auto", 
-                                opacity: 1,
-                                marginLeft: "0.75rem",
-                                transition: { duration: 0.3, ease: "easeOut" }
-                              }}
-                              className="overflow-hidden whitespace-nowrap"
-                            >
-                              <motion.span
-                                initial={{ x: -20, opacity: 0 }}
-                                whileHover={{ 
-                                  x: 0, 
-                                  opacity: 1,
-                                  transition: { duration: 0.2, delay: 0.1 }
-                                }}
-                                className={`text-sm font-semibold ${colorClasses.text}`}
-                              >
+                            <div className="
+                              opacity-0 group-hover/tech:opacity-100 
+                              w-0 group-hover/tech:w-auto
+                              transition-all duration-300 ease-out
+                              whitespace-nowrap overflow-hidden
+                              ml-0 group-hover/tech:ml-2
+                            ">
+                              <span className={`text-sm font-semibold ${colorClasses.text}`}>
                                 {tech.name}
-                              </motion.span>
-                            </motion.div>
-                          </motion.div>
+                              </span>
+                            </div>
+                          </div>
                         </motion.div>
                       );
                     })}
