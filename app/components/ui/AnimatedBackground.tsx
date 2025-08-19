@@ -1,3 +1,4 @@
+// components/ui/AnimatedBackground.tsx
 'use client';
 
 import { useEffect, useRef } from 'react';
@@ -25,56 +26,166 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       canvas.height = window.innerHeight;
     };
 
-    const createGradient = (time: number) => {
-      const centerX = canvas.width / 2 + Math.sin(time * 0.001) * 100;
-      const centerY = canvas.height / 2 + Math.cos(time * 0.0015) * 100;
-      
+    // Colores de tu paleta en formato RGB para facilitar manipulación
+    const colors = {
+      cream: { r: 248, g: 237, b: 237 },
+      orange: { r: 255, g: 130, b: 37 },
+      burgundy: { r: 180, g: 63, b: 63 },
+      navy: { r: 23, g: 59, b: 69 }
+    };
+
+    // Configuración de "blobs" estilo iOS 18
+    const blobs = [
+      {
+        x: 0.2,
+        y: 0.3,
+        radius: 0.3,
+        color: colors.cream,
+        speedX: 0.0003,
+        speedY: 0.0002,
+        pulseSpeed: 0.001,
+        opacity: 0.8
+      },
+      {
+        x: 0.7,
+        y: 0.2,
+        radius: 0.25,
+        color: colors.orange,
+        speedX: -0.0002,
+        speedY: 0.0004,
+        pulseSpeed: 0.0015,
+        opacity: 0.6
+      },
+      {
+        x: 0.1,
+        y: 0.7,
+        radius: 0.35,
+        color: colors.burgundy,
+        speedX: 0.0004,
+        speedY: -0.0003,
+        pulseSpeed: 0.0008,
+        opacity: 0.5
+      },
+      {
+        x: 0.8,
+        y: 0.8,
+        radius: 0.2,
+        color: colors.navy,
+        speedX: -0.0003,
+        speedY: -0.0002,
+        pulseSpeed: 0.0012,
+        opacity: 0.7
+      },
+      {
+        x: 0.5,
+        y: 0.5,
+        radius: 0.4,
+        color: colors.orange,
+        speedX: 0.0001,
+        speedY: 0.0003,
+        pulseSpeed: 0.0006,
+        opacity: 0.3
+      }
+    ];
+
+    const createRadialGradient = (centerX: number, centerY: number, radius: number, color: any, opacity: number) => {
       const gradient = ctx.createRadialGradient(
         centerX, centerY, 0,
-        centerX, centerY, Math.max(canvas.width, canvas.height)
+        centerX, centerY, radius
       );
-
-      // Colores de tu paleta
-      const colors = [
-        '#F8EDED', // cream
-        '#FF8225', // orange
-        '#B43F3F', // burgundy
-        '#173B45'  // navy
-      ];
-
-      const t = (Math.sin(time * 0.0008) + 1) / 2;
       
-      gradient.addColorStop(0, colors[0]);
-      gradient.addColorStop(0.3 + t * 0.2, `${colors[1]}66`);
-      gradient.addColorStop(0.6 + t * 0.1, `${colors[2]}44`);
-      gradient.addColorStop(1, colors[3]);
-
+      const { r, g, b } = color;
+      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${opacity})`);
+      gradient.addColorStop(0.4, `rgba(${r}, ${g}, ${b}, ${opacity * 0.6})`);
+      gradient.addColorStop(0.7, `rgba(${r}, ${g}, ${b}, ${opacity * 0.3})`);
+      gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+      
       return gradient;
     };
 
     const animate = (currentTime: number) => {
       timeRef.current = currentTime;
+      const time = currentTime * 0.001; // Convertir a segundos
       
-      // Limpiar canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Fondo base con gradiente sutil
+      const baseGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      baseGradient.addColorStop(0, '#F8EDED');
+      baseGradient.addColorStop(0.5, 'rgba(248, 237, 237, 0.95)');
+      baseGradient.addColorStop(1, 'rgba(23, 59, 69, 0.1)');
       
-      // Aplicar gradiente animado
-      ctx.fillStyle = createGradient(currentTime);
+      ctx.fillStyle = baseGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      // Agregar ondas sutiles
-      for (let i = 0; i < 3; i++) {
-        const wave = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        const offset = (currentTime * 0.0005 + i * Math.PI / 1.5) % (Math.PI * 2);
-        const opacity = (Math.sin(offset) + 1) / 2 * 0.1;
+      // Configurar blend mode para efectos iOS 18
+      ctx.globalCompositeOperation = 'multiply';
+      
+      // Animar y dibujar cada blob
+      blobs.forEach((blob, index) => {
+        // Movimiento suave
+        blob.x += Math.sin(time * blob.speedX + index) * 0.00001;
+        blob.y += Math.cos(time * blob.speedY + index) * 0.00001;
         
-        wave.addColorStop(0, `rgba(255, 130, 37, ${opacity})`);
-        wave.addColorStop(0.5, `rgba(180, 63, 63, ${opacity * 0.7})`);
-        wave.addColorStop(1, `rgba(23, 59, 69, ${opacity * 0.5})`);
+        // Mantener blobs en pantalla con rebote suave
+        if (blob.x < 0.1 || blob.x > 0.9) blob.speedX *= -1;
+        if (blob.y < 0.1 || blob.y > 0.9) blob.speedY *= -1;
         
-        ctx.fillStyle = wave;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
+        // Pulsación del tamaño
+        const pulse = Math.sin(time * blob.pulseSpeed + index * Math.PI) * 0.1 + 1;
+        const currentRadius = blob.radius * pulse;
+        
+        // Posición en píxeles
+        const x = blob.x * canvas.width;
+        const y = blob.y * canvas.height;
+        const radius = currentRadius * Math.min(canvas.width, canvas.height);
+        
+        // Crear y aplicar gradiente radial
+        const gradient = createRadialGradient(x, y, radius, blob.color, blob.opacity);
+        ctx.fillStyle = gradient;
+        
+        // Dibujar blob con forma orgánica
+        ctx.beginPath();
+        
+        // Crear forma orgánica con múltiples puntos de control
+        const points = 8;
+        for (let i = 0; i <= points; i++) {
+          const angle = (i / points) * Math.PI * 2;
+          const noise = Math.sin(time * 0.5 + angle * 3 + index) * 0.1 + 1;
+          const r = radius * noise;
+          const px = x + Math.cos(angle) * r;
+          const py = y + Math.sin(angle) * r;
+          
+          if (i === 0) {
+            ctx.moveTo(px, py);
+          } else {
+            // Usar curvas bezier para suavizar
+            const prevAngle = ((i - 1) / points) * Math.PI * 2;
+            const prevNoise = Math.sin(time * 0.5 + prevAngle * 3 + index) * 0.1 + 1;
+            const prevR = radius * prevNoise;
+            const prevPx = x + Math.cos(prevAngle) * prevR;
+            const prevPy = y + Math.sin(prevAngle) * prevR;
+            
+            const cpx = (prevPx + px) / 2;
+            const cpy = (prevPy + py) / 2;
+            
+            ctx.quadraticCurveTo(cpx, cpy, px, py);
+          }
+        }
+        
+        ctx.closePath();
+        ctx.fill();
+      });
+      
+      // Restaurar blend mode
+      ctx.globalCompositeOperation = 'source-over';
+      
+      // Overlay sutil para unificar colores (efecto iOS 18)
+      const overlayGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      overlayGradient.addColorStop(0, 'rgba(248, 237, 237, 0.1)');
+      overlayGradient.addColorStop(0.5, 'rgba(255, 130, 37, 0.05)');
+      overlayGradient.addColorStop(1, 'rgba(23, 59, 69, 0.1)');
+      
+      ctx.fillStyle = overlayGradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -100,54 +211,41 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
 
   return (
     <div className={`fixed inset-0 -z-10 ${className}`}>
-      {/* Canvas animado */}
+      {/* Canvas principal */}
       <canvas
         ref={canvasRef}
         className="w-full h-full object-cover"
         style={{
-          background: 'linear-gradient(135deg, #F8EDED 0%, rgba(255, 130, 37, 0.3) 50%, rgba(180, 63, 63, 0.2) 70%, #173B45 100%)'
+          background: 'linear-gradient(135deg, #F8EDED 0%, rgba(255, 130, 37, 0.1) 50%, rgba(23, 59, 69, 0.05) 100%)',
+          filter: 'blur(0.5px)' // Suavizado sutil estilo iOS
         }}
       />
 
-      {/* Overlay con gradiente CSS como fallback/complemento */}
-      <div className="absolute inset-0 opacity-30 animate-pulse-slow bg-gradient-to-br from-cream/20 via-transparent to-navy/20" />
-
-      {/* Elementos decorativos */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Partículas flotantes */}
-        {Array.from({ length: 6 }, (_, i) => (
+      {/* Efectos adicionales estilo iOS 18 */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Resplandor superior */}
+        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-cream/20 to-transparent" />
+        
+        {/* Resplandor inferior */}
+        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-navy/10 to-transparent" />
+        
+        {/* Partículas flotantes muy sutiles */}
+        {Array.from({ length: 3 }, (_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-orange/20 to-burgundy/20 animate-float opacity-30"
+            className="absolute w-1 h-1 rounded-full bg-orange/30 animate-float opacity-20"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${6 + i}s`,
+              top: `${20 + i * 30}%`,
+              left: `${10 + i * 35}%`,
+              animationDelay: `${i * 2}s`,
+              animationDuration: `${8 + i * 2}s`,
             }}
           />
         ))}
-
-        {/* Círculos decorativos más grandes */}
-        <div className="absolute top-20 left-10 w-32 h-32 opacity-5 animate-pulse">
-          <div className="w-full h-full rounded-full border-2 border-navy/30" />
-          <div className="absolute inset-6 rounded-full border border-navy/20" />
-          <div className="absolute inset-12 rounded-full bg-navy/10" />
-        </div>
-
-        <div className="absolute bottom-32 right-16 w-24 h-24 opacity-5 animate-pulse delay-1000">
-          <div className="w-full h-full rotate-45 border-2 border-burgundy/30" />
-          <div className="absolute inset-3 rounded-full border border-burgundy/20" />
-        </div>
-
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 opacity-5 animate-pulse delay-2000">
-          <div className="w-0 h-0 border-l-[40px] border-l-transparent border-r-[40px] border-r-transparent border-b-[60px] border-b-orange/30" />
-          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border border-orange/20" />
-        </div>
-
-        {/* Efecto de brillo sutil */}
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-cream/5 to-transparent animate-gradient" />
       </div>
+      
+      {/* Overlay final con efecto de cristal */}
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/[0.02] to-transparent backdrop-blur-[0.5px]" />
     </div>
   );
 };
