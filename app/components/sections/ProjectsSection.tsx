@@ -39,7 +39,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: 'fitincho-app',
-    title: 'E-commerce REST API',
+    title: 'FiTincho-app',
     description: "FiTincho - Fitness app.",
     longDescription: 'Aplicación web que permite a los usuarios crear y gestionar sus propias rutinas de entrenamiento. Incluye seguimiento del progreso con gráficos, un diseño moderno inspirado en iOS 18 con `glassmorphism`, un sistema de usuarios con perfiles y roles personalizados, y un panel de administración para la gestión completa del sistema.',
     icon: Server,
