@@ -11,10 +11,10 @@ import { LoadingSpinner } from './components/ui/LoadingSpinner';
 export default function HomePage() {
   return (
     <div className="min-h-screen relative overflow-x-hidden">
-      {/* Animated Background */}
+     
       <AnimatedBackground />
       
-      {/* Main Content */}
+    
       <div className="relative z-10">
         <Navigation />
         

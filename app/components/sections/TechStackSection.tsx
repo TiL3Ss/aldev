@@ -227,12 +227,10 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
           "
           variant="bordered"
           size="lg"
-          startContent={
-            <div className="flex items-center">
-              <Zap size={16} />
-            </div>
-          }
+          
         >
+              <Zap size={16} />
+
           Stack Tecnológico
           </Chip> 
 
