@@ -38,102 +38,63 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'ecommerce-api',
+    id: 'fitincho-app',
     title: 'E-commerce REST API',
-    description: 'API completa para plataforma de comercio electrónico',
-    longDescription: 'Sistema backend robusto con gestión de productos, usuarios, pedidos, pagos e inventario. Incluye autenticación JWT, validación de datos, rate limiting y documentación automática con Swagger.',
+    description: "FiTincho - Fitness app.",
+    longDescription: 'Aplicación web que permite a los usuarios crear y gestionar sus propias rutinas de entrenamiento. Incluye seguimiento del progreso con gráficos, un diseño moderno inspirado en iOS 18 con `glassmorphism`, un sistema de usuarios con perfiles y roles personalizados, y un panel de administración para la gestión completa del sistema.',
     icon: Server,
-    technologies: ['Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe', 'Docker'],
+    technologies: ['Next.js 14', 'TypeScript', 'Turso/LibSQL', 'Vercel', 'Tailwind CSS'],
     features: [
-      'Autenticación y autorización completa',
-      'Gestión de productos e inventario',
-      'Sistema de pedidos y pagos',
-      'Rate limiting y caching',
-      'Documentación API automática',
-      'Tests unitarios y de integración'
+      "Rutinas personalizadas",
+      "Seguimiento del progreso con gráficos",
+      "Diseño con 'glassmorphism'",
+      "Usuarios con perfiles y roles",
+      "Panel de administración"
     ],
-    demoUrl: 'https://api-demo.example.com',
-    githubUrl: 'https://github.com/tu-usuario/ecommerce-api',
-    status: 'completed',
-    category: 'api'
-  },
-  {
-    id: 'microservices-platform',
-    title: 'Plataforma Microservicios',
-    description: 'Arquitectura distribuida para aplicaciones empresariales',
-    longDescription: 'Sistema de microserviios con API Gateway, service discovery, circuit breakers y monitoreo distribuido. Incluye servicios para autenticación, notificaciones, archivos y anályticas.',
-    icon: Zap,
-    technologies: ['Next.js', 'Docker', 'Redis', 'PostgreSQL', 'RabbitMQ', 'Prometheus'],
-    features: [
-      'API Gateway con rate limiting',
-      'Service discovery automático',
-      'Circuit breaker pattern',
-      'Comunicación asíncrona',
-      'Monitoreo y alertas',
-      'Escalado automático'
-    ],
-    demoUrl: 'https://microservices-demo.example.com',
-    githubUrl: 'https://github.com/tu-usuario/microservices-platform',
-    status: 'in-progress',
-    category: 'microservices'
-  },
-  {
-    id: 'analytics-dashboard',
-    title: 'Dashboard Analytics Real-time',
-    description: 'Plataforma de análisis con visualizaciones en tiempo real',
-    longDescription: 'Sistema fullstack con Next.js para análisis de datos en tiempo real, WebSockets para updates live, ETL pipelines y visualizaciones interactivas.',
-    icon: BarChart3,
-    technologies: ['Next.js', 'TypeScript', 'WebSockets', 'MongoDB', 'Chart.js', 'Vercel'],
-    features: [
-      'Datos en tiempo real con WebSockets',
-      'ETL pipelines automatizados',
-      'Visualizaciones interactivas',
-      'Filtros y exportación de datos',
-      'Alertas personalizables',
-      'API REST para integraciones'
-    ],
-    demoUrl: 'https://analytics.example.com',
-    githubUrl: 'https://github.com/tu-usuario/analytics-dashboard',
+    demoUrl: 'https://fi-tincho.vercel.app/',
+    githubUrl: 'https://github.com/TiL3Ss/FiTincho',
     status: 'completed',
     category: 'fullstack'
   },
   {
-    id: 'auth-service',
-    title: 'Servicio de Autenticación',
-    description: 'Microservicio de auth con OAuth y JWT',
-    longDescription: 'Servicio especializado en autenticación y autorización con soporte para múltiples providers OAuth, gestión de sesiones, 2FA y políticas de seguridad avanzadas.',
-    icon: Shield,
-    technologies: ['Node.js', 'TypeScript', 'Redis', 'PostgreSQL', 'OAuth', 'Docker'],
+    id: 'anidrive-social-app',
+    title: 'Anidrive - Anime Social Network',
+    description: 'Red social para mantener un registro de los animes que estás viendo.',
+    longDescription: 'Una red social diseñada para entusiastas del anime, permitiendo a los usuarios mantener un seguimiento de sus series actuales, ver lo que otros están viendo, comentar reseñas, calificar animes y marcar el progreso de cada capítulo.',
+    icon: Zap,
+    technologies: ['Next.js 14', 'TypeScript', 'Turso/LibSQL', 'Vercel', 'Tailwind CSS'],
     features: [
-      'OAuth con múltiples providers',
-      'Autenticación de dos factores',
-      'Gestión de sesiones con Redis',
-      'Políticas de seguridad flexibles',
-      'Rate limiting inteligente',
-      'Logs de auditoría completos'
+        'Seguimiento de animes',
+        'Ver lo que otros usuarios están viendo',
+        'Comentarios y reseñas',
+        'Calificación de animes',
+        'Seguimiento de capítulos'
     ],
-    githubUrl: 'https://github.com/tu-usuario/auth-service',
-    status: 'completed',
-    category: 'api'
+    demoUrl: 'https://anidrive.vercel.app/',
+    githubUrl: 'https://github.com/TiL3Ss/Anidrive',
+    status: 'in-progress',
+    category: 'fullstack'
   },
   {
-    id: 'file-processor',
-    title: 'Procesador de Archivos',
-    description: 'Sistema de procesamiento asíncrono de archivos',
-    longDescription: 'Herramienta para procesamiento masivo de archivos con cola de trabajos, conversión de formatos, optimización de imágenes y almacenamiento en la nube.',
+    id: 'moodle-attendance-api',
+    title: 'Moodle Attendance API Plugin',
+    description: 'API para la gestión de asistencia en la plataforma Moodle.',
+    longDescription: 'API desarrollada como un plugin para la plataforma de aprendizaje Moodle, diseñada específicamente para gestionar la asistencia en cursos del SENCE (Servicio Nacional de Capacitación y Empleo). La API permite el manejo de la asistencia de los cursos administrados por la plataforma Moodle para la empresa CECADe Group.',
     icon: Database,
-    technologies: ['Node.js', 'Bull Queue', 'Sharp', 'AWS S3', 'Redis', 'Docker'],
-    features: [
-      'Cola de trabajos con Bull',
-      'Procesamiento de imágenes',
-      'Conversión de formatos',
-      'Upload a múltiples clouds',
-      'Progress tracking en tiempo real',
-      'Retry logic inteligente'
+    technologies: [
+      'PHP',
+      'Moodle',
+      'Postman'
     ],
-    githubUrl: 'https://github.com/tu-usuario/file-processor',
-    status: 'planning',
-    category: 'tools'
+    features: [
+      'Gestión de asistencia de cursos',
+      'Integración como plugin de Moodle',
+      'Manejo de datos para cursos SENCE'
+    ],
+    demoUrl: 'null',
+    githubUrl: 'null',
+    status: 'completed',
+    category: 'api'
   }
 ];
 
