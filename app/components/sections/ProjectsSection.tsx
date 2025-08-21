@@ -109,7 +109,8 @@ const statusConfig = {
     label: 'En Desarrollo', 
     color: 'warning' as const,
     icon: Clock,
-    bgClass: 'bg-orange-100 text-orange-700 border-orange-200'
+    bgClass: 'text-[#FF8225] border-[#FF8225]',
+    style: { backgroundColor: 'rgba(255, 130, 37, 0.1)' }
   },
   planning: { 
     label: 'Planificación', 
@@ -257,11 +258,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                             {project.title}
                           </h3>
                           <div className="flex flex-wrap gap-3">
-                            <div className={`
-                              px-3 py-1.5 rounded-full text-sm font-medium
-                              border backdrop-blur-xl
-                              ${statusConfig[project.status].bgClass}
-                            `}>
+                            <div 
+                              className={`
+                                px-3 py-1.5 rounded-full text-sm font-medium
+                                border backdrop-blur-xl
+                                ${statusConfig[project.status].bgClass}
+                              `}
+                              style={statusConfig[project.status].style}
+                            >
                               <div className="flex items-center gap-2">
                                 {React.createElement(statusConfig[project.status].icon, { size: 14 })}
                                 {statusConfig[project.status].label}
@@ -337,6 +341,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                             hover:shadow-xl 
                             transition-all duration-300 hover:scale-105
                             font-semibold border-0 backdrop-blur-xl
+                            flex items-center justify-center gap-2
                           "
                           style={{
                             background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
@@ -357,6 +362,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                             border 
                             transition-all duration-300 hover:scale-105 backdrop-blur-xl
                             font-semibold
+                            flex items-center justify-center gap-2
                           "
                           style={{
                             backgroundColor: 'rgba(248, 237, 237, 0.8)',
@@ -458,6 +464,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                   hover:shadow-xl 
                   transition-all duration-300 hover:scale-105
                   font-semibold border-0 backdrop-blur-xl h-14 px-8
+                  flex items-center justify-center gap-2
                 "
                 style={{
                   background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
@@ -474,6 +481,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                   border
                   transition-all duration-300 hover:scale-105 backdrop-blur-xl
                   font-semibold h-14 px-8
+                  flex items-center justify-center gap-2
                 "
                 style={{
                   backgroundColor: 'rgba(248, 237, 237, 0.9)',
