@@ -161,19 +161,23 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <Chip 
-              className="mb-6 backdrop-blur-xl px-4 py-2 border"
-              style={{
-                backgroundColor: 'rgba(248, 237, 237, 0.8)',
-                color: '#173B45',
-                borderColor: 'rgba(180, 63, 63, 0.3)'
-              }}
-              variant="bordered"
-              size="lg"
-              startContent={<Rocket size={18} style={{ color: '#B43F3F' }} />}
-            >
-              <span className="font-semibold">Proyectos Destacados</span>
-            </Chip>
+            <Chip
+            className="
+              mb-4 bg-gradient-to-r from-orange/15 to-burgundy/15 
+              text-navy border-orange/25 rounded-full px-6 py-3
+              backdrop-blur-xl shadow-lg shadow-orange/5
+              flex items-center
+            "
+            variant="bordered"
+            size="lg"
+            startContent={
+              <div className="flex items-center justify-center">
+                <Rocket size={20} className="text-navy" />
+              </div>
+            }
+          >
+            Proyectos Destacados
+          </Chip> 
           </motion.div>
           
           <motion.h2
