@@ -103,27 +103,27 @@ const statusConfig = {
     label: 'Completado', 
     color: 'success' as const,
     icon: CheckCircle2,
-    bgClass: 'bg-green-100 dark:bg-green-950/50 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800'
+    bgClass: 'bg-green-100 text-green-700 border-green-200'
   },
   'in-progress': { 
     label: 'En Desarrollo', 
     color: 'warning' as const,
     icon: Clock,
-    bgClass: 'bg-orange-100 dark:bg-orange-950/50 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-800'
+    bgClass: 'bg-orange-100 text-orange-700 border-orange-200'
   },
   planning: { 
     label: 'Planificación', 
     color: 'default' as const,
     icon: FileText,
-    bgClass: 'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-400 border-gray-200 dark:border-gray-700'
+    bgClass: 'bg-gray-100 text-gray-700 border-gray-200'
   }
 };
 
 const categoryConfig = {
-  api: { label: 'API', bgClass: 'bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800' },
-  microservices: { label: 'Microservicios', bgClass: 'bg-purple-100 dark:bg-purple-950/50 text-purple-700 dark:text-purple-400 border-purple-200 dark:border-purple-800' },
-  fullstack: { label: 'Full Stack', bgClass: 'bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800' },
-  tools: { label: 'Herramientas', bgClass: 'bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800' }
+  api: { label: 'API', bgClass: 'text-white border-[#B43F3F]', style: { backgroundColor: '#B43F3F' } },
+  microservices: { label: 'Microservicios', bgClass: 'text-white border-[#FF8225]', style: { backgroundColor: '#FF8225' } },
+  fullstack: { label: 'Full Stack', bgClass: 'text-[#F8EDED] border-[#173B45]', style: { backgroundColor: '#173B45' } },
+  tools: { label: 'Herramientas', bgClass: 'text-[#173B45] border-[#F8EDED]', style: { backgroundColor: '#F8EDED' } }
 };
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = '' }) => {
@@ -132,10 +132,16 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
       id="projects" 
       className={`
         py-20 px-4 
-        bg-gradient-to-b from-gray-50/50 via-blue-50/30 to-purple-50/50
-        dark:from-gray-900/50 dark:via-blue-950/30 dark:to-purple-950/50
         ${className}
       `}
+      style={{
+        background: `linear-gradient(135deg, 
+          rgba(248, 237, 237, 0.3) 0%,
+          rgba(255, 130, 37, 0.1) 35%,
+          rgba(180, 63, 63, 0.1) 65%,
+          rgba(23, 59, 69, 0.2) 100%
+        )`
+      }}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -153,14 +159,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <Chip 
-              className="
-                mb-6 bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
-                border border-gray-200/50 dark:border-gray-600/50
-                backdrop-blur-xl px-4 py-2
-              "
+              className="mb-6 backdrop-blur-xl px-4 py-2 border"
+              style={{
+                backgroundColor: 'rgba(248, 237, 237, 0.8)',
+                color: '#173B45',
+                borderColor: 'rgba(180, 63, 63, 0.3)'
+              }}
               variant="bordered"
               size="lg"
-              startContent={<Rocket size={18} className="text-blue-600 dark:text-blue-400" />}
+              startContent={<Rocket size={18} style={{ color: '#B43F3F' }} />}
             >
               <span className="font-semibold">Proyectos Destacados</span>
             </Chip>
@@ -171,12 +178,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="
-              text-5xl md:text-6xl font-black mb-6 tracking-tight
-              bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 
-              dark:from-white dark:via-blue-400 dark:to-purple-400
-              bg-clip-text text-transparent
-            "
+            className="text-5xl md:text-6xl font-black mb-6 tracking-tight bg-clip-text text-transparent"
+            style={{
+              background: `linear-gradient(135deg, #173B45 0%, #B43F3F 50%, #FF8225 100%)`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}
           >
             Casos de Éxito
           </motion.h2>
@@ -186,7 +193,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl max-w-3xl mx-auto leading-relaxed"
+            style={{ color: '#173B45' }}
           >
             Proyectos reales que demuestran mi experiencia en desarrollo backend, 
             desde APIs REST hasta arquitecturas de microservicios complejas
@@ -208,13 +216,18 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
               }}
             >
               <Card className="
-                bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
-                border border-black/5 dark:border-white/10
-                hover:border-blue-200/50 dark:hover:border-blue-700/50 
-                hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-purple-500/20
+                backdrop-blur-3xl 
+                border 
+                hover:shadow-2xl
                 transition-all duration-700 ease-out hover:scale-[1.02]
                 rounded-3xl overflow-hidden group
-              ">
+              "
+              style={{
+                backgroundColor: 'rgba(248, 237, 237, 0.7)',
+                borderColor: 'rgba(180, 63, 63, 0.2)',
+                boxShadow: '0 25px 50px -12px rgba(180, 63, 63, 0.15)'
+              }}
+              >
                 <div className="grid lg:grid-cols-3 gap-0 min-h-[400px]">
                   {/* Content */}
                   <div className="lg:col-span-2 p-8 lg:p-12 flex flex-col justify-center">
@@ -225,15 +238,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                           whileHover={{ scale: 1.1, rotate: 5 }}
                           transition={{ type: "spring", stiffness: 300, damping: 20 }}
                           className="
-                            p-4 rounded-3xl bg-gradient-to-br from-blue-500/20 to-purple-500/20
-                            backdrop-blur-xl border border-blue-200/30 dark:border-purple-400/30
-                            shadow-lg shadow-blue-500/10 dark:shadow-purple-500/20
+                            p-4 rounded-3xl backdrop-blur-xl border shadow-lg
+                            flex-shrink-0
                           "
+                          style={{
+                            background: `linear-gradient(135deg, 
+                              rgba(180, 63, 63, 0.15) 0%, 
+                              rgba(255, 130, 37, 0.15) 100%
+                            )`,
+                            borderColor: 'rgba(180, 63, 63, 0.3)',
+                            boxShadow: '0 10px 30px rgba(180, 63, 63, 0.2)'
+                          }}
                         >
-                          <project.icon size={32} className="text-blue-600 dark:text-blue-400" />
+                          <project.icon size={32} style={{ color: '#B43F3F' }} />
                         </motion.div>
                         <div>
-                          <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3 tracking-tight">
+                          <h3 className="text-3xl font-bold mb-3 tracking-tight" style={{ color: '#173B45' }}>
                             {project.title}
                           </h3>
                           <div className="flex flex-wrap gap-3">
@@ -247,11 +267,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                                 {statusConfig[project.status].label}
                               </div>
                             </div>
-                            <div className={`
-                              px-3 py-1.5 rounded-full text-sm font-medium
-                              border backdrop-blur-xl
-                              ${categoryConfig[project.category].bgClass}
-                            `}>
+                            <div 
+                              className={`
+                                px-3 py-1.5 rounded-full text-sm font-medium
+                                border backdrop-blur-xl
+                                ${categoryConfig[project.category].bgClass}
+                              `}
+                              style={categoryConfig[project.category].style}
+                            >
                               {categoryConfig[project.category].label}
                             </div>
                           </div>
@@ -260,16 +283,16 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-700 dark:text-gray-300 mb-4 text-xl font-medium">
+                    <p className="mb-4 text-xl font-medium" style={{ color: '#173B45' }}>
                       {project.description}
                     </p>
-                    <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed text-lg">
+                    <p className="mb-8 leading-relaxed text-lg" style={{ color: 'rgba(23, 59, 69, 0.8)' }}>
                       {project.longDescription}
                     </p>
 
                     {/* Technologies */}
                     <div className="mb-8">
-                      <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-wider">
+                      <h4 className="text-sm font-bold mb-4 uppercase tracking-wider" style={{ color: '#173B45' }}>
                         Stack Tecnológico
                       </h4>
                       <div className="flex flex-wrap gap-2">
@@ -285,11 +308,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                             <Chip
                               size="md"
                               className="
-                                bg-white/70 dark:bg-black/50 text-gray-700 dark:text-gray-300
-                                border border-gray-200/50 dark:border-gray-600/50
-                                backdrop-blur-xl hover:bg-blue-50/70 dark:hover:bg-blue-950/50
+                                backdrop-blur-xl border 
                                 transition-all duration-300 font-medium
                               "
+                              style={{
+                                backgroundColor: 'rgba(248, 237, 237, 0.8)',
+                                color: '#173B45',
+                                borderColor: 'rgba(180, 63, 63, 0.3)'
+                              }}
                               variant="bordered"
                             >
                               {tech}
@@ -301,35 +327,42 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
 
                     {/* Links */}
                     <div className="flex flex-wrap gap-4">
-                      {project.demoUrl && (
+                      {project.demoUrl && project.demoUrl !== 'null' && (
                         <Button
                           as={Link}
                           href={project.demoUrl}
                           target="_blank"
                           className="
-                            bg-gradient-to-r from-blue-500 to-purple-600 text-white
-                            hover:shadow-xl hover:shadow-blue-500/30
+                            text-white
+                            hover:shadow-xl 
                             transition-all duration-300 hover:scale-105
                             font-semibold border-0 backdrop-blur-xl
                           "
+                          style={{
+                            background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
+                            boxShadow: '0 10px 30px rgba(180, 63, 63, 0.3)'
+                          }}
                           radius="full"
                           startContent={<ExternalLink size={18} />}
                         >
                           Ver Demo
                         </Button>
                       )}
-                      {project.githubUrl && (
+                      {project.githubUrl && project.githubUrl !== 'null' && (
                         <Button
                           as={Link}
                           href={project.githubUrl}
                           target="_blank"
                           className="
-                            bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
-                            border border-gray-200/50 dark:border-gray-600/50
-                            hover:bg-gray-50/70 dark:hover:bg-gray-800/50
+                            border 
                             transition-all duration-300 hover:scale-105 backdrop-blur-xl
                             font-semibold
                           "
+                          style={{
+                            backgroundColor: 'rgba(248, 237, 237, 0.8)',
+                            color: '#173B45',
+                            borderColor: 'rgba(180, 63, 63, 0.3)'
+                          }}
                           radius="full"
                           startContent={<Github size={18} />}
                         >
@@ -341,12 +374,18 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
 
                   {/* Features */}
                   <div className="
-                    bg-gradient-to-br from-gray-50/80 to-blue-50/80 
-                    dark:from-gray-800/50 dark:to-blue-950/50 
                     p-8 lg:p-12 flex flex-col justify-center
-                    backdrop-blur-xl border-l border-gray-200/30 dark:border-gray-700/30
-                  ">
-                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-6 tracking-wide">
+                    backdrop-blur-xl border-l 
+                  "
+                  style={{
+                    background: `linear-gradient(135deg, 
+                      rgba(23, 59, 69, 0.1) 0%, 
+                      rgba(180, 63, 63, 0.05) 100%
+                    )`,
+                    borderLeftColor: 'rgba(180, 63, 63, 0.2)'
+                  }}
+                  >
+                    <h4 className="text-lg font-bold mb-6 tracking-wide" style={{ color: '#173B45' }}>
                       Características Principales
                     </h4>
                     <div className="space-y-4">
@@ -360,14 +399,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                           className="flex items-start gap-3 group"
                         >
                           <div className="
-                            w-6 h-6 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600
-                            flex items-center justify-center text-white text-xs font-bold
-                            flex-shrink-0 mt-0.5 shadow-lg shadow-blue-500/25
+                            w-6 h-6 rounded-xl text-white text-xs font-bold
+                            flex items-center justify-center
+                            flex-shrink-0 mt-0.5 shadow-lg 
                             group-hover:scale-110 transition-transform duration-300
-                          ">
+                          "
+                          style={{
+                            background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
+                            boxShadow: '0 4px 15px rgba(180, 63, 63, 0.3)'
+                          }}
+                          >
                             <CheckCircle2 size={14} />
                           </div>
-                          <span className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed font-medium">
+                          <span className="text-sm leading-relaxed font-medium" style={{ color: '#173B45' }}>
                             {feature}
                           </span>
                         </motion.div>
@@ -389,12 +433,18 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
           className="text-center mt-20"
         >
           <div className="
-            bg-white/60 dark:bg-black/40 backdrop-blur-3xl 
-            border border-black/5 dark:border-white/10
-            rounded-3xl p-8 md:p-12 shadow-xl shadow-black/5 dark:shadow-white/10
+            backdrop-blur-3xl 
+            border 
+            rounded-3xl p-8 md:p-12 shadow-xl 
             max-w-3xl mx-auto
-          ">
-            <p className="text-gray-700 dark:text-gray-300 mb-8 text-xl leading-relaxed">
+          "
+          style={{
+            backgroundColor: 'rgba(248, 237, 237, 0.8)',
+            borderColor: 'rgba(180, 63, 63, 0.2)',
+            boxShadow: '0 25px 50px -12px rgba(180, 63, 63, 0.2)'
+          }}
+          >
+            <p className="mb-8 text-xl leading-relaxed" style={{ color: '#173B45' }}>
               ¿Te interesa ver más de mi trabajo o colaborar en un proyecto?
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -404,11 +454,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                 target="_blank"
                 size="lg"
                 className="
-                  bg-gradient-to-r from-blue-500 to-purple-600 text-white
-                  hover:shadow-xl hover:shadow-blue-500/30
+                  text-white
+                  hover:shadow-xl 
                   transition-all duration-300 hover:scale-105
                   font-semibold border-0 backdrop-blur-xl h-14 px-8
                 "
+                style={{
+                  background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
+                  boxShadow: '0 10px 30px rgba(180, 63, 63, 0.3)'
+                }}
                 radius="full"
                 startContent={<Github size={20} />}
               >
@@ -417,12 +471,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
               <Button
                 size="lg"
                 className="
-                  bg-white/70 dark:bg-black/50 text-gray-800 dark:text-gray-200
-                  border border-gray-200/50 dark:border-gray-600/50
-                  hover:bg-gray-50/70 dark:hover:bg-gray-800/50
+                  border
                   transition-all duration-300 hover:scale-105 backdrop-blur-xl
                   font-semibold h-14 px-8
                 "
+                style={{
+                  backgroundColor: 'rgba(248, 237, 237, 0.9)',
+                  color: '#173B45',
+                  borderColor: 'rgba(180, 63, 63, 0.3)'
+                }}
                 radius="full"
                 onPress={() => {
                   const contactSection = document.getElementById('contact');
