@@ -103,7 +103,8 @@ const statusConfig = {
     label: 'Completado', 
     color: 'success' as const,
     icon: CheckCircle2,
-    bgClass: 'bg-green-100 text-green-700 border-green-200'
+    bgClass: 'bg-green-100 text-green-700 border-green-200',
+    style: undefined
   },
   'in-progress': { 
     label: 'En Desarrollo', 
@@ -116,7 +117,8 @@ const statusConfig = {
     label: 'Planificación', 
     color: 'default' as const,
     icon: FileText,
-    bgClass: 'bg-gray-100 text-gray-700 border-gray-200'
+    bgClass: 'bg-gray-100 text-gray-700 border-gray-200',
+    style: undefined
   }
 };
 
@@ -264,7 +266,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                                 border backdrop-blur-xl
                                 ${statusConfig[project.status].bgClass}
                               `}
-                              style={statusConfig[project.status].style}
+                              style={statusConfig[project.status].style || undefined}
                             >
                               <div className="flex items-center gap-2">
                                 {React.createElement(statusConfig[project.status].icon, { size: 14 })}
