@@ -16,7 +16,6 @@ import {
   Mail, 
   Github, 
   Linkedin, 
-  Twitter, 
   Send,
   MessageCircle,
   Calendar,
@@ -52,13 +51,6 @@ const socialLinks = [
     href: 'https://linkedin.com/in/alvaro-developer',
     username: '/in/alvaro-developer',
     description: 'Conectemos profesionalmente'
-  },
-  {
-    icon: Twitter,
-    label: 'Twitter',
-    href: 'https://twitter.com/alvaro_dev',
-    username: '@alvaro_dev',
-    description: 'Sígueme para tips de desarrollo'
   },
   {
     icon: Mail,
@@ -837,19 +829,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
               transition={{ delay: 0.9, duration: 0.6 }}
               className="mb-6"
             >
-              <Chip 
-                className="backdrop-blur-xl px-4 py-2 border"
-                style={{
-                  backgroundColor: 'rgba(255, 130, 37, 0.15)',
-                  color: '#FF8225',
-                  borderColor: 'rgba(255, 130, 37, 0.3)'
-                }}
-                variant="bordered"
-                size="lg"
-                startContent={<Sparkles size={18} style={{ color: '#FF8225' }} />}
-              >
-                <span className="font-semibold">¿Listo para empezar?</span>
-              </Chip>
+              <Chip
+            className="
+              mb-4 bg-gradient-to-r from-orange/15 to-burgundy/15 
+              text-navy border-orange/25 rounded-full px-6 py-3
+              backdrop-blur-xl shadow-lg shadow-orange/5
+              flex items-center
+            "
+            variant="bordered"
+            size="lg"
+            startContent={
+              <div className="flex items-center justify-center">
+                <Sparkles size={20} className="text-orange-dark" />
+              </div>
+            }
+          >
+            ¿Listo para empezar?
+          </Chip>
             </motion.div>
             
             <motion.h3
@@ -913,18 +909,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                 href="https://calendly.com/alvaro-developer/30min"
                 size="lg"
                                   className="
-                                    text-white
+                                    text-orange
                                     hover:shadow-xl 
                                     transition-all duration-300 hover:scale-105
                                     font-semibold border-0 backdrop-blur-xl h-14 px-8
                                     flex items-center justify-center gap-2
                                   "
                                   style={{
-                                    background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
-                                    boxShadow: '0 10px 30px rgba(180, 63, 63, 0.3)'
+                                    background: `linear-gradient(135deg, #E7D3D3 0%, #EEEEEE 100%)`,
+                                    boxShadow: '0 10px 30px rgba(100, 100, 0163, 00.3)'
                                   }}
                                   radius="full"
-                                  startContent={<Github size={20} />}
+                                  startContent={<MessageCircle size={20} />}
                                 >
                                   Agendar Reunión
               </Button>
