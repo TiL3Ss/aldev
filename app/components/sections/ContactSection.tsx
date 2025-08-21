@@ -216,11 +216,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
             size="lg"
             startContent={
               <div className="flex items-center justify-center">
-                <MessageCircle size={20} className="text-navy" />
+                <MessageCircle size={20} className="text-orange-dark" />
               </div>
             }
           >
-            Proyectos Destacados
+            Hablemos
           </Chip> 
           </motion.div>
           
@@ -317,8 +317,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                   </motion.div>
                 )}
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form 
+                  onSubmit={handleSubmit} 
+                  className="space-y-8 bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-lg"
+                >
                   <div className="grid md:grid-cols-2 gap-6">
+                    {/* Nombre */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -335,24 +339,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                         isInvalid={!!errors.name}
                         errorMessage={errors.name}
                         classNames={{
-                          input: "placeholder:text-gray-500",
-                          label: "font-medium",
+                          input: "placeholder:text-gray-500 px-4 py-3",
+                          label: "font-medium text-gray-700",
                           inputWrapper: `
-                            backdrop-blur-xl border transition-all duration-300
-                            focus-within:scale-[1.02]
-                            ${errors.name ? 'border-red-500' : ''}
+                            rounded-2xl border shadow-sm transition-all duration-300
+                            focus-within:scale-[1.02] focus-within:shadow-md
+                            ${errors.name ? 'border-red-500' : 'border-gray-200'}
                           `,
-                          errorMessage: "text-red-500"
+                          errorMessage: "text-red-500 text-sm mt-1"
                         }}
-                        style={{
-                          '--input-bg': 'rgba(248, 237, 237, 0.9)',
-                          '--input-color': '#173B45',
-                          '--label-color': '#173B45',
-                          '--border-color': 'rgba(180, 63, 63, 0.3)',
-                          '--focus-border-color': '#B43F3F'
-                        } as React.CSSProperties}
                       />
                     </motion.div>
+
+                    {/* Email */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -370,26 +369,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                         isInvalid={!!errors.email}
                         errorMessage={errors.email}
                         classNames={{
-                          input: "placeholder:text-gray-500",
-                          label: "font-medium",
+                          input: "placeholder:text-gray-500 px-4 py-3",
+                          label: "font-medium text-gray-700",
                           inputWrapper: `
-                            backdrop-blur-xl border transition-all duration-300
-                            focus-within:scale-[1.02]
-                            ${errors.email ? 'border-red-500' : ''}
+                            rounded-2xl border shadow-sm transition-all duration-300
+                            focus-within:scale-[1.02] focus-within:shadow-md
+                            ${errors.email ? 'border-red-500' : 'border-gray-200'}
                           `,
-                          errorMessage: "text-red-500"
+                          errorMessage: "text-red-500 text-sm mt-1"
                         }}
-                        style={{
-                          '--input-bg': 'rgba(248, 237, 237, 0.9)',
-                          '--input-color': '#173B45',
-                          '--label-color': '#173B45',
-                          '--border-color': 'rgba(180, 63, 63, 0.3)',
-                          '--focus-border-color': '#B43F3F'
-                        } as React.CSSProperties}
                       />
                     </motion.div>
                   </div>
-                  
+
+                  {/* Asunto */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -406,23 +399,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       isInvalid={!!errors.subject}
                       errorMessage={errors.subject}
                       classNames={{
-                        input: "placeholder:text-gray-500",
-                        label: "font-medium",
+                        input: "placeholder:text-gray-500 px-4 py-3",
+                        label: "font-medium text-gray-700",
                         inputWrapper: `
-                          backdrop-blur-xl border transition-all duration-300 focus-within:scale-[1.02]
-                          ${errors.subject ? 'border-red-500' : ''}
+                          rounded-2xl border shadow-sm transition-all duration-300
+                          focus-within:scale-[1.02] focus-within:shadow-md
+                          ${errors.subject ? 'border-red-500' : 'border-gray-200'}
                         `
                       }}
-                      style={{
-                        '--input-bg': 'rgba(248, 237, 237, 0.9)',
-                        '--input-color': '#173B45',
-                        '--label-color': '#173B45',
-                        '--border-color': 'rgba(180, 63, 63, 0.3)',
-                        '--focus-border-color': '#B43F3F'
-                      } as React.CSSProperties}
                     />
                   </motion.div>
-                  
+
+                  {/* Mensaje */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -440,23 +428,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       isInvalid={!!errors.message}
                       errorMessage={errors.message}
                       classNames={{
-                        input: "placeholder:text-gray-500",
-                        label: "font-medium",
+                        input: "placeholder:text-gray-500 px-4 py-3",
+                        label: "font-medium text-gray-700",
                         inputWrapper: `
-                          backdrop-blur-xl border transition-all duration-300 focus-within:scale-[1.02]
-                          ${errors.message ? 'border-red-500' : ''}
+                          rounded-2xl border shadow-sm transition-all duration-300
+                          focus-within:scale-[1.02] focus-within:shadow-md
+                          ${errors.message ? 'border-red-500' : 'border-gray-200'}
                         `
                       }}
-                      style={{
-                        '--input-bg': 'rgba(248, 237, 237, 0.9)',
-                        '--input-color': '#173B45',
-                        '--label-color': '#173B45',
-                        '--border-color': 'rgba(180, 63, 63, 0.3)',
-                        '--focus-border-color': '#B43F3F'
-                      } as React.CSSProperties}
                     />
                   </motion.div>
-                  
+
+                  {/* Botón */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -468,14 +451,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       size="lg"
                       radius="full"
                       className="
-                        w-full text-white
-                        hover:shadow-xl transition-all duration-300 hover:scale-[1.02]
-                        font-semibold h-14 text-base border-0 backdrop-blur-xl
+                        w-full text-white font-semibold h-14 text-base 
+                        hover:shadow-xl hover:scale-[1.03] transition-all duration-300
                         flex items-center justify-center gap-2
                       "
                       style={{
                         background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
-                        boxShadow: '0 10px 30px rgba(180, 63, 63, 0.3)'
+                        boxShadow: '0 8px 24px rgba(180, 63, 63, 0.3)'
                       }}
                       isLoading={isSubmitting}
                       startContent={!isSubmitting ? <Send size={20} /> : null}
@@ -485,6 +467,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                     </Button>
                   </motion.div>
                 </form>
+
               </CardBody>
             </Card>
           </motion.div>
@@ -816,7 +799,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       </span>
                     </div>
                     <p className="text-sm" style={{ color: 'rgba(23, 59, 69, 0.8)' }}>
-                      Español • English • Português
+                      Español • English 
                     </p>
                   </motion.div>
                 </div>
@@ -904,42 +887,46 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <Button
-                as={Link}
-                href="#contact"
-                size="lg"
-                radius="full"
-                className="
-                  text-white font-semibold px-8 h-14 text-base border-0 backdrop-blur-xl
-                  hover:shadow-xl transition-all duration-300 hover:scale-105
-                "
-                style={{
-                  background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
-                  boxShadow: '0 10px 30px rgba(180, 63, 63, 0.3)'
-                }}
-                startContent={<Send size={20} />}
-              >
-                Envíame un Mensaje
+                                  as={Link}
+                                  href="#contact"
+                                  target="_blank"
+                                  size="lg"
+                                  className="
+                                    text-white
+                                    hover:shadow-xl 
+                                    transition-all duration-300 hover:scale-105
+                                    font-semibold border-0 backdrop-blur-xl h-14 px-8
+                                    flex items-center justify-center gap-2
+                                  "
+                                  style={{
+                                    background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
+                                    boxShadow: '0 10px 30px rgba(180, 63, 63, 0.3)'
+                                  }}
+                                  radius="full"
+                                  startContent={<Github size={20} />}
+                                >
+                                  Envíame un mensaje
               </Button>
               
               <Button
                 as={Link}
                 href="https://calendly.com/alvaro-developer/30min"
                 size="lg"
-                radius="full"
-                variant="bordered"
-                className="
-                  font-semibold px-8 h-14 text-base backdrop-blur-xl
-                  hover:shadow-lg transition-all duration-300 hover:scale-105
-                "
-                style={{
-                  color: '#173B45',
-                  borderColor: 'rgba(180, 63, 63, 0.3)',
-                  backgroundColor: 'rgba(248, 237, 237, 0.5)'
-                }}
-                startContent={<Calendar size={20} />}
-                isExternal
-              >
-                Agendar Reunión
+                                  className="
+                                    text-white
+                                    hover:shadow-xl 
+                                    transition-all duration-300 hover:scale-105
+                                    font-semibold border-0 backdrop-blur-xl h-14 px-8
+                                    flex items-center justify-center gap-2
+                                  "
+                                  style={{
+                                    background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
+                                    boxShadow: '0 10px 30px rgba(180, 63, 63, 0.3)'
+                                  }}
+                                  radius="full"
+                                  startContent={<Github size={20} />}
+                                >
+                                  Agendar Reunión
               </Button>
             </motion.div>
           </div>
