@@ -1,6 +1,8 @@
 // app/api/contact/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { Check, MessageSquare, ArrowRight, Linkedin, Github } from 'lucide-react';
 
 interface ContactFormData {
   name: string;
@@ -70,7 +72,7 @@ export async function POST(request: NextRequest) {
       replyTo: email,
     };
 
-    // Email de confirmación al usuario - Nuevo diseño basado en tu componente React
+    // Email de confirmación al usuario - Usando iconos de Lucide React
     const confirmationMailOptions = {
       from: process.env.GMAIL_USER,
       to: email,
@@ -107,13 +109,11 @@ export async function POST(request: NextRequest) {
             <!-- Logo and Success Icon -->
             <div style="text-align: center; margin-bottom: 32px;">
               <div style="position: relative; display: inline-block; margin-bottom: 24px;">
-                <!-- Logo placeholder - puedes reemplazar con tu logo real -->
-                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-                  <span style="color: white; font-size: 32px; font-weight: bold;">A</span>
-                </div>
+                <!-- Logo -->
+                <img src="https://yourdomain.com/images/logo_w.png" alt="Logo" style="width: 80px; height: 80px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); object-fit: cover;" />
                 <!-- Success checkmark -->
                 <div style="position: absolute; bottom: -8px; right: -8px; width: 32px; height: 32px; background: linear-gradient(135deg, #34d399 0%, #10b981 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
-                  <span style="color: white; font-size: 16px; font-weight: bold;">✓</span>
+                  ${renderToStaticMarkup(<Check size={16} color="white" strokeWidth={3} />)}
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
             <!-- Card Header -->
             <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06);">
               <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);">
-                <span style="color: white; font-size: 20px;">💬</span>
+                ${renderToStaticMarkup(<MessageSquare size={24} color="white" />)}
               </div>
               <h3 style="color: #1e293b; font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.3px;">
                 Resumen de tu mensaje
@@ -187,25 +187,29 @@ export async function POST(request: NextRequest) {
               <!-- LinkedIn Button -->
               <a href="https://linkedin.com/in/alvaro-developer" class="contact-button" style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: rgba(59, 130, 246, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 16px; text-decoration: none; margin-bottom: 12px; transition: all 0.3s ease;">
                 <div style="width: 40px; height: 40px; background: #0077b5; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 119, 181, 0.3);">
-                  <span style="color: white; font-size: 18px; font-weight: bold;">in</span>
+                  ${renderToStaticMarkup(<Linkedin size={20} color="white" />)}
                 </div>
                 <div style="flex: 1;">
                   <p style="color: #1d4ed8; font-size: 14px; font-weight: 600; margin: 0 0 2px 0;">LinkedIn</p>
                   <p style="color: rgba(29, 78, 216, 0.7); font-size: 12px; margin: 0;">Conectemos profesionalmente</p>
                 </div>
-                <div style="color: rgba(29, 78, 216, 0.4); font-size: 16px; transition: all 0.3s ease;">→</div>
+                <div style="color: rgba(29, 78, 216, 0.4); font-size: 16px; transition: all 0.3s ease;">
+                  ${renderToStaticMarkup(<ArrowRight size={16} color="currentColor" />)}
+                </div>
               </a>
               
               <!-- GitHub Button -->
               <a href="https://github.com/TiL3Ss" class="contact-button" style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: rgba(107, 114, 128, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(107, 114, 128, 0.15); border-radius: 16px; text-decoration: none; transition: all 0.3s ease;">
                 <div style="width: 40px; height: 40px; background: #374151; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(55, 65, 81, 0.3);">
-                  <span style="color: white; font-size: 18px;">⚡</span>
+                  ${renderToStaticMarkup(<Github size={20} color="white" />)}
                 </div>
                 <div style="flex: 1;">
                   <p style="color: #374151; font-size: 14px; font-weight: 600; margin: 0 0 2px 0;">GitHub</p>
                   <p style="color: rgba(55, 65, 81, 0.7); font-size: 12px; margin: 0;">Revisa mis proyectos</p>
                 </div>
-                <div style="color: rgba(55, 65, 81, 0.4); font-size: 16px; transition: all 0.3s ease;">→</div>
+                <div style="color: rgba(55, 65, 81, 0.4); font-size: 16px; transition: all 0.3s ease;">
+                  ${renderToStaticMarkup(<ArrowRight size={16} color="currentColor" />)}
+                </div>
               </a>
             </div>
           </div>
