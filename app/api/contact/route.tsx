@@ -199,7 +199,7 @@ export async function POST(request: NextRequest) {
             <div style="max-width: 400px; margin: 0 auto;">
               
               <!-- LinkedIn Button -->
-              <a href="https://linkedin.com/in/alvaro-developer" class="contact-button" style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: rgba(59, 130, 246, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 16px; text-decoration: none; margin-bottom: 12px; transition: all 0.3s ease;">
+              <a href="https://linkedin.com/in/alvaro-chavez-melo-35392b338" class="contact-button" style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: rgba(59, 130, 246, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 16px; text-decoration: none; margin-bottom: 12px; transition: all 0.3s ease;">
                 <div style="width: 40px; height: 40px; background: #0077b5; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 119, 181, 0.3);">
                   <div style="color: white;">${icons.linkedin}</div>
                 </div>

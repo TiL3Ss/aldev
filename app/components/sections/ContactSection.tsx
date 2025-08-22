@@ -47,8 +47,8 @@ const socialLinks = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/alvaro-developer',
-    username: '/in/alvaro-developer',
+    href: 'https://linkedin.com/in/alvaro-chavez-melo-35392b338',
+    username: '/in/alvaro-chavez-melo-35392b338',
     description: 'Conectemos profesionalmente'
   },
   {
