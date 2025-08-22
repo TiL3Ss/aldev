@@ -192,7 +192,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
               WebkitTextFillColor: 'transparent'
             }}
           >
-            Casos de Éxito
+            Proyectos
           </motion.h2>
           
           <motion.p

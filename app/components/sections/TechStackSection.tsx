@@ -242,7 +242,7 @@ export const TechStackSection: React.FC<TechStackSectionProps> = ({ className = 
             bg-gradient-to-r from-navy via-burgundy to-orange 
             bg-clip-text text-transparent
           ">
-            Tecnologías que Domino
+            Tecnologías
           </h2>
           
           <p className="text-xl text-navy/70 max-w-3xl mx-auto leading-relaxed">

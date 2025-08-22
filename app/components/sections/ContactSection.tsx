@@ -303,7 +303,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                 
                 <form 
                   onSubmit={handleSubmit} 
-                  className="space-y-8 bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-lg"
+                  className="space-y-6 bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-lg"
                 >
                   <div className="grid md:grid-cols-2 gap-6">
                     {/* Nombre */}
@@ -320,17 +320,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                         onValueChange={(value) => handleInputChange('name', value)}
                         isRequired
                         radius="lg"
+                        variant="bordered"
                         isInvalid={!!errors.name}
                         errorMessage={errors.name}
                         classNames={{
-                          input: "placeholder:text-gray-500 px-4 py-3",
-                          label: "font-medium text-gray-700",
+                          input: "text-gray-700 placeholder:text-gray-500",
+                          label: "text-gray-700 font-medium",
                           inputWrapper: `
-                            rounded-2xl border shadow-sm transition-all duration-300
-                            focus-within:scale-[1.02] focus-within:shadow-md
-                            ${errors.name ? 'border-red-500' : 'border-gray-200'}
+                            bg-white/90 border-gray-300 hover:border-gray-400
+                            data-[focus=true]:border-orange-500 data-[focus=true]:bg-white
+                            ${errors.name ? 'border-red-500 data-[focus=true]:border-red-500' : ''}
                           `,
-                          errorMessage: "text-red-500 text-sm mt-1"
+                          errorMessage: "text-red-500 text-sm"
                         }}
                       />
                     </motion.div>
@@ -350,17 +351,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                         onValueChange={(value) => handleInputChange('email', value)}
                         isRequired
                         radius="lg"
+                        variant="bordered"
                         isInvalid={!!errors.email}
                         errorMessage={errors.email}
                         classNames={{
-                          input: "placeholder:text-gray-500 px-4 py-3",
-                          label: "font-medium text-gray-700",
+                          input: "text-gray-700 placeholder:text-gray-500",
+                          label: "text-gray-700 font-medium",
                           inputWrapper: `
-                            rounded-2xl border shadow-sm transition-all duration-300
-                            focus-within:scale-[1.02] focus-within:shadow-md
-                            ${errors.email ? 'border-red-500' : 'border-gray-200'}
+                            bg-white/90 border-gray-300 hover:border-gray-400
+                            data-[focus=true]:border-orange-500 data-[focus=true]:bg-white
+                            ${errors.email ? 'border-red-500 data-[focus=true]:border-red-500' : ''}
                           `,
-                          errorMessage: "text-red-500 text-sm mt-1"
+                          errorMessage: "text-red-500 text-sm"
                         }}
                       />
                     </motion.div>
@@ -380,16 +382,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       onValueChange={(value) => handleInputChange('subject', value)}
                       isRequired
                       radius="lg"
+                      variant="bordered"
                       isInvalid={!!errors.subject}
                       errorMessage={errors.subject}
                       classNames={{
-                        input: "placeholder:text-gray-500 px-4 py-3",
-                        label: "font-medium text-gray-700",
+                        input: "text-gray-700 placeholder:text-gray-500",
+                        label: "text-gray-700 font-medium",
                         inputWrapper: `
-                          rounded-2xl border shadow-sm transition-all duration-300
-                          focus-within:scale-[1.02] focus-within:shadow-md
-                          ${errors.subject ? 'border-red-500' : 'border-gray-200'}
-                        `
+                          bg-white/90 border-gray-300 hover:border-gray-400
+                          data-[focus=true]:border-orange-500 data-[focus=true]:bg-white
+                          ${errors.subject ? 'border-red-500 data-[focus=true]:border-red-500' : ''}
+                        `,
+                        errorMessage: "text-red-500 text-sm"
                       }}
                     />
                   </motion.div>
@@ -406,19 +410,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       placeholder="Cuéntame sobre tu proyecto, idea o cualquier consulta que tengas..."
                       value={form.message}
                       onValueChange={(value) => handleInputChange('message', value)}
-                      minRows={6}
+                      rows={5}
                       isRequired
                       radius="lg"
+                      variant="bordered"
                       isInvalid={!!errors.message}
                       errorMessage={errors.message}
                       classNames={{
-                        input: "placeholder:text-gray-500 px-4 py-3",
-                        label: "font-medium text-gray-700",
+                        input: "text-gray-700 placeholder:text-gray-500 resize-none",
+                        label: "text-gray-700 font-medium",
                         inputWrapper: `
-                          rounded-2xl border shadow-sm transition-all duration-300
-                          focus-within:scale-[1.02] focus-within:shadow-md
-                          ${errors.message ? 'border-red-500' : 'border-gray-200'}
-                        `
+                          bg-white/90 border-gray-300 hover:border-gray-400
+                          data-[focus=true]:border-orange-500 data-[focus=true]:bg-white
+                          ${errors.message ? 'border-red-500 data-[focus=true]:border-red-500' : ''}
+                        `,
+                        errorMessage: "text-red-500 text-sm"
                       }}
                     />
                   </motion.div>
@@ -429,6 +435,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.7, duration: 0.5 }}
+                    className="pt-4"
                   >
                     <Button
                       type="submit"
@@ -437,7 +444,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                       className="
                         w-full text-white font-semibold h-14 text-base 
                         hover:shadow-xl hover:scale-[1.03] transition-all duration-300
-                        flex items-center justify-center gap-2
+                        flex items-center justify-center gap-2 disabled:opacity-50
+                        disabled:cursor-not-allowed disabled:hover:scale-100
                       "
                       style={{
                         background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
