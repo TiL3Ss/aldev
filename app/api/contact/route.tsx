@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
       service: 'gmail', 
       auth: {
         user: process.env.GMAIL_USER, 
