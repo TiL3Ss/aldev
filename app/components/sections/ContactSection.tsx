@@ -250,238 +250,238 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 gap-6 auto-rows-auto">
           
-          {/* Contact Form - Main Card */}
-<motion.div
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-  className="lg:col-span-3 xl:col-span-4 row-span-2"
->
-  <Card className="
-    backdrop-blur-3xl border transition-all duration-700 ease-out
-    rounded-3xl overflow-hidden h-full
-    hover:shadow-2xl hover:scale-[1.01]
-  "
-  style={{
-    backgroundColor: 'rgba(248, 237, 237, 0.8)',
-    borderColor: 'rgba(180, 63, 63, 0.2)',
-    boxShadow: '0 25px 50px -12px rgba(180, 63, 63, 0.15)'
-  }}
-  >
-    <CardBody className="p-6 lg:p-8 h-full flex flex-col">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-      >
-        <h3 className="text-2xl lg:text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: '#173B45' }}>
-          <div className="
-            p-2 lg:p-3 rounded-2xl backdrop-blur-xl border shadow-lg
-          "
-          style={{
-            background: `linear-gradient(135deg, 
-              rgba(180, 63, 63, 0.15) 0%, 
-              rgba(255, 130, 37, 0.15) 100%
-            )`,
-            borderColor: 'rgba(180, 63, 63, 0.3)',
-            boxShadow: '0 10px 30px rgba(180, 63, 63, 0.2)'
-          }}
-          >
-            <Send size={20} className="lg:w-6 lg:h-6" style={{ color: '#B43F3F' }} />
-          </div>
-          Envíame un Mensaje
-        </h3>
-      </motion.div>
-
-      {isSubmitted && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-4 p-3 rounded-2xl flex items-center gap-3"
-          style={{
-            backgroundColor: 'rgba(34, 197, 94, 0.1)',
-            border: '1px solid rgba(34, 197, 94, 0.2)'
-          }}
-        >
-          <CheckCircle2 size={18} style={{ color: '#22c55e' }} />
-          <span style={{ color: '#15803d' }} className="font-medium text-sm">
-            ¡Mensaje enviado! Te responderé pronto.
-          </span>
-        </motion.div>
-      )}
-      
-      <form 
-        onSubmit={handleSubmit} 
-        className="flex-1 bg-white/70 backdrop-blur-2xl rounded-3xl p-4 lg:p-6 shadow-lg flex flex-col"
-      >
-        <div className="flex-1 space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Nombre */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="space-y-2"
-            >
-              <label className="text-gray-700 font-medium text-sm block">
-                Tu Nombre *
-              </label>
-              <input
-                type="text"
-                placeholder="Escribe tu nombre completo"
-                value={form.name}
-                onChange={(e) => handleInputChange('name', e.target.value)}
-                required
-                className={`
-                  w-full px-3 py-2 rounded-xl border bg-white/90 
-                  text-gray-700 placeholder:text-gray-500
-                  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-                  transition-all duration-300
-                  ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-                `}
-              />
-              {errors.name && (
-                <span className="text-red-500 text-xs">{errors.name}</span>
-              )}
-            </motion.div>
-
-            {/* Email */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="space-y-2"
-            >
-              <label className="text-gray-700 font-medium text-sm block">
-                Email *
-              </label>
-              <input
-                type="email"
-                placeholder="tu@email.com"
-                value={form.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
-                required
-                className={`
-                  w-full px-3 py-2 rounded-xl border bg-white/90 
-                  text-gray-700 placeholder:text-gray-500
-                  focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-                  transition-all duration-300
-                  ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-                `}
-              />
-              {errors.email && (
-                <span className="text-red-500 text-xs">{errors.email}</span>
-              )}
-            </motion.div>
-          </div>
-
-          {/* Asunto */}
+        {/* Contact Form - Main Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="space-y-2"
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="lg:col-span-4 xl:col-span-6 row-span-2"
           >
-            <label className="text-gray-700 font-medium text-sm block">
-              Asunto *
-            </label>
-            <input
-              type="text"
-              placeholder="¿De qué quieres hablar?"
-              value={form.subject}
-              onChange={(e) => handleInputChange('subject', e.target.value)}
-              required
-              className={`
-                w-full px-3 py-2 rounded-xl border bg-white/90 
-                text-gray-700 placeholder:text-gray-500
-                focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-                transition-all duration-300
-                ${errors.subject ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-              `}
-            />
-            {errors.subject && (
-              <span className="text-red-500 text-xs">{errors.subject}</span>
-            )}
-          </motion.div>
-
-          {/* Mensaje */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="space-y-2 flex-1 flex flex-col"
-          >
-            <label className="text-gray-700 font-medium text-sm block">
-              Mensaje *
-            </label>
-            <textarea
-              placeholder="Cuéntame sobre tu proyecto, idea o cualquier consulta que tengas..."
-              value={form.message}
-              onChange={(e) => handleInputChange('message', e.target.value)}
-              required
-              className={`
-                flex-1 w-full px-3 py-2 rounded-xl border bg-white/90 
-                text-gray-700 placeholder:text-gray-500
-                focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-                transition-all duration-300 resize-none min-h-[80px]
-                ${errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-              `}
-            />
-            {errors.message && (
-              <span className="text-red-500 text-xs">{errors.message}</span>
-            )}
-          </motion.div>
-        </div>
-
-        {/* Botón */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.7, duration: 0.5 }}
-          className="mt-4"
-        >
-          <button
-            type="submit"
-            disabled={isSubmitting || isSubmitted}
-            className="
-              w-full h-12 rounded-full text-white font-semibold text-base
-              bg-gradient-to-r from-burgundy to-orange
-              hover:shadow-xl hover:scale-[1.03] transition-all duration-300
-              flex items-center justify-center gap-2
-              disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
+            <Card className="
+              backdrop-blur-3xl border transition-all duration-700 ease-out
+              rounded-3xl overflow-hidden h-full
+              hover:shadow-2xl hover:scale-[1.01]
             "
             style={{
-              background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
-              boxShadow: '0 8px 24px rgba(180, 63, 63, 0.3)'
+              backgroundColor: 'rgba(248, 237, 237, 0.8)',
+              borderColor: 'rgba(180, 63, 63, 0.2)',
+              boxShadow: '0 25px 50px -12px rgba(180, 63, 63, 0.15)'
             }}
-          >
-            {isSubmitting ? (
-              <>
-                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                Enviando...
-              </>
-            ) : isSubmitted ? (
-              '¡Enviado!'
-            ) : (
-              <>
-                <Send size={18} />
-                Enviar Mensaje
-              </>
-            )}
-          </button>
-        </motion.div>
-      </form>
+            >
+              <CardBody className="p-6 lg:p-8 h-full flex flex-col">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                >
+                  <h3 className="text-2xl lg:text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: '#173B45' }}>
+                    <div className="
+                      p-2 lg:p-3 rounded-2xl backdrop-blur-xl border shadow-lg
+                    "
+                    style={{
+                      background: `linear-gradient(135deg, 
+                        rgba(180, 63, 63, 0.15) 0%, 
+                        rgba(255, 130, 37, 0.15) 100%
+                      )`,
+                      borderColor: 'rgba(180, 63, 63, 0.3)',
+                      boxShadow: '0 10px 30px rgba(180, 63, 63, 0.2)'
+                    }}
+                    >
+                      <Send size={20} className="lg:w-6 lg:h-6" style={{ color: '#B43F3F' }} />
+                    </div>
+                    Envíame un Mensaje
+                  </h3>
+                </motion.div>
 
-    </CardBody>
-  </Card>
-</motion.div>
+                {isSubmitted && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-4 p-3 rounded-2xl flex items-center gap-3"
+                    style={{
+                      backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                      border: '1px solid rgba(34, 197, 94, 0.2)'
+                    }}
+                  >
+                    <CheckCircle2 size={18} style={{ color: '#22c55e' }} />
+                    <span style={{ color: '#15803d' }} className="font-medium text-sm">
+                      ¡Mensaje enviado! Te responderé pronto.
+                    </span>
+                  </motion.div>
+                )}
+                
+                <form 
+                  onSubmit={handleSubmit} 
+                  className="flex-1 bg-white/70 backdrop-blur-2xl rounded-3xl p-4 lg:p-6 shadow-lg flex flex-col"
+                >
+                  <div className="flex-1 space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Nombre */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="space-y-2"
+                      >
+                        <label className="text-gray-700 font-medium text-sm block">
+                          Tu Nombre *
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Escribe tu nombre completo"
+                          value={form.name}
+                          onChange={(e) => handleInputChange('name', e.target.value)}
+                          required
+                          className={`
+                            w-full px-3 py-2 rounded-xl border bg-white/90 
+                            text-gray-700 placeholder:text-gray-500
+                            focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                            transition-all duration-300
+                            ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                          `}
+                        />
+                        {errors.name && (
+                          <span className="text-red-500 text-xs">{errors.name}</span>
+                        )}
+                      </motion.div>
+
+                      {/* Email */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4, duration: 0.5 }}
+                        className="space-y-2"
+                      >
+                        <label className="text-gray-700 font-medium text-sm block">
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          placeholder="tu@email.com"
+                          value={form.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          required
+                          className={`
+                            w-full px-3 py-2 rounded-xl border bg-white/90 
+                            text-gray-700 placeholder:text-gray-500
+                            focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                            transition-all duration-300
+                            ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                          `}
+                        />
+                        {errors.email && (
+                          <span className="text-red-500 text-xs">{errors.email}</span>
+                        )}
+                      </motion.div>
+                    </div>
+
+                    {/* Asunto */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5, duration: 0.5 }}
+                      className="space-y-2"
+                    >
+                      <label className="text-gray-700 font-medium text-sm block">
+                        Asunto *
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="¿De qué quieres hablar?"
+                        value={form.subject}
+                        onChange={(e) => handleInputChange('subject', e.target.value)}
+                        required
+                        className={`
+                          w-full px-3 py-2 rounded-xl border bg-white/90 
+                          text-gray-700 placeholder:text-gray-500
+                          focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                          transition-all duration-300
+                          ${errors.subject ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                        `}
+                      />
+                      {errors.subject && (
+                        <span className="text-red-500 text-xs">{errors.subject}</span>
+                      )}
+                    </motion.div>
+
+                    {/* Mensaje */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6, duration: 0.5 }}
+                      className="space-y-2 flex-1 flex flex-col"
+                    >
+                      <label className="text-gray-700 font-medium text-sm block">
+                        Mensaje *
+                      </label>
+                      <textarea
+                        placeholder="Cuéntame sobre tu proyecto, idea o cualquier consulta que tengas..."
+                        value={form.message}
+                        onChange={(e) => handleInputChange('message', e.target.value)}
+                        required
+                        className={`
+                          flex-1 w-full px-3 py-2 rounded-xl border bg-white/90 
+                          text-gray-700 placeholder:text-gray-500
+                          focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                          transition-all duration-300 resize-none min-h-[80px]
+                          ${errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                        `}
+                      />
+                      {errors.message && (
+                        <span className="text-red-500 text-xs">{errors.message}</span>
+                      )}
+                    </motion.div>
+                  </div>
+
+                  {/* Botón */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.7, duration: 0.5 }}
+                    className="mt-4"
+                  >
+                    <button
+                      type="submit"
+                      disabled={isSubmitting || isSubmitted}
+                      className="
+                        w-full h-12 rounded-full text-white font-semibold text-base
+                        bg-gradient-to-r from-burgundy to-orange
+                        hover:shadow-xl hover:scale-[1.03] transition-all duration-300
+                        flex items-center justify-center gap-2
+                        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
+                      "
+                      style={{
+                        background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
+                        boxShadow: '0 8px 24px rgba(180, 63, 63, 0.3)'
+                      }}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                          Enviando...
+                        </>
+                      ) : isSubmitted ? (
+                        '¡Enviado!'
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          Enviar Mensaje
+                        </>
+                      )}
+                    </button>
+                  </motion.div>
+                </form>
+
+              </CardBody>
+            </Card>
+          </motion.div>
 
          
 
