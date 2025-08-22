@@ -619,31 +619,82 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
         </Card>
       </motion.div>
 
-                
+                <div className="space-y-3">
+                  {quickActions.map((action, index) => {
+                    const Icon = action.icon;
+                    return (
+                      <motion.div
+                        key={action.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+                      >
+                        <Link
+                          href={action.href}
+                          className="
+                            block p-4 rounded-2xl border 
+                            hover:shadow-lg
+                            transition-all duration-300 hover:scale-[1.02] group
+                            backdrop-blur-xl
+                          "
+                          style={{
+                            backgroundColor: 'rgba(248, 237, 237, 0.5)',
+                            borderColor: 'rgba(180, 63, 63, 0.2)'
+                          }}
+                          isExternal
+                        >
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="p-2 rounded-lg group-hover:scale-110 transition-transform duration-300"
+                            style={{
+                              backgroundColor: 'rgba(180, 63, 63, 0.1)',
+                              border: '1px solid rgba(180, 63, 63, 0.2)'
+                            }}
+                            >
+                              <Icon size={16} style={{ color: '#B43F3F' }} />
+                            </div>
+                            <h4 className="font-semibold text-sm" style={{ color: '#173B45' }}>
+                              {action.title}
+                            </h4>
+                          </div>
+                          <p className="text-xs mb-3 leading-relaxed" style={{ color: 'rgba(23, 59, 69, 0.7)' }}>
+                            {action.description}
+                          </p>
+                          <div className="flex items-center justify-between">
+                            <span className="
+                              inline-block text-xs font-medium px-3 py-1 rounded-full
+                            "
+                            style={{
+                              backgroundColor: 'rgba(180, 63, 63, 0.1)',
+                              color: '#B43F3F'
+                            }}
+                            >
+                              {action.action}
+                            </span>
+                            {action.badge && (
+                              <span className="
+                                text-xs px-2 py-1 rounded-full font-medium
+                              "
+                              style={{
+                                backgroundColor: 'rgba(255, 130, 37, 0.1)',
+                                color: '#FF8225'
+                              }}
+                              >
+                                {action.badge}
+                              </span>
+                            )}
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </CardBody>
             </Card>
           </motion.div>
 
           {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="lg:col-span-2 xl:col-span-3"
-          >
-            <Card className="
-              backdrop-blur-3xl border transition-all duration-700 ease-out
-              rounded-3xl overflow-hidden h-full hover:shadow-xl hover:scale-[1.02]
-            "
-            style={{
-              backgroundColor: 'rgba(248, 237, 237, 0.7)',
-              borderColor: 'rgba(180, 63, 63, 0.2)',
-              boxShadow: '0 15px 35px rgba(180, 63, 63, 0.1)'
-            }}
-            >
-              <CardBody className="p-6">
-                <motion.div
+<motion.div
   initial={{ opacity: 0, x: 50 }}
   whileInView={{ opacity: 1, x: 0 }}
   viewport={{ once: true }}
@@ -685,62 +736,41 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
         </h3>
       </motion.div>
 
-                    
-                  </CardBody>
-                </Card>
-              </motion.div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {socialLinks.map((social, index) => {
-                    const Icon = social.icon;
-                    return (
-                      <motion.div
-                        key={social.label}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-                      >
-                        <Link
-                          href={social.href}
-                          className="
-                            flex items-center gap-3 p-3 rounded-xl
-                            border border-transparent transition-all duration-300
-                            group backdrop-blur-xl hover:scale-105
-                          "
-                          style={{
-                            backgroundColor: 'rgba(248, 237, 237, 0.5)',
-                            borderColor: 'rgba(180, 63, 63, 0.15)'
-                          }}
-                          isExternal
-                        >
-                          <div className="
-                            p-2 rounded-lg 
-                            group-hover:scale-110 transition-transform duration-300
-                          "
-                          style={{
-                            backgroundColor: 'rgba(180, 63, 63, 0.1)',
-                            border: '1px solid rgba(180, 63, 63, 0.2)'
-                          }}
-                          >
-                            <Icon size={14} style={{ color: '#B43F3F' }} />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm" style={{ color: '#173B45' }}>
-                              {social.label}
-                            </div>
-                            <div className="text-xs truncate" style={{ color: 'rgba(23, 59, 69, 0.7)' }}>
-                              {social.username}
-                            </div>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </CardBody>
-            </Card>
-          </motion.div>
+      <div className="space-y-4">
+        {socialLinks.map((social, index) => {
+          const Icon = social.icon;
+          return (
+            <motion.div
+              key={social.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
+              className="p-4 rounded-2xl backdrop-blur-xl border"
+              style={{
+                background: `linear-gradient(135deg, 
+                  rgba(180, 63, 63, 0.08) 0%, 
+                  rgba(255, 130, 37, 0.08) 100%
+                )`,
+                borderColor: 'rgba(180, 63, 63, 0.2)'
+              }}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <Icon size={16} style={{ color: '#B43F3F' }} />
+                <span className="font-medium" style={{ color: '#173B45' }}>
+                  {social.label}
+                </span>
+              </div>
+              <p className="text-sm" style={{ color: 'rgba(23, 59, 69, 0.8)' }}>
+                {social.description}
+              </p>
+            </motion.div>
+          );
+        })}
+      </div>
+    </CardBody>
+  </Card>
+</motion.div>
 
           {/* Contact Info */}
           <motion.div
