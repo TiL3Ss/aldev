@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-10 left-10 w-32 h-32 bg-red-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-pink-500/5 rounded-full blur-3xl" />
       </div>
@@ -66,7 +66,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
             <motion.h3 
               className="
                 text-3xl font-black mb-4 tracking-tight
-                bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 
+                bg-gradient-to-r from-red-600 via-red-500 to-orange
                 bg-clip-text text-transparent
               "
               whileHover={{ scale: 1.05 }}
@@ -77,8 +77,8 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
             <p className="
               text-gray-700 dark:text-gray-300 mb-8 leading-relaxed max-w-md text-lg
             ">
-              Backend Developer especializado en crear soluciones técnicas
-              robustas y escalables. Transformando ideas en código de calidad.
+              Software Developer especializado en crear soluciones técnicas
+              eficaces y escalables. Transformando ideas en código de calidad.
             </p>
 
             <motion.div 
@@ -98,11 +98,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Heart size={16} className="text-red-500" />
+                <Coffee size={16} className="text-red-500" />
               </motion.div>
               <span>usando</span>
-              <Code size={16} className="text-blue-500" />
-              <span>y mucho</span>
+              <Code size={16} className="text-red-500" />
+              <span>y más</span>
               <Coffee size={16} className="text-amber-600" />
             </motion.div>
           </motion.div>
@@ -133,7 +133,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
                       scrollToSection(link.href);
                     }}
                     className="
-                      text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400
+                      text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400
                       transition-all duration-300 text-sm font-medium
                       hover:translate-x-1 block py-1
                     "
@@ -170,7 +170,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
-                      text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400
+                      text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400
                       transition-all duration-300 text-sm font-medium
                       block py-1
                     "
@@ -210,7 +210,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
             text-gray-500 dark:text-gray-400 text-sm font-medium
             order-2 lg:order-1
           ">
-            © {currentYear} Alvaro. Todos los derechos reservados.
+            © {currentYear} Alvchdev. Todos los derechos reservados.
           </div>
 
           <div className="
@@ -223,10 +223,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
             >
               <Chip 
                 className="
-                  bg-green-100 dark:bg-green-950/50 text-green-700 dark:text-green-400
-                  border border-green-200 dark:border-green-800
-                  backdrop-blur-xl font-semibold
-                "
+              flex items-center gap-2 text-green-600 dark:text-green-500 text-sm
+              bg-white/60 dark:bg-black/40 backdrop-blur-xl 
+              border border-gray-200/50 dark:border-gray-600/50
+              rounded-2xl px-4 py-2
+            "
                 variant="bordered"
                 size="sm"
                 startContent={
@@ -242,7 +243,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
             </motion.div>
             
             <div className="
-              flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm
+              flex items-center gap-2 text-orange dark:text-orange-light text-sm
               bg-white/60 dark:bg-black/40 backdrop-blur-xl 
               border border-gray-200/50 dark:border-gray-600/50
               rounded-2xl px-4 py-2
