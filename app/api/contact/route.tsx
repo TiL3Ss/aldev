@@ -1,8 +1,22 @@
 // app/api/contact/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { Check, MessageSquare, ArrowRight, Linkedin, Github } from 'lucide-react';
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+// SVGs de los iconos de Lucide React
+const icons = {
+  check: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"></polyline></svg>`,
+  messageSquare: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
+  linkedin: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+  github: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`,
+  arrowRight: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"></polyline></svg>`
+};
 
 interface ContactFormData {
   name: string;
@@ -110,10 +124,10 @@ export async function POST(request: NextRequest) {
             <div style="text-align: center; margin-bottom: 32px;">
               <div style="position: relative; display: inline-block; margin-bottom: 24px;">
                 <!-- Logo -->
-                <img src="https://aldev-alpha.vercel.app/images/logo_w.png" alt="Logo" style="width: 80px; height: 80px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); object-fit: cover;" />
+                <img src="https://aldev-alpha.vercel.app//images/logo_w.png" alt="Logo" style="width: 80px; height: 80px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); object-fit: cover;" />
                 <!-- Success checkmark -->
                 <div style="position: absolute; bottom: -8px; right: -8px; width: 32px; height: 32px; background: linear-gradient(135deg, #34d399 0%, #10b981 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
-                  ${renderToStaticMarkup(<Check size={16} color="white" strokeWidth={3} />)}
+                  <div style="color: white;">${icons.check}</div>
                 </div>
               </div>
             </div>
@@ -143,7 +157,7 @@ export async function POST(request: NextRequest) {
             <!-- Card Header -->
             <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06);">
               <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);">
-                ${renderToStaticMarkup(<MessageSquare size={24} color="white" />)}
+                <div style="color: white;">${icons.messageSquare}</div>
               </div>
               <h3 style="color: #1e293b; font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.3px;">
                 Resumen de tu mensaje
@@ -187,28 +201,28 @@ export async function POST(request: NextRequest) {
               <!-- LinkedIn Button -->
               <a href="https://linkedin.com/in/alvaro-developer" class="contact-button" style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: rgba(59, 130, 246, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 16px; text-decoration: none; margin-bottom: 12px; transition: all 0.3s ease;">
                 <div style="width: 40px; height: 40px; background: #0077b5; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 119, 181, 0.3);">
-                  ${renderToStaticMarkup(<Linkedin size={20} color="white" />)}
+                  <div style="color: white;">${icons.linkedin}</div>
                 </div>
                 <div style="flex: 1;">
                   <p style="color: #1d4ed8; font-size: 14px; font-weight: 600; margin: 0 0 2px 0;">LinkedIn</p>
                   <p style="color: rgba(29, 78, 216, 0.7); font-size: 12px; margin: 0;">Conectemos profesionalmente</p>
                 </div>
                 <div style="color: rgba(29, 78, 216, 0.4); font-size: 16px; transition: all 0.3s ease;">
-                  ${renderToStaticMarkup(<ArrowRight size={16} color="currentColor" />)}
+                  ${icons.arrowRight}
                 </div>
               </a>
               
               <!-- GitHub Button -->
               <a href="https://github.com/TiL3Ss" class="contact-button" style="display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: rgba(107, 114, 128, 0.05); backdrop-filter: blur(8px); border: 1px solid rgba(107, 114, 128, 0.15); border-radius: 16px; text-decoration: none; transition: all 0.3s ease;">
                 <div style="width: 40px; height: 40px; background: #374151; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(55, 65, 81, 0.3);">
-                  ${renderToStaticMarkup(<Github size={20} color="white" />)}
+                  <div style="color: white;">${icons.github}</div>
                 </div>
                 <div style="flex: 1;">
                   <p style="color: #374151; font-size: 14px; font-weight: 600; margin: 0 0 2px 0;">GitHub</p>
                   <p style="color: rgba(55, 65, 81, 0.7); font-size: 12px; margin: 0;">Revisa mis proyectos</p>
                 </div>
                 <div style="color: rgba(55, 65, 81, 0.4); font-size: 16px; transition: all 0.3s ease;">
-                  ${renderToStaticMarkup(<ArrowRight size={16} color="currentColor" />)}
+                  ${icons.arrowRight}
                 </div>
               </a>
             </div>
