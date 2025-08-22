@@ -314,9 +314,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                 
                 <form 
                 onSubmit={handleSubmit} 
-                className="space-y-6 bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-lg"
+                className="space-y-9 bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-lg"
               >
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-3 gap-6">
                   {/* Nombre */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
