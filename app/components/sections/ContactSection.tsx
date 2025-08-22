@@ -538,7 +538,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-              className="p-4 rounded-2xl backdrop-blur-xl border cursor-pointer hover:scale-[1.02] transition-all duration-300"
+              className="p-4 rounded-2xl backdrop-blur-xl border cursor-pointer hover:scale-[1.02] hover:shadow-lg group transition-all duration-300"
               style={{
                 background: `linear-gradient(135deg, 
                   rgba(180, 63, 63, 0.08) 0%, 
@@ -549,12 +549,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
               onClick={() => window.open(social.href, '_blank')}
             >
               <div className="flex items-center gap-3 mb-2">
-                <Icon size={16} style={{ color: '#B43F3F' }} />
-                <span className="font-medium" style={{ color: '#173B45' }}>
+                <div className="p-1 rounded-lg group-hover:scale-110 transition-transform duration-300"
+                style={{
+                  backgroundColor: 'rgba(180, 63, 63, 0.1)',
+                  border: '1px solid rgba(180, 63, 63, 0.2)'
+                }}
+                >
+                  <Icon size={16} style={{ color: '#B43F3F' }} />
+                </div>
+                <span className="font-medium group-hover:text-orange-600 transition-colors duration-300" style={{ color: '#173B45' }}>
                   {social.label}
                 </span>
               </div>
-              <p className="text-sm" style={{ color: 'rgba(23, 59, 69, 0.8)' }}>
+              <p className="text-sm group-hover:text-gray-600 transition-colors duration-300" style={{ color: 'rgba(23, 59, 69, 0.8)' }}>
                 {social.description}
               </p>
             </motion.div>
