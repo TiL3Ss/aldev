@@ -10,7 +10,7 @@ import {
   Server, 
   Database, 
   Shield,
-  BarChart3,
+  MessageCircle,
   Zap,
   CheckCircle2,
   Clock,
@@ -501,6 +501,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ className = ''
                     contactSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
+                startContent={
+                  <div className="flex items-center justify-center">
+                    <MessageCircle size={20} className="text-orange-dark" />
+                  </div>
+                }
               >
                 Hablemos del Proyecto
               </Button>

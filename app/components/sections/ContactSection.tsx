@@ -18,7 +18,6 @@ import {
   Linkedin, 
   Send,
   MessageCircle,
-  Calendar,
   Phone,
   MapPin,
   Clock,
@@ -62,20 +61,13 @@ const socialLinks = [
 ];
 
 const quickActions = [
-  {
-    icon: Calendar,
-    title: 'Agenda una Reunión',
-    description: 'Conversemos sobre tu proyecto',
-    action: 'Agendar',
-    href: 'https://calendly.com/alvaro-developer/30min',
-    badge: 'Disponible'
-  },
+  
   {
     icon: MessageCircle,
     title: 'Chat Directo',
     description: 'Hablemos por WhatsApp',
     action: 'Chatear',
-    href: 'https://wa.me/1234567890?text=Hola%20Álvaro,%20me%20gustaría%20conversar%20sobre...',
+    href: 'https://wa.me/948583700?text=Hola%20Álvaro,%20me%20gustaría%20conversar%20sobre...',
     badge: 'Respuesta rápida'
   },
   {
@@ -83,7 +75,7 @@ const quickActions = [
     title: 'Llamada',
     description: 'Para consultas urgentes',
     action: 'Llamar',
-    href: 'tel:+1234567890',
+    href: 'tel:+56948583700',
     badge: 'Horario comercial'
   }
 ];
