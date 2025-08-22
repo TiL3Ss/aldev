@@ -114,36 +114,47 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setIsSubmitting(true);
-    
-    try {
-      // Aquí puedes implementar el envío real del formulario
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(form),
-      });
+  e.preventDefault();
+  
+  if (!validateForm()) return;
+  
+  setIsSubmitting(true);
+  
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form),
+    });
 
-      if (response.ok) {
-        setForm({ name: '', email: '', subject: '', message: '' });
-        setErrors({});
-        setIsSubmitted(true);
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        throw new Error('Error al enviar el mensaje');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsSubmitting(false);
+    const data = await response.json();
+
+    if (response.ok && data.success) {
+      // Limpiar formulario
+      setForm({ name: '', email: '', subject: '', message: '' });
+      setErrors({});
+      setIsSubmitted(true);
+      
+      // Opcional: mostrar notificación de éxito
+      console.log('✅ Email enviado correctamente');
+      
+      // Restablecer estado después de 5 segundos
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } else {
+      // Manejar errores del servidor
+      throw new Error(data.error || 'Error al enviar el mensaje');
     }
-  };
+  } catch (error) {
+    console.error('❌ Error:', error);
+    
+    // Opcional: Mostrar mensaje de error al usuario
+    alert('Error al enviar el mensaje. Por favor, intenta de nuevo.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <section 
@@ -302,170 +313,170 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                 )}
                 
                 <form 
-  onSubmit={handleSubmit} 
-  className="space-y-6 bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-lg"
->
-  <div className="grid md:grid-cols-2 gap-6">
-    {/* Nombre */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.3, duration: 0.5 }}
-      className="space-y-2"
-    >
-      <label className="text-gray-700 font-medium text-sm block">
-        Tu Nombre *
-      </label>
-      <input
-        type="text"
-        placeholder="Escribe tu nombre completo"
-        value={form.name}
-        onChange={(e) => handleInputChange('name', e.target.value)}
-        required
-        className={`
-          w-full px-4 py-3 rounded-xl border bg-white/90 
-          text-gray-700 placeholder:text-gray-500
-          focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-          transition-all duration-300
-          ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-        `}
-      />
-      {errors.name && (
-        <span className="text-red-500 text-sm">{errors.name}</span>
-      )}
-    </motion.div>
+                onSubmit={handleSubmit} 
+                className="space-y-6 bg-white/70 backdrop-blur-2xl rounded-3xl p-8 shadow-lg"
+              >
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Nombre */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    className="space-y-2"
+                  >
+                    <label className="text-gray-700 font-medium text-sm block">
+                      Tu Nombre *
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Escribe tu nombre completo"
+                      value={form.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      required
+                      className={`
+                        w-full px-4 py-3 rounded-xl border bg-white/90 
+                        text-gray-700 placeholder:text-gray-500
+                        focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                        transition-all duration-300
+                        ${errors.name ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                      `}
+                    />
+                    {errors.name && (
+                      <span className="text-red-500 text-sm">{errors.name}</span>
+                    )}
+                  </motion.div>
 
-    {/* Email */}
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.4, duration: 0.5 }}
-      className="space-y-2"
-    >
-      <label className="text-gray-700 font-medium text-sm block">
-        Email *
-      </label>
-      <input
-        type="email"
-        placeholder="tu@email.com"
-        value={form.email}
-        onChange={(e) => handleInputChange('email', e.target.value)}
-        required
-        className={`
-          w-full px-4 py-3 rounded-xl border bg-white/90 
-          text-gray-700 placeholder:text-gray-500
-          focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-          transition-all duration-300
-          ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-        `}
-      />
-      {errors.email && (
-        <span className="text-red-500 text-sm">{errors.email}</span>
-      )}
-    </motion.div>
-  </div>
+                  {/* Email */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                    className="space-y-2"
+                  >
+                    <label className="text-gray-700 font-medium text-sm block">
+                      Email *
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="tu@email.com"
+                      value={form.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      required
+                      className={`
+                        w-full px-4 py-3 rounded-xl border bg-white/90 
+                        text-gray-700 placeholder:text-gray-500
+                        focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                        transition-all duration-300
+                        ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                      `}
+                    />
+                    {errors.email && (
+                      <span className="text-red-500 text-sm">{errors.email}</span>
+                    )}
+                  </motion.div>
+                </div>
 
-  {/* Asunto */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: 0.5, duration: 0.5 }}
-    className="space-y-2"
-  >
-    <label className="text-gray-700 font-medium text-sm block">
-      Asunto *
-    </label>
-    <input
-      type="text"
-      placeholder="¿De qué quieres hablar?"
-      value={form.subject}
-      onChange={(e) => handleInputChange('subject', e.target.value)}
-      required
-      className={`
-        w-full px-4 py-3 rounded-xl border bg-white/90 
-        text-gray-700 placeholder:text-gray-500
-        focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-        transition-all duration-300
-        ${errors.subject ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-      `}
-    />
-    {errors.subject && (
-      <span className="text-red-500 text-sm">{errors.subject}</span>
-    )}
-  </motion.div>
+                {/* Asunto */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="space-y-2"
+                >
+                  <label className="text-gray-700 font-medium text-sm block">
+                    Asunto *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="¿De qué quieres hablar?"
+                    value={form.subject}
+                    onChange={(e) => handleInputChange('subject', e.target.value)}
+                    required
+                    className={`
+                      w-full px-4 py-3 rounded-xl border bg-white/90 
+                      text-gray-700 placeholder:text-gray-500
+                      focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                      transition-all duration-300
+                      ${errors.subject ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                    `}
+                  />
+                  {errors.subject && (
+                    <span className="text-red-500 text-sm">{errors.subject}</span>
+                  )}
+                </motion.div>
 
-  {/* Mensaje */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: 0.6, duration: 0.5 }}
-    className="space-y-2"
-  >
-    <label className="text-gray-700 font-medium text-sm block">
-      Mensaje *
-    </label>
-    <textarea
-      placeholder="Cuéntame sobre tu proyecto, idea o cualquier consulta que tengas..."
-      value={form.message}
-      onChange={(e) => handleInputChange('message', e.target.value)}
-      rows={5}
-      required
-      className={`
-        w-full px-4 py-3 rounded-xl border bg-white/90 
-        text-gray-700 placeholder:text-gray-500
-        focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
-        transition-all duration-300 resize-none
-        ${errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
-      `}
-    />
-    {errors.message && (
-      <span className="text-red-500 text-sm">{errors.message}</span>
-    )}
-  </motion.div>
+                {/* Mensaje */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="space-y-2"
+                >
+                  <label className="text-gray-700 font-medium text-sm block">
+                    Mensaje *
+                  </label>
+                  <textarea
+                    placeholder="Cuéntame sobre tu proyecto, idea o cualquier consulta que tengas..."
+                    value={form.message}
+                    onChange={(e) => handleInputChange('message', e.target.value)}
+                    rows={5}
+                    required
+                    className={`
+                      w-full px-4 py-3 rounded-xl border bg-white/90 
+                      text-gray-700 placeholder:text-gray-500
+                      focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500
+                      transition-all duration-300 resize-none
+                      ${errors.message ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 hover:border-gray-400'}
+                    `}
+                  />
+                  {errors.message && (
+                    <span className="text-red-500 text-sm">{errors.message}</span>
+                  )}
+                </motion.div>
 
-  {/* Botón */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: 0.7, duration: 0.5 }}
-    className="pt-4"
-  >
-    <button
-      type="submit"
-      disabled={isSubmitting || isSubmitted}
-      className="
-        w-full h-14 rounded-full text-white font-semibold text-base
-        bg-gradient-to-r from-burgundy to-orange
-        hover:shadow-xl hover:scale-[1.03] transition-all duration-300
-        flex items-center justify-center gap-2
-        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
-      "
-      style={{
-        background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
-        boxShadow: '0 8px 24px rgba(180, 63, 63, 0.3)'
-      }}
-    >
-      {isSubmitting ? (
-        <>
-          <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-          Enviando...
-        </>
-      ) : isSubmitted ? (
-        '¡Enviado!'
-      ) : (
-        <>
-          <Send size={20} />
-          Enviar Mensaje
-        </>
-      )}
-    </button>
-  </motion.div>
-</form>
+                {/* Botón */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7, duration: 0.5 }}
+                  className="pt-4"
+                >
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || isSubmitted}
+                    className="
+                      w-full h-14 rounded-full text-white font-semibold text-base
+                      bg-gradient-to-r from-burgundy to-orange
+                      hover:shadow-xl hover:scale-[1.03] transition-all duration-300
+                      flex items-center justify-center gap-2
+                      disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
+                    "
+                    style={{
+                      background: `linear-gradient(135deg, #B43F3F 0%, #FF8225 100%)`,
+                      boxShadow: '0 8px 24px rgba(180, 63, 63, 0.3)'
+                    }}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                        Enviando...
+                      </>
+                    ) : isSubmitted ? (
+                      '¡Enviado!'
+                    ) : (
+                      <>
+                        <Send size={20} />
+                        Enviar Mensaje
+                      </>
+                    )}
+                  </button>
+                </motion.div>
+              </form>
 
               </CardBody>
             </Card>
