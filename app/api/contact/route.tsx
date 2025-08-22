@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
             <div style="text-align: center; margin-bottom: 32px;">
               <div style="position: relative; display: inline-block; margin-bottom: 24px;">
                 <!-- Logo -->
-                <img src="https://yourdomain.com/images/logo_w.png" alt="Logo" style="width: 80px; height: 80px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); object-fit: cover;" />
+                <img src="https://aldev-alpha.vercel.app/images/logo_w.png" alt="Logo" style="width: 80px; height: 80px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); object-fit: cover;" />
                 <!-- Success checkmark -->
                 <div style="position: absolute; bottom: -8px; right: -8px; width: 32px; height: 32px; background: linear-gradient(135deg, #34d399 0%, #10b981 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
                   ${renderToStaticMarkup(<Check size={16} color="white" strokeWidth={3} />)}
