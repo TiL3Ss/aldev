@@ -278,17 +278,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     
                     {/* Content */}
                     <div className="relative z-10 text-center">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        className="mb-4 flex justify-center"
-                      >
+                      <div className="mb-4 flex justify-center">
                         <img 
                           src="https://aldev-alpha.vercel.app/images/logo_w.png" 
                           alt="AlDev Logo" 
                           className="w-16 h-16 object-contain"
                         />
-                      </motion.div>
+                      </div>
                       <div className="text-gray-800 dark:text-white font-bold text-xl tracking-wide">Backend</div>
                       <div className="text-orange dark:text-orange-light font-medium text-lg">Excellence</div>
                     </div>
@@ -301,11 +297,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     className="absolute inset-0 pointer-events-none"
                   >
                     {[
-                      { icon: Github, delay: 0, position: 'top' },
-                      { icon: SquareChevronRight, delay: 0.25, position: 'right' },
-                      { icon: MessageCircleCode, delay: 0.5, position: 'bottom' },
-                      { icon: Brain, delay: 0.75, position: 'left' }
-                    ].map(({ icon: Icon, delay, position }, index) => (
+                      { icon: Github, delay: 0, position: 'top', color: 'text-gray-900 dark:text-white' },
+                      { icon: SquareChevronRight, delay: 0.25, position: 'right', color: 'text-green-600 dark:text-green-400' },
+                      { icon: MessageCircleCode, delay: 0.5, position: 'bottom', color: 'text-blue-600 dark:text-blue-400' },
+                      { icon: Brain, delay: 0.75, position: 'left', color: 'text-purple-600 dark:text-purple-400' }
+                    ].map(({ icon: Icon, delay, position, color }, index) => (
                       <motion.div
                         key={position}
                         initial={{ opacity: 0, scale: 0 }}
@@ -331,7 +327,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                             rotate: { duration: 30, repeat: Infinity, ease: "linear" },
                             scale: { duration: 2, repeat: Infinity, delay: delay }
                           }}
-                          className="text-gray-700 dark:text-gray-300"
+                          className={`${color}`}
                         >
                           <Icon size={24} />
                         </motion.div>
