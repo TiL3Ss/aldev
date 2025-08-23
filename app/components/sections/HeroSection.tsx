@@ -3,7 +3,7 @@
 
 import { Button, Card, CardBody, Chip } from '@heroui/react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Sparkles, SquareChevronRight, MessageCircleCode, Brain } from 'lucide-react';
 
 interface HeroSectionProps {
   className?: string;
@@ -281,9 +281,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        className="text-6xl mb-4 grayscale-0"
+                        className="mb-4 flex justify-center"
                       >
-                        ⚡
+                        <img 
+                          src="https://aldev-alpha.vercel.app/images/logo_w.png" 
+                          alt="AlDev Logo" 
+                          className="w-16 h-16 object-contain"
+                        />
                       </motion.div>
                       <div className="text-gray-800 dark:text-white font-bold text-xl tracking-wide">Backend</div>
                       <div className="text-orange dark:text-orange-light font-medium text-lg">Excellence</div>
@@ -297,11 +301,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                     className="absolute inset-0 pointer-events-none"
                   >
                     {[
-                      { emoji: '🚀', delay: 0, position: 'top' },
-                      { emoji: '⚙️', delay: 0.25, position: 'right' },
-                      { emoji: '🔧', delay: 0.5, position: 'bottom' },
-                      { emoji: '💡', delay: 0.75, position: 'left' }
-                    ].map(({ emoji, delay, position }, index) => (
+                      { icon: Github, delay: 0, position: 'top' },
+                      { icon: SquareChevronRight, delay: 0.25, position: 'right' },
+                      { icon: MessageCircleCode, delay: 0.5, position: 'bottom' },
+                      { icon: Brain, delay: 0.75, position: 'left' }
+                    ].map(({ icon: Icon, delay, position }, index) => (
                       <motion.div
                         key={position}
                         initial={{ opacity: 0, scale: 0 }}
@@ -310,7 +314,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                         className={`
                           absolute w-14 h-14 rounded-2xl backdrop-blur-xl
                           bg-white/60 dark:bg-black/40 border border-white/30 dark:border-white/10
-                          flex items-center justify-center text-2xl
+                          flex items-center justify-center
                           shadow-lg shadow-black/5 dark:shadow-white/10
                           ${position === 'top' && '-top-6 left-1/2 -translate-x-1/2'}
                           ${position === 'right' && 'top-1/2 -right-6 -translate-y-1/2'}
@@ -318,7 +322,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                           ${position === 'left' && 'top-1/2 -left-6 -translate-y-1/2'}
                         `}
                       >
-                        <motion.span
+                        <motion.div
                           animate={{ 
                             rotate: -360,
                             scale: [1, 1.1, 1]
@@ -327,9 +331,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
                             rotate: { duration: 30, repeat: Infinity, ease: "linear" },
                             scale: { duration: 2, repeat: Infinity, delay: delay }
                           }}
+                          className="text-gray-700 dark:text-gray-300"
                         >
-                          {emoji}
-                        </motion.span>
+                          <Icon size={24} />
+                        </motion.div>
                       </motion.div>
                     ))}
                   </motion.div>
