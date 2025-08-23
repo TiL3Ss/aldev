@@ -21,9 +21,8 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
 
   const socialLinks = [
     { label: 'GitHub', href: 'https://github.com/TiL3Ss' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/tu-perfil' },
-    { label: 'Twitter', href: 'https://twitter.com/tu-handle' },
-    { label: 'Email', href: 'mailto:tu@email.com' }
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/alvaro-chavez-melo-35392b338/' },
+    { label: 'Email', href: 'mailto:alvchdev@gmail.com' }
   ];
 
   const scrollToSection = (href: string) => {
@@ -98,12 +97,12 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Coffee size={16} className="text-red-500" />
+                <Coffee size={16} className="text-amber-500" />
               </motion.div>
               <span>usando</span>
-              <Code size={16} className="text-red-500" />
+              <Code size={16} className="text-blue-500" />
               <span>y más</span>
-              <Coffee size={16} className="text-amber-600" />
+              <Coffee size={16} className="text-amber-800" />
             </motion.div>
           </motion.div>
 
