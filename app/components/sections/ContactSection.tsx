@@ -532,6 +532,43 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
       <div className="space-y-4">
         {socialLinks.map((social, index) => {
           const Icon = social.icon;
+          
+          // Definir colores específicos por plataforma
+          const getHoverColors = (label: string) => {
+            switch(label) {
+              case 'LinkedIn':
+                return {
+                  iconColor: '#0077B5', // Azul LinkedIn
+                  textColor: '#0077B5',
+                  bgColor: 'rgba(0, 119, 181, 0.1)',
+                  borderColor: 'rgba(0, 119, 181, 0.2)'
+                };
+              case 'GitHub':
+                return {
+                  iconColor: '#FF8225', // Naranja
+                  textColor: '#FF8225',
+                  bgColor: 'rgba(255, 130, 37, 0.1)',
+                  borderColor: 'rgba(255, 130, 37, 0.2)'
+                };
+              case 'Email':
+                return {
+                  iconColor: '#10B981', // Verde
+                  textColor: '#10B981',
+                  bgColor: 'rgba(16, 185, 129, 0.1)',
+                  borderColor: 'rgba(16, 185, 129, 0.2)'
+                };
+              default:
+                return {
+                  iconColor: '#B43F3F',
+                  textColor: '#FF8225',
+                  bgColor: 'rgba(180, 63, 63, 0.1)',
+                  borderColor: 'rgba(180, 63, 63, 0.2)'
+                };
+            }
+          };
+
+          const hoverColors = getHoverColors(social.label);
+
           return (
             <motion.div
               key={social.label}
@@ -548,17 +585,53 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ className = '' }
                 borderColor: 'rgba(180, 63, 63, 0.2)'
               }}
               onClick={() => window.open(social.href, '_blank')}
+              onMouseEnter={(e) => {
+                const target = e.currentTarget;
+                target.style.background = `linear-gradient(135deg, ${hoverColors.bgColor} 0%, ${hoverColors.bgColor} 100%)`;
+                target.style.borderColor = hoverColors.borderColor;
+              }}
+              onMouseLeave={(e) => {
+                const target = e.currentTarget;
+                target.style.background = `linear-gradient(135deg, rgba(180, 63, 63, 0.08) 0%, rgba(255, 130, 37, 0.08) 100%)`;
+                target.style.borderColor = 'rgba(180, 63, 63, 0.2)';
+              }}
             >
               <div className="flex items-center gap-3 mb-2">
-                <div className="p-1 rounded-lg group-hover:scale-110 transition-transform duration-300"
-                style={{
-                  backgroundColor: 'rgba(180, 63, 63, 0.1)',
-                  border: '1px solid rgba(180, 63, 63, 0.2)'
-                }}
+                <div 
+                  className="p-1 rounded-lg group-hover:scale-110 transition-all duration-300"
+                  style={{
+                    backgroundColor: 'rgba(180, 63, 63, 0.1)',
+                    border: '1px solid rgba(180, 63, 63, 0.2)'
+                  }}
                 >
-                  <Icon size={16} style={{ color: '#B43F3F' }} />
+                  <Icon 
+                    size={16} 
+                    style={{ 
+                      color: '#B43F3F',
+                      transition: 'color 0.3s ease'
+                    }}
+                    className="group-hover:text-current"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = hoverColors.iconColor;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#B43F3F';
+                    }}
+                  />
                 </div>
-                <span className="font-medium group-hover:text-orange-600 transition-colors duration-300" style={{ color: '#173B45' }}>
+                <span 
+                  className="font-medium transition-colors duration-300" 
+                  style={{ 
+                    color: '#173B45',
+                    transition: 'color 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = hoverColors.textColor;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#173B45';
+                  }}
+                >
                   {social.label}
                 </span>
               </div>
