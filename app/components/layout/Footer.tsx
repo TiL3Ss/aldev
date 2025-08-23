@@ -266,10 +266,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           "
         >
           <div className="
-             text-orange dark:text-orange-light text-xs font-medium
+            text-orange dark:text-orange-light text-xs font-medium
             bg-white/40 dark:bg-black/20 backdrop-blur-xl 
             border border-orange/30 dark:border-orange-light/30
             rounded-full px-4 py-2
+            flex items-center gap-2
           ">
             <Clock size={12} />
             <span>Tiempo de respuesta: &lt; 24h</span>
