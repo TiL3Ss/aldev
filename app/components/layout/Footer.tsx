@@ -266,18 +266,18 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           "
         >
           <div className="
-            flex items-center gap-3 text-gray-500 dark:text-gray-400 text-xs
+             text-orange dark:text-orange-light text-xs font-medium
             bg-white/40 dark:bg-black/20 backdrop-blur-xl 
-            border border-gray-200/30 dark:border-gray-600/30
+            border border-orange/30 dark:border-orange-light/30
             rounded-full px-4 py-2
           ">
             <Clock size={12} />
             <span>Tiempo de respuesta: &lt; 24h</span>
           </div>
           <div className="
-            text-gray-400 dark:text-gray-500 text-xs font-medium
+            text-orange dark:text-orange-light text-xs font-medium
             bg-white/40 dark:bg-black/20 backdrop-blur-xl 
-            border border-gray-200/30 dark:border-gray-600/30
+            border border-orange/30 dark:border-orange-light/30
             rounded-full px-4 py-2
           ">
             GMT-3 • Trabajo 100% remoto
