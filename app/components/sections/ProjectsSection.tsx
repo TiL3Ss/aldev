@@ -57,6 +57,25 @@ const projects: Project[] = [
     category: 'fullstack'
   },
   {
+  id: 'Godeli',
+  title: 'Godeli-app',
+  description: "Godeli - Administrador de comandas de reparto a domicilio.",
+  longDescription: 'Aplicación web diseñada para optimizar la gestión de entregas a domicilio, permitiendo a las tiendas crear y administrar comandas mientras brinda a los repartidores una herramienta eficiente para gestionar sus entregas. Godeli sincroniza en tiempo real el estado de las comandas entre tiendas y repartidores, mejorando la comunicación y eficiencia en el proceso de delivery.',
+  icon: Server,
+  technologies: ['Next.js 14', 'TypeScript', 'Turso/LibSQL', 'Vercel', 'Tailwind CSS'],
+  features: [
+    "Panel de tienda para creación y gestión de comandas con estados actualizables",
+    "Panel de repartidor para aceptar y gestionar entregas",
+    "Sistema de seguimiento en tiempo real del estado de las comandas",
+    "Historial completo de comandas para tiendas y repartidores",
+    "Sistema de comentarios para cancelaciones y incidencias"
+  ],
+  demoUrl: 'https://godeli.vercel.app/',
+  githubUrl: 'https://github.com/TiL3Ss/godeli',
+  status: 'in-progress',
+  category: 'fullstack'
+  },
+  {
     id: 'anidrive-social-app',
     title: 'Anidrive - Anime Social Network',
     description: 'Red social para mantener un registro de los animes que estás viendo.',
@@ -79,7 +98,7 @@ const projects: Project[] = [
     id: 'moodle-attendance-api',
     title: 'Moodle Attendance API Plugin',
     description: 'API para la gestión de asistencia en la plataforma Moodle.',
-    longDescription: 'API desarrollada como un plugin para la plataforma de aprendizaje Moodle, diseñada específicamente para gestionar la asistencia en cursos del SENCE (Servicio Nacional de Capacitación y Empleo). La API permite el manejo de la asistencia de los cursos administrados por la plataforma Moodle para la empresa CECADe Group.',
+    longDescription: 'API desarrollada como un plugin para la plataforma de aprendizaje Moodle, diseñada específicamente para gestionar la asistencia en cursos del SENCE (Servicio Nacional de Capacitación y Empleo). La API permite el manejo de la asistencia de los cursos administrados por la plataforma Moodle para la empresa CECADeGroup.',
     icon: Database,
     technologies: [
       'PHP',
